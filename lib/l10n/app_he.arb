@@ -1,0 +1,983 @@
+{
+  "@@locale": "he",
+  "appTitle": "YellowShifts",
+  "appTagline": "פלטפורמת תפעול משמרות ועבודה",
+  "navHome": "ראשי",
+  "navSchedule": "סידור עבודה",
+  "navAttendance": "נוכחות",
+  "navEmployees": "עובדים",
+  "navSettings": "הגדרות",
+  "navAvailability": "זמינות",
+  "navReports": "דוחות",
+  "navDesignSystem": "שפת עיצוב",
+  "loginTitle": "התחברות ל-YellowShifts",
+  "loginSubtitle": "הזן את פרטי ההתחברות כדי לגשת לניהול התחנה שלך.",
+  "loginEmailLabel": "כתובת אימייל",
+  "loginEmailHint": "name@yellowshifts.com",
+  "loginPasswordLabel": "סיסמה",
+  "loginPasswordHint": "הזן את סיסמתך",
+  "loginButton": "התחברות למערכת",
+  "loginLoading": "מאמת נתונים...",
+  "loginInvalidCredentials": "כתובת אימייל או סיסמה שגויים. אנא נסה שוב.",
+  "loginNetworkError": "לא ניתן להתחבר לשרת. בדוק את חיבור הרשת.",
+  "loginValidationEmpty": "נא להזין כתובת אימייל וסיסמה.",
+  "loginHeroTitle": "מהירות תפעולית.\nדיוק רב-תחנתי.",
+  "loginHeroSubtitle": "מערכת ניהול משמרות וכוח אדם מתקדמת לתחנות, מנהלי משמרת ועובדים בסנכרון מלא בזמן אמת.",
+  "loginHeroBadge": "מערכת תפעולית • YellowShifts",
+
+  "stationSelectTitle": "בחירת תחנה",
+  "stationSelectSubtitle": "הינך משויך למספר תחנות. בחר תחנה פעילה להמשך עבודה.",
+  "stationSelectAction": "כניסה לתחנה",
+  "stationActiveBadge": "פעיל",
+  "stationInactiveBadge": "לא פעיל",
+  "emptyStationsTitle": "לא נבחרה תחנה פעילה",
+  "emptyStationsDescription": "אנא בחר תחנה פעילה כדי לגשת למערכות התפעוליות של התחנה.",
+  "roleAdmin": "מנהל תחנה",
+  "roleShiftManager": "מנהל משמרת",
+  "roleEmployee": "עובד",
+  "dashboardTitle": "מבט על התחנה",
+  "dashboardWelcome": "ברוך הבא, {name}",
+  "@dashboardWelcome": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardActiveStation": "תחנה פעילה: {stationName}",
+  "@dashboardActiveStation": {
+    "placeholders": {
+      "stationName": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardStationCode": "קוד תחנה",
+  "dashboardTimezone": "אזור זמן",
+  "dashboardRole": "תפקיד בתחנה",
+  "dashboardQuickStats": "דופק תפעולי",
+  "dashboardRealtimeSync": "סנכרון בזמן אמת מחובר",
+  "dashboardActiveMembers": "כוח אדם פעיל",
+  "dashboardAdminsCount": "מנהלי תחנה",
+  "dashboardManagersCount": "מנהלי משמרת",
+  "dashboardEmployeesCount": "עובדים",
+  "dashboardEmptyOnboardingTitle": "ברוכים הבאים לתחנה החדשה",
+  "dashboardEmptyOnboardingDesc": "התחנה שלך הוגדרה בהצלחה. התחל בהוספת העובד הראשון או בהגדרת פרמטרי התפעול של התחנה.",
+  "employeesTitle": "ספר עובדים",
+  "employeesSubtitle": "ניהול חשבונות כוח אדם, תפקידי תחנה ואבטחת גישה.",
+  "employeesSearchHint": "חיפוש לפי שם, טלפון או קוד עובד...",
+  "employeesFilterAllRoles": "כל התפקידים",
+  "employeesFilterAllStatus": "כל הסטטוסים",
+  "employeesAddButton": "עובד חדש",
+  "employeesEmptyTitle": "לא נמצאו עובדים",
+  "employeesEmptyDesc": "עדיין לא נרשמו עובדים בתחנה זו.",
+  "employeesEmptySearchDesc": "לא נמצאו רשומות עובדים התואמות את שאילתת החיפוש.",
+  "employeesColName": "שם וזהות",
+  "employeesColRole": "תפקיד בתחנה",
+  "employeesColStatus": "סטטוס",
+  "employeesColPhone": "טלפון",
+  "employeesColCode": "קוד עובד",
+  "employeesColActions": "פעולות",
+  "createEmployeeTitle": "הקצאת חשבון עובד",
+  "createEmployeeSubtitle": "יצירת חשבון כוח אדם חדש או שיוך עובד קיים לתחנה זו.",
+  "createEmployeeStepIdentity": "זהות ופרטי קשר",
+  "createEmployeeStepRole": "תחנה ותפקיד",
+  "createEmployeeStepAccess": "פרטי גישה ראשוניים",
+  "createEmployeeFirstName": "שם פרטי",
+  "createEmployeeLastName": "שם משפחה",
+  "createEmployeeEmail": "כתובת אימייל (אופציונלי)",
+  "createEmployeePhone": "מספר טלפון נייד",
+  "createEmployeeCode": "קוד עובד בתחנה (אופציונלי)",
+  "createEmployeeRoleLabel": "הקצאת תפקיד בתחנה",
+  "createEmployeeSubmit": "צור חשבון עובד",
+  "createEmployeeSuccessTitle": "החשבון הוקצה בהצלחה",
+  "createEmployeeSuccessDesc": "חשבון העובד נוצר. מסור את הסיסמה הזמנית החד-פעמית לעובד באופן מאובטח.",
+  "createEmployeeTempPassword": "סיסמה זמנית חד-פעמית",
+  "createEmployeeCopyPassword": "העתק פרטי גישה",
+  "createEmployeeCopiedToast": "פרטי הגישה הזמניים הועתקו ללוח",
+  "createEmployeeSecurityNotice": "סיסמה זמנית זו מוצגת פעם אחת בלבד ואינה נשמרת בטקסט גלוי.",
+  "inspectorTitle": "פרטי עובד",
+  "inspectorSubtitle": "ניהול חברות בתחנה והרשאות גישה",
+  "inspectorContactSection": "פרטי קשר וזהות",
+  "inspectorRoleSection": "תפקיד וסמכויות בתחנה",
+  "inspectorMembershipSection": "תפקיד וסמכויות בתחנה",
+  "inspectorStatusSection": "סטטוס חברות",
+  "inspectorSecuritySection": "פעולות אבטחת חשבון",
+  "inspectorChangeRole": "שינוי תפקיד",
+  "inspectorRoleChange": "שינוי תפקיד",
+  "inspectorChangeStatus": "שינוי סטטוס",
+  "inspectorResetPassword": "איפוס סיסמה",
+  "inspectorResetPasswordConfirm": "להפיק סיסמה זמנית חדשה עבור עובד זה?",
+  "inspectorRevokeSessions": "ניתוק כל החיבורים",
+  "inspectorRevokeSessionsConfirm": "לבצע התנתקות כפויה מכל ההתקנים הפעילים?",
+  "inspectorLastAdminNotice": "לא ניתן להוריד בדרגה או להשבית את מנהל התחנה הפעיל האחרון.",
+  "inspectorDeactivate": "השבת עובד",
+  "inspectorReactivate": "הפעל עובד מחדש",
+  "inspectorActionSuccess": "הפעולה הושלמה בהצלחה",
+  "commonCancel": "ביטול",
+  "commonClose": "סגור",
+  "commonSave": "שמור",
+  "stationSettingsTitle": "פרמטרי תפעול תחנה",
+  "stationSettingsSubtitle": "ניהול קוד תחנה, אזור זמן, שפה ברירת מחדל ויום תחילת שבוע.",
+  "stationSettingsName": "שם התחנה",
+  "stationSettingsCode": "קוד תפעולי",
+  "stationSettingsTimezone": "אזור זמן תפעולי",
+  "stationSettingsLocale": "שפת ברירת מחדל",
+  "stationSettingsWeekStart": "תחילת שבוע תפעולי",
+  "stationSettingsSunday": "יום ראשון (שבוע ישראלי סטנדרטי)",
+  "stationSettingsMonday": "יום שני",
+  "stationSettingsSave": "שמור פרמטרים",
+  "stationSettingsSaved": "פרמטרי התחנה עודכנו בהצלחה",
+  "stationSettingsSavedToast": "פרמטרי התחנה עודכנו בהצלחה",
+  "shiftsTitle": "תבניות משמרת",
+  "shiftsSubtitle": "הגדרת משמרות עבודה בתחנה, שעות פעילות וסדר הופעה.",
+  "shiftsAddButton": "תבנית משמרת חדשה",
+  "shiftsEmptyTitle": "אין תבניות משמרת",
+  "shiftsEmptyDesc": "הגדר את תבניות המשמרת של התחנה כדי לאפשר הגשת זמינות שבועית.",
+  "shiftsColName": "שם המשמרת",
+  "shiftsColTimes": "שעות פעילות",
+  "shiftsColDuration": "משך זמן",
+  "shiftsColStatus": "סטטוס",
+  "shiftsCrossMidnight": "חוצה חצות (+יום למחרת)",
+  "shiftsDeactivate": "השבת",
+  "shiftsReactivate": "הפעל מחדש",
+  "shiftsEdit": "ערוך משמרת",
+  "shiftsCreateDialogTitle": "תבנית משמרת חדשה",
+  "shiftsEditDialogTitle": "עריכת תבנית משמרת",
+  "shiftsNameLabel": "שם המשמרת",
+  "shiftsNameHint": "לדוגמה: בוקר, ערב, לילה...",
+  "shiftsCodeLabel": "קוד תפעולי (אופציונלי)",
+  "shiftsCodeHint": "לדוגמה: MOR, EVE",
+  "shiftsStartTime": "שעת התחלה",
+  "shiftsEndTime": "שעת סיום",
+  "shiftsSaveButton": "שמור תבנית משמרת",
+  "permissionsTitle": "סמכויות אחראי משמרת",
+  "permissionsSubtitle": "הגדרת הרשאות תפעוליות והרשאות ניהול עבור אחראי משמרת בתחנה זו.",
+  "permissionsSectionTemplates": "ניהול תבניות משמרת",
+  "permissionsShiftTemplatesManage": "יצירה, עריכה ושינוי סדר של תבניות משמרת",
+  "permissionsSectionAvailability": "תפעול זמינות שבועית",
+  "permissionsAvailabilityPeriodCreate": "יצירת שבועות זמינות בטיוטה",
+  "permissionsAvailabilityPeriodOpen": "פתיחת שבועות להגשת זמינות",
+  "permissionsAvailabilityPeriodClose": "סגירה ופתיחה מחדש של תקופות זמינות",
+  "permissionsAvailabilityTeamRead": "צפייה במטריצת זמינות צוות והגשות",
+  "permissionsSaveButton": "שמור הגדרות סמכויות",
+  "permissionsSavedToast": "סמכויות אחראי המשמרת עודכנו בהצלחה",
+  "availabilityTitle": "זמינות שבועית",
+  "availabilitySubtitle": "הגש את העדפות העבודה שלך למשמרות השבוע הקרוב.",
+  "availabilityNoPeriodTitle": "אין שבוע זמינות פתוח",
+  "availabilityNoPeriodDesc": "כרגע אין שבוע זמינות פתוח להגשה בתחנה זו.",
+  "availabilityDeadlineNotice": "מועד אחרון להגשה: {deadline}",
+  "@availabilityDeadlineNotice": {
+    "placeholders": {
+      "deadline": {
+        "type": "String"
+      }
+    }
+  },
+  "availabilityStatusDraft": "טיוטה",
+  "availabilityStatusSubmitted": "הוגש",
+  "availabilityStatusClosed": "סגור (קריאה בלבד)",
+  "availabilityStatusNotStarted": "טרם התחיל",
+  "availabilityProgress": "נענו {answered} מתוך {total} משבצות",
+  "@availabilityProgress": {
+    "placeholders": {
+      "answered": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "availabilityAvailable": "זמין",
+  "availabilityUnavailable": "לא זמין",
+  "availabilityUnanswered": "טרם סומן",
+  "availabilityAllDayAvailable": "זמין כל היום",
+  "availabilityAllDayUnavailable": "לא זמין כל היום",
+  "availabilitySubmitButton": "הגש זמינות",
+  "availabilityEditNotice": "עריכת משבצת שנענתה תחזיר את ההגשה למצב טיוטה עד להגשה חוזרת.",
+  "availabilitySubmittedConfirmation": "הזמינות הוגשה בהצלחה לשבוע {week}",
+  "@availabilitySubmittedConfirmation": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  },
+  "availabilitySavingDraft": "שומר טיוטה...",
+  "availabilityDraftSaved": "טיוטה נשמרה",
+  "managerAvailabilityTitle": "מטריצת זמינות צוות",
+  "managerAvailabilitySubtitle": "סקירת זמינות כוח אדם, קצב הגשות ומוכנות תפעולית לסידור.",
+  "managerKpiEligible": "כוח אדם זכאי",
+  "managerKpiSubmitted": "הגישו זמינות",
+  "managerKpiDraft": "בתהליך (טיוטה)",
+  "managerKpiNotStarted": "טרם התחילו",
+  "managerKpiNotSubmitted": "ממתינים להגשה",
+  "managerFilterAll": "כל העובדים",
+  "managerFilterSubmitted": "הוגש",
+  "managerFilterDraft": "טיוטה",
+  "managerFilterNotStarted": "לא התחיל",
+  "managerOpenPeriod": "פתח הגשות",
+  "managerClosePeriod": "סגור הגשות",
+  "managerReopenPeriod": "פתח מחדש",
+  "managerCreatePeriod": "צור תקופת זמינות",
+  "managerPeriodHistory": "שבועות קודמים",
+  "scheduleTitle": "לוח משמרות שבועי",
+  "scheduleSubtitle": "שיבוץ עובדים, איזון איוש ופרסום לוחות רשמיים לתחנה.",
+  "scheduleDraftStatus": "טיוטה",
+  "schedulePublishedStatus": "רשמי מפורסם",
+  "schedulePublishAction": "פרסם לוח",
+  "scheduleStaffingCoverage": "כיסוי איוש: {percent}%",
+  "@scheduleStaffingCoverage": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "myShiftsTitle": "המשמרות שלי",
+  "myShiftsEmptyDraft": "טרם פורסם לוח משמרות לשבוע זה",
+  "myShiftsEmptyAssigned": "אין לך משמרות משובצות לשבוע זה",
+  "candidateAssignAction": "שבץ",
+  "candidateOverrideAction": "שבץ עם חריגה",
+  "candidateAlreadyAssigned": "משובץ",
+  "attendanceTitle": "נוכחות בתחנה",
+  "attendanceNotCheckedIn": "לא בכניסה",
+  "attendanceCurrentlyWorking": "עובד כעת",
+  "attendanceScanQrAction": "סרוק ברקוד תחנה",
+  "attendanceCheckOutAction": "יציאה ממשמרת",
+  "attendanceRecentHistory": "משמרות אחרונות",
+  "attendanceKioskMode": "קיוסק תחנה",
+  "attendanceLiveMonitor": "דוח נוכחות חי",
+  "navNotifications": "התראות",
+  "notificationsTitle": "מרכז התראות והודעות",
+  "notificationsSubtitle": "עדכוני סידור עבודה, נוכחות חיה, תזכורות והתראות תפעוליות בזמן אמת",
+  "notificationsMarkAllRead": "סמן הכל כנקרא",
+  "notificationsEmptyTitle": "אין התראות להצגה",
+  "notificationsEmptyDesc": "הכל מעודכן! התראות חדשות על סידורי עבודה ונוכחות יופיעו כאן.",
+  "notificationsUnreadOnly": "טרם נקראו בלבד",
+  "notificationPreferencesTitle": "הגדרות ערוצי התראות",
+  "notificationPreferencesSubtitle": "ניהול ערוצי מסירה והעדפות קבלת הודעות באפליקציה, פוש, מייל ו-SMS",
+  "notificationMandatoryNotice": "התראות אבטחה ותפעול חובה",
+  "notificationMandatoryDesc": "התראות אבטחה קריטיות, חריגות זיהוי ותיקוני נוכחות ידניים נמסרים תמיד בתוך האפליקציה לצורכי בקרה ואבטחה.",
+  "notificationDeliveryMatrix": "מטריצת ערוצים",
+  "notificationDeliveryMatrixDesc": "בחר אילו התראות יימסרו בכל ערוץ תקשורת",
+  "navMyHours": "השעות שלי",
+  "myHoursTitle": "שעות העבודה שלי",
+  "myHoursSubtitle": "ציר זמן נוכחות אישי, היסטוריית שעות ומשמרות פעילות בכל התחנות",
+  "reportsTitle": "דוחות נוכחות ותפעול",
+  "reportsSubtitle": "ריכוז שעות עבודה מאומתות, מדדי תחנה, פילוח עובדים ולוח משמרות יומי",
+  "kpiTotalWorked": "סה״כ שעות עבודה",
+  "kpiCompletedShifts": "משמרות שהושלמו",
+  "kpiLateShifts": "משמרות באיחור",
+  "kpiTotalLateTime": "סה״כ זמן איחור",
+  "kpiCorrectedRecords": "רשומות שתוקנו",
+  "kpiActiveOpenSessions": "משמרות פעילות כעת",
+  "kpiRepeatedLateness": "איחורים חוזרים",
+  "kpiActiveWorkforce": "עובדים פעילים בתחנה",
+  "kpiAverageShift": "משך משמרת ממוצע",
+  "kpiOnTimeRate": "שיעור הגעה בזמן",
+  "presetToday": "היום",
+  "presetCurrentWeek": "השבוע",
+  "presetCurrentMonth": "החודש",
+  "presetLastMonth": "חודש שעבר",
+  "presetCustom": "טווח מותאם",
+  "filterAll": "כל המשמרות",
+  "filterCompleted": "הושלמו",
+  "filterLate": "איחורים בלבד",
+  "filterCorrected": "תוקנו בלבד",
+  "filterOpen": "פעילות בלבד",
+  "tabBreakdown": "פילוח עובדים",
+  "tabDailyBoard": "לוח משמרות יומי",
+  "searchEmployeesPlaceholder": "חיפוש לפי שם או קוד עובד...",
+  "employeeDrilldownTitle": "פירוט נוכחות ותיקונים",
+  "correctionLedger": "יומן תיקונים",
+  "noAttendanceFound": "לא נמצאו רשומות נוכחות לתקופה שנבחרה.",
+  "selectDatePrompt": "בחר תאריך תפעולי",
+  "statusActive": "פעיל",
+  "statusInactive": "לא פעיל",
+  "statusSuspended": "מושעה",
+  "navDashboard": "לוח בקרה",
+  "navShiftTemplates": "תבניות משמרת",
+  "navKiosks": "עמדות קיוסק",
+  "navStationSettings": "הגדרות תחנה",
+  "navSectionWorkspace": "סביבת עבודה אישית",
+  "navSectionManagement": "ניהול תחנה",
+  "navSectionGeneral": "חשבון ומערכת",
+  "switchStationContext": "החלפת תחנה פעילה",
+  "noPhoneRegistered": "לא הוזן מספר טלפון",
+  "noCodeAssigned": "טרם הוגדר",
+  "notProvided": "לא צוין",
+  "joinedStationLabel": "הצטרף לתחנה",
+  "allStatusesFilter": "כל הסטטוסים",
+  "filterStatusActive": "פעילים",
+  "filterStatusInactive": "לא פעילים",
+  "filterStatusSuspended": "מושעים",
+  "selectEmployeePrompt": "בחר עובד מהרשימה לצפייה בפרטים תפעוליים",
+  "colNameIdentity": "שם וזהות",
+  "colStationRole": "תפקיד בתחנה",
+  "colStatus": "סטטוס",
+  "colPhone": "טלפון",
+  "colCode": "קוד עובד",
+  "dashboardStationOverview": "מבט על התחנה",
+  "dashboardEmployeeNextShift": "המשמרת הבאה שלך",
+  "dashboardEmployeeNoShift": "אין משמרות מתוכננות להיום",
+  "dashboardEmployeeAttendanceStatus": "מצב נוכחות היום",
+  "dashboardEmployeeActiveShift": "משמרת פעילה כעת",
+  "dashboardEmployeeNotCheckedIn": "אינך מדווח נוכחות כעת",
+  "dashboardEmployeeClockInAction": "דיווח נוכחות באמצעות QR",
+  "dashboardEmployeeClockOutAction": "סיום משמרת ויציאה",
+  "dashboardEmployeeMyHoursTitle": "סיכום שעות עבודה",
+  "dashboardEmployeeAvailabilityTitle": "זמינות למשמרות",
+  "dashboardEmployeeAvailabilityOpen": "הגשת זמינות לשבוע הבא פתוחה",
+  "dashboardEmployeeAvailabilitySubmitted": "זמינות הוגשה בהצלחה",
+  "dashboardEmployeeAvailabilityClosed": "אין תקופת הגשת זמינות פעילה",
+  "dashboardManagerStaffingTitle": "איוש מבצעי להיום",
+  "dashboardManagerStaffingRequired": "דרושים: {count}",
+  "@dashboardManagerStaffingRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerStaffingAssigned": "משובצים: {count}",
+  "@dashboardManagerStaffingAssigned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerStaffingCheckedIn": "נוכחים: {count}",
+  "@dashboardManagerStaffingCheckedIn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerStaffingShortage": "חוסר: {count}",
+  "@dashboardManagerStaffingShortage": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerLiveAttendanceTitle": "לוח נוכחות חי",
+  "dashboardManagerAvailabilityOverview": "סטטוס הגשות זמינות צוות",
+  "dashboardManagerAlertsTitle": "התראות תפעוליות",
+  "dashboardManagerLateArrivals": "{count} איחורים",
+  "@dashboardManagerLateArrivals": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerLongSessions": "{count} משמרות מעל 16 שעות",
+  "@dashboardManagerLongSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardAdminPulseTitle": "סיכום כוח אדם בתחנה",
+  "dashboardAdminQuickShortcuts": "קיצורי ניהול מהירים",
+  "dashboardAdminKioskSummary": "עמדות קיוסק",
+  "dashboardAdminSettingsAction": "הגדרות תחנה",
+  "dashboardAdminAddEmployeeAction": "הוספת עובד",
+  "employeeEditTitle": "עריכת פרטי עובד",
+  "employeeEditSubtitle": "עריכת פרטי חשבון גלובליים והגדרות חברות בתחנה",
+  "employeeEditGlobalNotice": "שם פרטי, שם משפחה, טלפון ושפה מועדפת חלים על הפרופיל הגלובלי.",
+  "employeeEditStationNotice": "תפקיד בתחנה, סטטוס חברות וקוד עובד תקפים לתחנה זו בלבד.",
+  "employeeEditFirstNameLabel": "שם פרטי",
+  "employeeEditLastNameLabel": "שם משפחה",
+  "employeeEditPhoneLabel": "מספר טלפון",
+  "employeeEditEmailLabel": "כתובת אימייל",
+  "employeeEditLocaleLabel": "שפת ממשק מועדפת",
+  "employeeEditRoleLabel": "תפקיד בתחנה",
+  "employeeEditStatusLabel": "סטטוס חברות",
+  "employeeEditCodeLabel": "קוד עובד בתחנה",
+  "employeeEditSaveButton": "שמירת שינויים",
+  "employeeEditSuccessToast": "פרטי העובד עודכנו בהצלחה",
+  "employeeEditAction": "עריכת פרופיל",
+  "employeeResetPasswordTitle": "איפוס סיסמת עובד",
+  "employeeResetPasswordConfirm": "פעולה זו תיצור סיסמה זמנית חדשה עבור {name} ותנתק את כל החיבורים הפעילים.",
+  "@employeeResetPasswordConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "employeeResetPasswordGenerate": "יצירת סיסמה חדשה",
+  "employeeResetPasswordSuccessTitle": "סיסמה זמנית חדשה",
+  "employeeResetPasswordSuccessDesc": "הונפקה סיסמה זמנית חדשה עבור {name}:",
+  "@employeeResetPasswordSuccessDesc": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "employeeResetPasswordNotice": "מסור סיסמה זו לעובד. היא לא תוצג שוב במערכת.",
+  "employeeRevokeSessionsConfirm": "ניתוק חיבורים פעילים",
+  "employeeRevokeSessionsSuccess": "כל החיבורים הפעילים נותקו בהצלחה",
+  "errorLastAdminRequired": "לא ניתן להסיר או להשבית את מנהל התחנה הפעיל האחרון.",
+  "errorPermissionDenied": "הגישה נדחתה. אין לך הרשאות מתאימות לפעולה זו.",
+  "errorDuplicatePhone": "מספר טלפון זה כבר מקושר למשתמש אחר במערכת.",
+  "errorDuplicateEmail": "כתובת אימייל זו כבר מקושרת למשתמש אחר במערכת.",
+  "errorInvalidInput": "הנתונים שהוזנו אינם תקינים. אנא בדוק את השדות.",
+  "errorNotFound": "הרשומה המבוקשת לא נמצאה.",
+  "errorGeneric": "אירעה שגיאה בלתי צפויה. אנא נסה שוב.",
+  "errorExportExpired": "קישור ההורדה פג תוקף (תוקף של 15 דקות). אנא הפק ייצוא חדש.",
+  "errorActiveAttendanceBlocksDeactivation": "לא ניתן להשבית תחנה כאשר ישנן משמרות פתוחות או עובדים פעילים בשעון.",
+  "dialogCancel": "ביטול",
+  "copyPassword": "העתקת סיסמה",
+  "passwordCopied": "הסיסמה הועתקה ללוח",
+  "closeButton": "סגור",
+  "navExports": "ייצוא נתונים",
+  "navAuditCenter": "מרכז ביקורת",
+  "navSystemHealth": "תקינות מערכת",
+  "exportCenterTitle": "מרכז ייצוא תפעולי",
+  "exportCenterSubtitle": "הפקת קובצי נתונים תפעוליים חתומים ומאובטחים עם הגנה מפני הזרקת נוסחאות",
+  "exportMyHours": "ייצוא שעות נוכחות אישיות",
+  "exportStationAttendanceSummary": "סיכום נוכחות תחנתי",
+  "exportStationEmployeeWorkedHours": "שעות עבודה לפי עובד",
+  "exportDailyAttendanceReport": "דוח נוכחות יומי",
+  "exportAttendanceCorrectionLedger": "יומן תיקוני נוכחות",
+  "exportPublishedSchedule": "סידור עבודה מפורסם",
+  "exportEmployeeDirectory": "ספר עובדים ותפקידים",
+  "exportAvailabilityOverview": "סקירת זמינות צוות",
+  "exportFormatCsv": "CSV (קידוד UTF-8)",
+  "exportFormatPdf": "מסמך PDF",
+  "exportButtonGenerate": "הפק ייצוא",
+  "exportGenerating": "מפיק ייצוא נתונים...",
+  "exportSuccess": "הייצוא הופק בהצלחה ({rowCount} שורות)",
+  "@exportSuccess": {
+    "placeholders": {
+      "rowCount": {
+        "type": "int"
+      }
+    }
+  },
+  "exportDownloadButton": "הורד קובץ",
+  "exportHistoryTitle": "היסטוריית קבצים שהופקו",
+  "exportHistoryEmpty": "לא נמצאו קובצי ייצוא אחרונים.",
+  "exportStatusCompleted": "הושלם",
+  "exportStatusExpired": "פג תוקף",
+  "exportStatusProcessing": "בתהליך",
+  "exportStatusFailed": "נכשל",
+  "exportExpiryNotice": "קישורי ההורדה פגים אוטומטית לאחר 15 דקות מטעמי אבטחת מידע.",
+  "auditCenterTitle": "מרכז ביקורת מנהלים",
+  "auditCenterSubtitle": "יומן פעולות מנהלתיות בלתי-ניתן לשינוי עם סינון וחיפוש מתקדם",
+  "auditFilterAll": "כל הפעילויות",
+  "auditFilterMemberships": "עובדים והרשאות",
+  "auditFilterSchedules": "סידורי עבודה",
+  "auditFilterAttendance": "נוכחות ושעון",
+  "auditFilterKiosks": "עמדות קיוסק",
+  "auditFilterStation": "הגדרות תחנה",
+  "auditFilterExports": "ייצוא נתונים",
+  "auditFilterAvailability": "זמינות עובדים",
+  "auditSearchPlaceholder": "חיפוש לפי מבצע, אימייל, פעולה או יעד...",
+  "auditEmptyLogs": "לא נמצאו רשומות ביקורת התואמות את החיפוש.",
+  "auditMetadataTitle": "נתוני מטא מאובטחים",
+  "auditActor": "מבצע",
+  "auditAction": "פעולה",
+  "auditTarget": "יעד",
+  "auditTimestamp": "זמן ביצוע",
+  "auditPageInfo": "עמוד {current} מתוך {total} ({count} אירועים)",
+  "@auditPageInfo": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthTitle": "תקינות תפעולית ומערכת",
+  "systemHealthSubtitle": "טלמטריה חיה, מצב עמדות קיוסק וניהול מחזור חיי נתונים",
+  "systemHealthKiosksFleet": "מצב עמדות קיוסק",
+  "systemHealthKiosksOnline": "{online} מתוך {total} מחוברים",
+  "@systemHealthKiosksOnline": {
+    "placeholders": {
+      "online": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthExportPipeline": "צינור ייצוא נתונים (24 שעות)",
+  "systemHealthExportsSummary": "{count} קבצים הופקו ({failed} נכשלו)",
+  "@systemHealthExportsSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "failed": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthAnomalies": "תקינות והתראות מערכת",
+  "systemHealthNoAnomalies": "כל המערכות התחנתיות תקינות",
+  "systemHealthStaleSessions": "{count} משמרות פתוחות חריגות",
+  "@systemHealthStaleSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthFailedIdentity": "{count} כשלים באימות זהות",
+  "@systemHealthFailedIdentity": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataRetentionTitle": "מדיניות שימור ומחיקת נתונים",
+  "dataRetentionSummary": "רשומות נוכחות, משמרות ויומני ביקורת נשמרים לצמיתות. טוקני QR זמניים וקובצי ייצוא שפג תוקפם מנוקים אוטומטית.",
+  "dataRetentionRunButton": "הפעל ניקוי מחזור חיים",
+  "dataRetentionSuccess": "הניקוי הושלם: {exports} קבצים סומנו כפגי תוקף, {challenges} טוקני QR נוקו.",
+  "@dataRetentionSuccess": {
+    "placeholders": {
+      "exports": {
+        "type": "int"
+      },
+      "challenges": {
+        "type": "int"
+      }
+    }
+  },
+  "stationTimezoneLabel": "אזור זמן תחנתי (IANA)",
+  "stationTimezoneHelper": "אזור הזמן המשמש לגבולות משמרת ולחישובי נוכחות",
+  "stationLateGraceMinutes": "חלון חסד לאיחור (דקות)",
+  "stationLateGraceHelper": "כניסה בטווח דקות זה תיחשב כהגעה בזמן ללא רישום איחור",
+  "stationCheckInEarlyMinutes": "חלון כניסה מוקדמת (דקות)",
+  "stationCheckInEarlyHelper": "מספר הדקות המותרות לכניסה לפני תחילת המשמרת המתוכננת",
+  "stationDangerZone": "פעולות רגישות ומנהלתיות",
+  "stationDeactivateAction": "השבת תחנה",
+  "stationDeactivateNotice": "השבתת התחנה תחסום שעון נוכחות וסידורי עבודה.",
+  "stationDeactivateBlockedActive": "לא ניתן להשבית תחנה כל עוד ישנן משמרות פתוחות או עובדים פעילים בשעון.",
+  "stationForceDeactivateConfirm": "אישור השבתת תחנה בכפייה",
+  "connectionOnline": "מחובר לרשת",
+  "connectionDegraded": "חיבור איטי / לא יציב",
+  "connectionReconnecting": "מתחבר מחדש...",
+  "connectionOffline": "ללא חיבור — מצב קריאה בלבד",
+  "errorOfflineActionBlocked": "פעולה זו דורשת חיבור אינטרנט פעיל.",
+  "errorReconcilingAttendance": "מאמת סטטוס נוכחות לאחר פסק זמן ברשת...",
+  "errorKioskDisconnected": "המכשיר מנותק מהרשת",
+  "errorKioskReconnecting": "מנסה להתחבר מחדש...",
+  "appUpdateAvailable": "קיימת גרסה חדשה למערכת YellowShifts.",
+  "appUpdateReloadNow": "רענן כעת",
+  "appUpdateLater": "מאוחר יותר",
+  "startupConfigError": "שגיאת תצורה",
+  "startupConfigErrorMessage": "אתחול המערכת נכשל עקב תצורת סביבה לא תקינה.",
+  "startupLoading": "טוען את המערכת...",
+  "startupRetry": "נסה שוב",
+  "errorRateLimited": "יותר מדי בקשות ברצף. אנא המתן מספר שניות ונסה שוב.",
+  "errorScheduleConflict": "זוהתה התנגשות בשיבוץ המשמרת.",
+  "errorVersionConflict": "לוח המשמרות עודכן על ידי מנהל אחר. אנא רענן את המסך.",
+  "errorStationDeactivated": "תחנה זו אינה פעילה כעת.",
+  "errorMembershipDeactivated": "חברותך בתחנה זו אינה פעילה או הושעתה.",
+  "errorTimeout": "פסק זמן לבקשה. אנא בדוק את החיבור לרשת.",
+  "errorServiceUnavailable": "השרת אינו זמין זמנית. אנא נסה שוב בקרוב.",
+  "systemHealthHealthy": "תקין",
+  "systemHealthDegraded": "מופחת",
+  "systemHealthUnavailable": "לא זמין",
+  "systemHealthUnknown": "לא ידוע",
+  "settingsTitle": "הגדרות והעדפות",
+  "settingsSubtitle": "ניהול זהות משתמש, שפה והגדרות תפעול תחנה",
+  "settingsUserProfile": "פרופיל משתמש",
+  "settingsUserPhone": "טלפון: {phone}",
+  "@settingsUserPhone": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsBiometricFace": "אימות זהות וזיהוי פנים (Face ID)",
+  "settingsBiometricFaceSubtitle": "רישום, ניהול או ביטול אימות פנים אופציונלי",
+  "settingsNotifications": "העדפות התראות",
+  "settingsNotificationsSubtitle": "הגדרת ערוצי קבלת התראות באפליקציה, פוש, אימייל ו-SMS",
+  "settingsStationAdmin": "ניהול תחנה",
+  "settingsOperationalParams": "פרמטרים תפעוליים",
+  "settingsOperationalParamsSubtitle": "אזור זמן, קוד, שפה ותחילת שבוע",
+  "settingsBiometricPolicy": "מדיניות אימות זהות תחנתית",
+  "settingsBiometricPolicySubtitle": "הגדרת מצבי אימות בכניסה/יציאה ומוכנות צוות",
+  "settingsShiftTemplates": "תבניות משמרת",
+  "settingsShiftTemplatesSubtitle": "הגדרת משמרות עבודה, שעות וסדר תצוגה",
+  "settingsShiftManagerCaps": "סמכויות מנהל משמרת",
+  "settingsShiftManagerCapsSubtitle": "החרגות הרשאות ייעודיות לתחנה עבור מנהלי משמרת",
+  "settingsKioskDevices": "עמדות קיוסק תחנתיות",
+  "settingsKioskDevicesSubtitle": "הקצאה וניהול של צגי טאבלט קיוסק פיזיים",
+  "settingsExportCenter": "מרכז ייצוא דוחות תפעוליים",
+  "settingsExportCenterSubtitle": "הפקת קובצי CSV ו-PDF מוסמכים של דוחות תפעול",
+  "settingsAuditCenter": "יומן ביקורת תפעולי",
+  "settingsAuditCenterSubtitle": "בדיקת יומן פעולות ניהול כרונולוגי ובלתי ניתן לשינוי",
+  "settingsSystemHealth": "תקינות תפעולית ומחזור חיים",
+  "settingsSystemHealthSubtitle": "טלמטריה חיה, תקינות עמדות קיוסק ותחזוקת נתונים",
+  "settingsCurrentStationDetails": "פרטי תחנה נוכחית",
+  "settingsStationName": "שם התחנה",
+  "settingsStationCode": "קוד תפעולי",
+  "settingsStationTimezone": "אזור זמן",
+  "settingsStationLocale": "שפת ממשק תחנתית",
+  "settingsLanguageDirection": "שפה וכיווניות",
+  "settingsSignOut": "התנתק מ-YellowShifts",
+  "identityAssuranceTitle": "אימות זהות וזיהוי פנים (Face ID)",
+  "identityAssuranceSubtitle": "ניהול אימות ביומטרי בכניסה והסכמת פרטיות",
+  "identityStatusLabel": "סטטוס אימות",
+  "identityStatusNotEnrolled": "לא רשום",
+  "identityStatusActive": "פעיל ומאומת",
+  "identityStatusPending": "ממתין להשלמה",
+  "identityStatusRevoked": "בוטל",
+  "identityPrivacyTitle": "ארכיטקטורה ממוקדת פרטיות",
+  "identityPrivacyBullet1": "אף תמונת פנים גולמית או הקלטת וידאו אינה נשמרת בשרתים או במסדי הנתונים.",
+  "identityPrivacyBullet2": "המכשיר מבצע בדיקת חיות מקומית ומאמת מול מזהה ספק מוצפן.",
+  "identityPrivacyBullet3": "הנך שומר על שליטה מלאה לבטל את הפרופיל הביומטרי בכל עת.",
+  "identityConsentText": "אני מסכים/ה לאימות חיות ביומטרי לצורך אבטחת נוכחות בתחנות YellowShifts.",
+  "identityConsentFooter": "גרסה {version} • טוקן מוצפן בלבד • ללא שמירת תמונות",
+  "@identityConsentFooter": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "identityEnrollButton": "רשום זיהוי פנים (Face ID)",
+  "identityRevokeButton": "בטל פרופיל ביומטרי",
+  "identityRevokeConfirmTitle": "לבטל את זיהוי הפנים?",
+  "identityRevokeConfirmDesc": "הפרופיל הביומטרי שלך יבוטל ומזהה האימות יימחק. תוכל להירשם מחדש בכל עת.",
+  "identityEnrolledSuccess": "פרופיל ביומטרי נרשם בהצלחה!",
+  "identityRevokedSuccess": "הפרופיל הביומטרי בוטל.",
+  "identityEnrollmentFailed": "רישום ביומטרי נכשל.",
+  "identityAcceptConsentRequired": "יש לאשר את הודעת הפרטיות הביומטרית כדי להמשיך.",
+  "systemHealthAllDevicesHealthy": "כל עמדות הקיוסק תקינות ומחוברות",
+  "systemHealthKiosksOfflineCount": "{count, plural, =1{עמדת קיוסק 1 מנותקת} other{{count} עמדות קיוסק מנותקות}}",
+  "@systemHealthKiosksOfflineCount": {
+    "placeholders": {
+      "count": {
+        "type": "num"
+      }
+    }
+  },
+  "systemHealthDefenseSubtitle": "הושלם עם הגנת נוסחאות בצד שרת",
+  "systemHealthStaleSessionsSubtitle": "משמרות פתוחות מעל 16 שעות הדורשות בדיקת מנהל",
+  "systemHealthFailedIdentitySubtitle": "אימותי זהות שנכשלו או שלא הושלמו ב-24 השעות האחרונות",
+  "kioskDevicesTitle": "עמדות קיוסק",
+  "kioskLaunchModeButton": "הפעל מצב קיוסק",
+  "kioskProvisionNewTitle": "הקצאת עמדת קיוסק חדשה",
+  "kioskDeviceNameLabel": "שם העמדה (לדוגמה: טאבלט כניסה ראשית)",
+  "kioskDeviceIdentifierLabel": "מזהה עמדה (לדוגמה: KIOSK-01)",
+  "kioskProvisionAction": "הקצה עמדה",
+  "kioskSecretTitle": "קוד סודי של עמדת קיוסק",
+  "kioskSecretWarning": "שמור קוד סודי זה כעת. הוא לא יוצג שוב במערכת לעולם.",
+  "kioskDeviceLabel": "עמדה: {identifier}",
+  "@kioskDeviceLabel": {
+    "placeholders": {
+      "identifier": {
+        "type": "String"
+      }
+    }
+  },
+  "kioskCopySecretAction": "העתק קוד סודי",
+  "kioskSecretCopiedToast": "הקוד הסודי הועתק ללוח!",
+  "kioskDoneAction": "סיום",
+  "kioskEmptyTitle": "טרם הוקצו עמדות קיוסק",
+  "kioskEmptyDesc": "הקצה טאבלט פיזי או צג דפדפן להצגת ברקודי נוכחות תחנתיים.",
+  "kioskStatusOnline": "מחובר",
+  "kioskStatusOffline": "מנותק / לא פעיל",
+  "kioskStatusInactive": "מושבת",
+  "kioskLastSeen": "נראה לאחרונה: {time}",
+  "@kioskLastSeen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "kioskNeverConnected": "טרם התחבר",
+  "kioskRotateSecretAction": "החלף קוד סודי",
+  "kioskDeactivateAction": "השבת",
+  "kioskReactivateAction": "הפעל מחדש",
+  "kioskDeactivatedToast": "עמדת הקיוסק הושבתה",
+  "kioskReactivatedToast": "עמדת הקיוסק הופעלה מחדש",
+  "exportPreset7Days": "7 ימים",
+  "exportPreset30Days": "30 ימים",
+  "exportPresetThisMonth": "החודש",
+  "exportPresetLastMonth": "חודש שעבר",
+  "exportPresetCustom": "מותאם אישית",
+  "exportFormatLabel": "פורמט קובץ",
+  "availabilityDeadlineInfo": "מועד אחרון: {deadline} • {count} משמרות ביום",
+  "@availabilityDeadlineInfo": {
+    "placeholders": {
+      "deadline": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availabilitySlotsAnswered": "{answered} מתוך {total} משבצות סומנו",
+  "@availabilitySlotsAnswered": {
+    "placeholders": {
+      "answered": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "statusOpen": "פתוח",
+  "statusClosed": "סגור",
+  "statusDraft": "טיוטה",
+  "statusSubmitted": "הוגש",
+  "statusNotStarted": "לא התחיל",
+  "noEmployeeRecordsFound": "לא נמצאו רשומות עובדים.",
+  "stationSectionIdentity": "זהות ופרטי תחנה",
+  "stationSectionRegional": "ברירות מחדל אזוריות ולוח שנה",
+  "stationSectionGrace": "מדיניות משמרות וחלונות חסד",
+  "stationActiveStatus": "תחנה פעילה",
+  "stationDeactivatedStatus": "תחנה מושבתת",
+  "stationActiveDesc": "עמדות קיוסק ושעוני נוכחות פתוחים לפעילות תקינה.",
+  "stationDeactivatedDesc": "התחנה מושהית וחסומה מכל פעילות מבצעית.",
+  "policyOptionDisabledTitle": "מושבת (קוד QR בלבד)",
+  "policyOptionDisabledSubtitle": "נוכחות נעשית באמצעות ברקודי QR מתחלפים בלבד.",
+  "policyOptionCheckInOnlyTitle": "בכניסה בלבד (מומלץ)",
+  "policyOptionCheckInOnlySubtitle": "מחייב אימות ביומטרי בכניסה. יציאה באמצעות קוד QR בלבד.",
+  "policyOptionStrictTitle": "מחמיר: כניסה ויציאה",
+  "policyOptionStrictSubtitle": "מחייב אימות ביומטרי הן בכניסה והן ביציאה מהמשמרת.",
+  "policyApplyAction": "החל שינוי מדיניות",
+  "policyTeamReadinessTitle": "מוכנות ביומטרית של הצוות",
+  "policyNoMembersRegistered": "אין עובדים פעילים רשומים בתחנה.",
+  "attendanceLiveMonitor": "נוכחות חיה בתחנה",
+  "kpiWorkingNow": "עובדים כעת",
+  "kpiUpcoming": "משמרות קרובות",
+  "kpiLate": "איחורים",
+  "kpiCompleted": "הושלמו",
+  "kpiNotCheckedIn": "טרם נכנסו",
+  "attendanceRosterTitle": "סידור משמרות להיום",
+  "rosterScheduledCount": "{count} משמרות מתוזמנות",
+  "noEmployeesScheduledToday": "אין עובדים מתוזמנים להיום.",
+  "attendanceStatusWorking": "בעבודה",
+  "attendanceStatusUpcoming": "קרובה",
+  "attendanceStatusLate": "איחור {minutes} דק'",
+  "attendanceStatusCompleted": "הושלמה",
+  "attendanceStatusNotCheckedIn": "טרם נכנס/ה",
+  "scannerTabCamera": "סריקת מצלמה",
+  "scannerTabManual": "הזנת קוד ידני",
+  "scannerCameraUnavailable": "המצלמה אינה זמינה",
+  "scannerCameraPermError": "אנא בדוק הרשאות גישה למצלמה או השתמש בהזנת קוד ידנית.",
+  "scannerEnterKioskCode": "הזנת קוד עמדת קיוסק",
+  "scannerEnterCodeDesc": "הקלד את הקוד בן 6 התווים המוצג מתחת לקוד ה-QR בעמדת הקיוסק.",
+  "scannerVerifyCodeAction": "אמת קוד",
+  "attendanceNotCheckedIn": "טרם נכנסת למשמרת",
+  "attendanceScanPrompt": "סרוק את קוד ה-QR מעמדת הקיוסק או הזן קוד ידני כדי להתחיל את המשמרת",
+  "attendanceScanQrAction": "סרוק קוד עמדה",
+  "attendanceCurrentlyWorking": "במשמרת פעילה כעת",
+  "attendanceActiveShift": "משמרת פעילה",
+  "attendanceLateDuration": "איחור של {minutes} דק'",
+  "attendanceCheckOutAction": "סרוק ליציאה ממשמרת",
+  "attendanceConfirmCheckIn": "אישור כניסה למשמרת",
+  "attendanceConfirmCheckOut": "אישור יציאה ממשמרת",
+  "shiftLabel": "משמרת",
+  "scheduledShift": "משמרת מתוזמנת",
+  "scheduledWindow": "חלון זמן מתוזמן",
+  "workedTimeLabel": "זמן עבודה",
+  "checkInNowAction": "היכנס למשמרת עכשיו",
+  "checkOutNowAction": "צא ממשמרת עכשיו",
+  "correctionDialogTitle": "תיקון דיווח נוכחות",
+  "correctionReasonLabel": "סיבת תיקון (חובה)",
+  "correctionReasonHint": "לדוגמה: עובד שכח לדווח יציאה בטאבלט העמדה",
+  "correctionSaveAction": "שמור תיקון",
+  "checkInLabel": "כניסה",
+  "checkOutLabel": "יציאה",
+  "attendanceNoHistory": "אין היסטוריית נוכחות מתועדת עדיין.",
+  "attendanceWorkShift": "משמרת עבודה",
+  "timeNow": "עכשיו",
+  "identityVerifyingFace": "מאמת חיות פנים...",
+  "kpiActiveEmployees": "{count} עובדים פעילים",
+  "kpiActiveOpen": "{count} פעילות כעת",
+  "kpiLateShiftsCount": "{count} משמרות באיחור ({minutes} דק')",
+  "kpiEmployeesLateThreshold": "עובדים עם 3+ איחורים",
+  "kpiAttentionBadge": "לתשומת לב",
+  "kpiManualAdjustmentsAudited": "התאמות ידניות מבוקרות",
+  "workforceRecordsTitle": "רשומות כוח אדם ({count})",
+  "tableColEmployee": "עובד",
+  "tableColCode": "קוד",
+  "tableColWorkedTime": "שעות עבודה",
+  "tableColCompleted": "הושלמו",
+  "tableColLateShifts": "איחורים",
+  "tableColCorrections": "תיקונים",
+  "tableColStatus": "סטטוס",
+  "repeatedLatenessTag": "איחורים חוזרים (3+)",
+  "statusActive": "פעיל",
+  "statusInactive": "לא פעיל",
+  "statusSuspended": "מושעה",
+  "tableMetricWorked": "עבודה",
+  "tableMetricShifts": "משמרות",
+  "tableMetricLate": "איחור",
+  "tableMetricCorrected": "תוקן",
+  "dailyNoRecords": "אין משמרות מתוזמנות או דיווחי כניסה בתאריך זה.",
+  "dailyScheduledShiftsTitle": "משמרות תפעוליות מתוזמנות ({count})",
+  "dailyWalkInTitle": "נוכחות לא מתוזמנת ({count})",
+  "dailyRequiredStaff": "נדרש: {count}",
+  "dailyAssignedStaff": "שובצו: {count}",
+  "dailyCheckedInStaff": "נכנסו: {count}",
+  "dailyLateStaff": "באיחור: {count}",
+  "dailyActiveOpenStaff": "פעילות כעת: {count}",
+  "dailyNoShiftRecords": "טרם נרשמו דיווחי נוכחות למשמרת מתוזמנת זו.",
+  "checkedInLabel": "כניסה",
+  "lateMinutesLabel": "איחור {minutes} דק'",
+  "shiftHistoryTitle": "היסטוריית משמרות ({count})",
+  "allStationsFilter": "כל התחנות",
+  "stationsWorkedCount": "{count} תחנות",
+  "lateTimeDuration": "זמן איחור {minutes} דק'",
+  "repeatedBadge": "חוזר",
+  "operationalWeekRange": "טווח שבוע תפעולי",
+  "submissionDeadline": "מועד אחרון להגשה",
+  "operationalNotesOptional": "הערות תפעוליות (אופציונלי)",
+  "operationalNotesHint": "לדוגמה: נדרש כיסוי חגים, מינימום 4 משמרות...",
+  "createPeriodAction": "צור תקופה",
+  "submissionDeadlineFutureError": "מועד ההגשה האחרון חייב להיות בעתיד.",
+  "kioskScreenTitle": "עמדת קיוסק נוכחות",
+  "kioskScreenUnconfiguredDesc": "טאבלט זה עדיין אינו מוגדר. הגדר פרטי גישה כדי להתחיל בשידור קודי QR לרישום נוכחות.",
+  "kioskConfigureDeviceAction": "הגדרת עמדת קיוסק",
+  "kioskSetupDialogTitle": "הגדרת עמדת קיוסק לתחנה",
+  "kioskDeviceIdentifierLabel": "מזהה מכשיר",
+  "kioskDeviceIdentifierHint": "לדוגמה: KIOSK-MAIN-01",
+  "kioskDeviceSecretLabel": "סוד מכשיר (Secret)",
+  "kioskDeviceSecretHint": "הדבק את הסוד שנוצר בהגדרות מנהל",
+  "kioskConnectAction": "חיבור עמדת קיוסק",
+  "kioskValidationRequired": "נא להזין מזהה מכשיר וסוד מכשיר.",
+  "kioskConnectionFailed": "החיבור נכשל: {error}",
+  "kioskDefaultTitle": "קיוסק תחנה",
+  "kioskScanInstruction": "סרוק באמצעות אפליקציית YellowShifts לכניסה או יציאה",
+  "kioskConnectedStatus": "עמדת קיוסק מחוברת: {identifier}",
+  "kioskSecondsRemaining": "{seconds} שניות",
+  "reportsAccessRestrictedTitle": "הגישה מוגבלת",
+  "reportsAccessRestrictedDesc": "עליך להיות מנהל תחנה פעיל או מנהל מערכת כדי לצפות בדוחות תפעוליים.",
+  "walkInShift": "משמרת ללא שיבוץ",
+  "activeShiftInProgress": "משמרת פעילה כעת",
+  "shiftExceedsWarning": "המשמרת עולה על 16 שעות. יש לבדוק את סטטוס היציאה.",
+  "repeatedLatenessPattern": "דפוס איחורים חוזר: 3 או יותר איחורים בתקופת דיווח זו.",
+  "attendanceCorrectionHistory": "היסטוריית נוכחות ותיקונים",
+  "noRecordsInPeriod": "אין רשומות נוכחות בתקופה זו.",
+  "correctionsCount": "{count, plural, =1{תיקון 1} other{{count} תיקונים}}",
+  "correctionLedger": "יומן תיקונים",
+  "correctionByActor": "בוצע ע\"י: {name}",
+  "correctionDurationChange": "משך זמן: {oldDuration} -> {newDuration}",
+  "correctionReasonPrefix": "סיבה: \"{reason}\"",
+  "stationLabel": "תחנה",
+  "kpiWorkedHours": "שעות עבודה",
+  "kpiLateArrivals": "איחורים",
+  "statusCorrected": "תוקן",
+
+  "rolePlatformAdmin": "מנהל פלטפורמה",
+  "roleStationManager": "מנהל תחנה",
+  "platformAdminTitle": "ניהול הפלטפורמה",
+  "platformAdminMode": "מצב פלטפורמה",
+  "platformOverviewTitle": "סקירת פלטפורמה",
+  "platformOverviewSubtitle": "סיכום תפעולי כלל-רשתי למפעילי YellowShifts.",
+  "platformNavOverview": "סקירה",
+  "platformNavStations": "תחנות",
+  "platformNavAudit": "ביקורת / תפעול",
+  "platformNavHealth": "בריאות המערכת",
+  "platformStationsTitle": "תחנות",
+  "platformStationsSubtitle": "הקמה, בקרה והפעלה של כל תחנה ברשת YellowShifts.",
+  "platformCreateStation": "יצירת תחנה",
+  "platformCreateStationTitle": "יצירת תחנה",
+  "platformCreateStationSubtitle": "הקמת תחנה ושיוך מנהל התחנה הראשוני.",
+  "platformStationName": "שם התחנה",
+  "platformStationCode": "קוד תחנה",
+  "platformStationTimezone": "אזור זמן",
+  "platformStationLocale": "שפה",
+  "platformStationStatus": "סטטוס",
+  "platformWeekStart": "תחילת השבוע",
+  "platformWeekStartSunday": "יום ראשון",
+  "platformWeekStartMonday": "יום שני",
+  "platformInitialManager": "מנהל תחנה ראשוני",
+  "platformManagerEmail": "אימייל מנהל",
+  "platformManagerFirstName": "שם פרטי",
+  "platformManagerLastName": "שם משפחה",
+  "platformManagerPhone": "טלפון (אופציונלי)",
+  "platformAssignManager": "שיוך מנהל תחנה",
+  "platformAddManager": "הוספת מנהל תחנה",
+  "platformReplaceManager": "החלפת מנהל תחנה",
+  "platformRemoveManager": "הסרת תפקיד מנהל",
+  "platformDeactivateManager": "השבתת מנהל תחנה",
+  "platformReactivateManager": "הפעלת מנהל תחנה מחדש",
+  "platformStationManagers": "מנהלי תחנה",
+  "platformStationManagersSubtitle": "רק מנהל פלטפורמה יכול להעניק או לבטל הרשאות מנהל תחנה.",
+  "platformDeactivateStation": "השבתת תחנה",
+  "platformReactivateStation": "הפעלת תחנה מחדש",
+  "platformOpenStation": "פתיחת תחנה",
+  "platformOperatingStation": "הפעלת תחנה",
+  "platformOperatingBanner": "מנהל פלטפורמה · מפעיל: {stationName}",
+  "@platformOperatingBanner": {
+    "placeholders": {
+      "stationName": {
+        "type": "String"
+      }
+    }
+  },
+  "platformReturnToPlatform": "חזרה לניהול הפלטפורמה",
+  "platformConfirmDeactivateTitle": "להשבית את התחנה?",
+  "platformConfirmDeactivateBody": "גישת התחנה הרגילה תיחסם. היסטוריית נוכחות, סידורים ורשומות ביקורת יישמרו.",
+  "platformConfirmRemoveManagerTitle": "להסיר הרשאת מנהל תחנה?",
+  "platformConfirmRemoveManagerBody": "המשתמש לא יוכל עוד לשמש מנהל תחנה. חייב להישאר מנהל תחנה פעיל אחד לפחות.",
+  "platformReasonLabel": "סיבה",
+  "platformReasonHint": "תארו מדוע נדרש השינוי",
+  "platformForceDeactivate": "השבתה כפויה למרות פעילות פתוחה",
+  "platformMetricTotalStations": "סה״כ תחנות",
+  "platformMetricActiveStations": "תחנות פעילות",
+  "platformMetricInactiveStations": "תחנות מושבתות",
+  "platformMetricActiveMemberships": "חברויות פעילות",
+  "platformMetricStationAdmins": "מנהלי תחנה",
+  "platformMetricShiftManagers": "מנהלי משמרת",
+  "platformMetricKiosksOnline": "קיוסקים מקוונים",
+  "platformMetricKiosksOffline": "קיוסקים לא מקוונים",
+  "platformMetricAlerts": "התרעות תפעול",
+  "platformColEmployees": "עובדים פעילים",
+  "platformColManagers": "מנהלי תחנה",
+  "platformColShiftManagers": "מנהלי משמרת",
+  "platformColKiosks": "סטטוס קיוסק",
+  "platformHealthSummary": "בריאות תפעולית",
+  "platformAuditTitle": "ביקורת פלטפורמה",
+  "platformAuditSubtitle": "צפייה באירועי פלטפורמה ותחנות. מנהלי תחנה נשארים בגבולות התחנה בלבד.",
+  "platformAuditFilterAction": "פעולה",
+  "platformHealthTitle": "בריאות הפלטפורמה",
+  "platformHealthSubtitle": "אותות מצרפיים של קיוסק, ייצוא, נוכחות והתראות בכל הרשת.",
+  "platformUnauthorizedTitle": "ניהול הפלטפורמה אינו זמין",
+  "platformUnauthorizedBody": "אזור זה מיועד למנהלי פלטפורמה פעילים בלבד.",
+  "platformEmptyStations": "עדיין לא הוקמו תחנות.",
+  "platformCreatedToast": "התחנה נוצרה בהצלחה",
+  "platformUpdatedToast": "התחנה עודכנה",
+  "platformDeactivatedToast": "התחנה הושבתה",
+  "platformReactivatedToast": "התחנה הופעלה מחדש",
+  "platformManagerAssignedToast": "מנהל התחנה שויך",
+  "platformManagerRemovedToast": "תפקיד מנהל התחנה הוסר",
+  "platformManagedByPlatform": "מנוהל באמצעות ניהול הפלטפורמה",
+  "platformAdminRoleReadonlyHint": "הרשאות מנהל תחנה משויכות רק על ידי ניהול הפלטפורמה.",
+  "errorNotPlatformAdmin": "יש להיות מנהל פלטפורמה פעיל כדי לבצע פעולה זו.",
+  "errorStationCodeConflict": "קוד תחנה זה כבר בשימוש.",
+  "errorStationAlreadyInactive": "התחנה כבר מושבתת.",
+  "errorStationAlreadyActive": "התחנה כבר פעילה.",
+  "errorStationProvisioningFailed": "הקמת התחנה נכשלה. לא נותרה תחנה חלקית פעילה.",
+  "errorStationAdminRoleForbidden": "מנהלי תחנה אינם יכולים להעניק או לבטל הרשאות מנהל תחנה."
+}

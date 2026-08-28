@@ -1,0 +1,1164 @@
+{
+  "@@locale": "en",
+  "appTitle": "YellowShifts",
+  "appTagline": "Workforce Operations Platform",
+  "navHome": "Home",
+  "navSchedule": "Schedule",
+  "navAttendance": "Attendance",
+  "navEmployees": "Employees",
+  "navSettings": "Settings",
+  "navAvailability": "Availability",
+  "navReports": "Reports",
+  "navDesignSystem": "Design System",
+  "loginTitle": "Sign In to YellowShifts",
+  "loginSubtitle": "Enter your credentials to access your station operations.",
+  "loginEmailLabel": "Email Address",
+  "loginEmailHint": "name@yellowshifts.com",
+  "loginPasswordLabel": "Password",
+  "loginPasswordHint": "Enter your password",
+  "loginButton": "Sign In to Operations",
+  "loginLoading": "Authenticating...",
+  "loginInvalidCredentials": "Invalid email or password. Please verify and try again.",
+  "loginNetworkError": "Unable to connect to the server. Check your network connection.",
+  "loginValidationEmpty": "Please enter both your email address and password.",
+  "loginHeroTitle": "Operational Velocity.\nMulti-Station Precision.",
+  "loginHeroSubtitle": "A modern workforce operations engine designed for stations, shift managers, and field staff with real-time synchronization.",
+  "loginHeroBadge": "YellowShifts Operations • Supabase Verified",
+
+  "stationSelectTitle": "Select Station",
+  "stationSelectSubtitle": "You belong to multiple stations. Choose an active station to proceed.",
+  "stationSelectAction": "Enter Station",
+  "stationActiveBadge": "Active",
+  "stationInactiveBadge": "Inactive",
+  "emptyStationsTitle": "No Active Station Selected",
+  "emptyStationsDescription": "Please select or request access to a station to access operational features.",
+  "roleAdmin": "Administrator",
+  "roleShiftManager": "Shift Manager",
+  "roleEmployee": "Employee",
+  "dashboardTitle": "Station Overview",
+  "dashboardWelcome": "Welcome back, {name}",
+  "@dashboardWelcome": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardActiveStation": "Current Station: {stationName}",
+  "@dashboardActiveStation": {
+    "placeholders": {
+      "stationName": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboardStationCode": "Station Code",
+  "dashboardTimezone": "Timezone",
+  "dashboardRole": "Your Role",
+  "dashboardQuickStats": "Operational Pulse",
+  "dashboardRealtimeSync": "Realtime Connected",
+  "dashboardActiveMembers": "Active Workforce",
+  "dashboardAdminsCount": "Administrators",
+  "dashboardManagersCount": "Shift Managers",
+  "dashboardEmployeesCount": "Employees",
+  "dashboardEmptyOnboardingTitle": "Welcome to Your New Station",
+  "dashboardEmptyOnboardingDesc": "Your station has been provisioned. Begin by adding your first employee or configuring station operating parameters.",
+  "employeesTitle": "Employee Directory",
+  "employeesSubtitle": "Manage workforce accounts, station roles, and access security.",
+  "employeesSearchHint": "Search by name, phone, or employee code...",
+  "employeesFilterAllRoles": "All Roles",
+  "employeesFilterAllStatus": "All Statuses",
+  "employeesAddButton": "New Employee",
+  "employeesEmptyTitle": "No Employees Found",
+  "employeesEmptyDesc": "No employees have been registered in this station yet.",
+  "employeesEmptySearchDesc": "No workforce records matched your search query.",
+  "employeesColName": "Name & Identity",
+  "employeesColRole": "Station Role",
+  "employeesColStatus": "Status",
+  "employeesColPhone": "Phone",
+  "employeesColCode": "Code",
+  "employeesColActions": "Actions",
+  "createEmployeeTitle": "Provision Employee Account",
+  "createEmployeeSubtitle": "Create a new workforce account or assign an existing member to this station.",
+  "createEmployeeStepIdentity": "Identity & Contact",
+  "createEmployeeStepRole": "Station & Role",
+  "createEmployeeStepAccess": "Access Credentials",
+  "createEmployeeFirstName": "First Name",
+  "createEmployeeLastName": "Last Name",
+  "createEmployeeEmail": "Email Address (Optional)",
+  "createEmployeePhone": "Mobile Phone Number",
+  "createEmployeeCode": "Station Employee Code (Optional)",
+  "createEmployeeRoleLabel": "Assign Station Role",
+  "createEmployeeSubmit": "Create Employee Account",
+  "createEmployeeSuccessTitle": "Account Provisioned Successfully",
+  "createEmployeeSuccessDesc": "The employee account has been created. Provide the one-time temporary credentials to the employee securely.",
+  "createEmployeeTempPassword": "One-Time Temporary Password",
+  "createEmployeeCopyPassword": "Copy Credentials",
+  "createEmployeeCopiedToast": "Temporary credentials copied to clipboard",
+  "createEmployeeSecurityNotice": "This temporary password is only displayed once and is never stored in plaintext.",
+  "inspectorTitle": "Employee Details",
+  "inspectorSubtitle": "Station membership and access management",
+  "inspectorContactSection": "Contact & Identity",
+  "inspectorRoleSection": "Station Role & Authority",
+  "inspectorMembershipSection": "Station Role & Authority",
+  "inspectorStatusSection": "Membership Status",
+  "inspectorSecuritySection": "Account Security Actions",
+  "inspectorChangeRole": "Change Role",
+  "inspectorRoleChange": "Change Role",
+  "inspectorChangeStatus": "Change Status",
+  "inspectorResetPassword": "Reset Password",
+  "inspectorResetPasswordConfirm": "Generate new temporary credentials for this employee?",
+  "inspectorRevokeSessions": "Revoke All Sessions",
+  "inspectorRevokeSessionsConfirm": "Force sign-out all active sessions for this user?",
+  "inspectorLastAdminNotice": "Cannot demote or deactivate the last Administrator of this station.",
+  "inspectorDeactivate": "Deactivate Employee",
+  "inspectorReactivate": "Reactivate Employee",
+  "inspectorActionSuccess": "Operation completed successfully",
+  "commonCancel": "Cancel",
+  "commonClose": "Close",
+  "commonSave": "Save",
+  "stationSettingsTitle": "Station Operational Parameters",
+  "stationSettingsSubtitle": "Manage station code, timezone, locale, and operational week start.",
+  "stationSettingsName": "Station Name",
+  "stationSettingsCode": "Operational Code",
+  "stationSettingsTimezone": "Operational Timezone",
+  "stationSettingsLocale": "Default Locale",
+  "stationSettingsWeekStart": "Operational Week Starts On",
+  "stationSettingsSunday": "Sunday (Standard Israeli Week)",
+  "stationSettingsMonday": "Monday",
+  "stationSettingsSave": "Save Station Parameters",
+  "stationSettingsSaved": "Station parameters updated successfully",
+  "stationSettingsSavedToast": "Station parameters updated successfully",
+  "shiftsTitle": "Shift Templates",
+  "shiftsSubtitle": "Configure station working shifts, operational hours, and ordering.",
+  "shiftsAddButton": "Add Shift Template",
+  "shiftsEmptyTitle": "No Shift Templates",
+  "shiftsEmptyDesc": "Define your station's shift templates to enable weekly availability submissions.",
+  "shiftsColName": "Shift Name",
+  "shiftsColTimes": "Hours",
+  "shiftsColDuration": "Duration",
+  "shiftsColStatus": "Status",
+  "shiftsCrossMidnight": "Crosses Midnight (+1 day)",
+  "shiftsDeactivate": "Deactivate",
+  "shiftsReactivate": "Reactivate",
+  "shiftsEdit": "Edit Shift",
+  "shiftsCreateDialogTitle": "New Shift Template",
+  "shiftsEditDialogTitle": "Edit Shift Template",
+  "shiftsNameLabel": "Shift Name",
+  "shiftsNameHint": "e.g. Morning, Evening, Night...",
+  "shiftsCodeLabel": "Operational Code (Optional)",
+  "shiftsCodeHint": "e.g. MOR, EVE",
+  "shiftsStartTime": "Start Time",
+  "shiftsEndTime": "End Time",
+  "shiftsSaveButton": "Save Shift Template",
+  "permissionsTitle": "Shift Manager Capabilities",
+  "permissionsSubtitle": "Configure operational permissions and management overrides for Shift Managers.",
+  "permissionsSectionTemplates": "Shift Templates Management",
+  "permissionsShiftTemplatesManage": "Create, edit, and reorder shift templates",
+  "permissionsSectionAvailability": "Weekly Availability Operations",
+  "permissionsAvailabilityPeriodCreate": "Create draft weekly availability periods",
+  "permissionsAvailabilityPeriodOpen": "Open availability submission periods",
+  "permissionsAvailabilityPeriodClose": "Close and reopen availability periods",
+  "permissionsAvailabilityTeamRead": "View team availability matrix and submissions",
+  "permissionsSaveButton": "Save Capability Overrides",
+  "permissionsSavedToast": "Shift Manager permissions updated successfully",
+  "availabilityTitle": "Weekly Availability",
+  "availabilitySubtitle": "Submit your working preferences for upcoming station shifts.",
+  "availabilityNoPeriodTitle": "No Open Availability Request",
+  "availabilityNoPeriodDesc": "There is currently no open availability period for this station.",
+  "availabilityDeadlineNotice": "Submission Deadline: {deadline}",
+  "@availabilityDeadlineNotice": {
+    "placeholders": {
+      "deadline": {
+        "type": "String"
+      }
+    }
+  },
+  "availabilityStatusDraft": "Draft",
+  "availabilityStatusSubmitted": "Submitted",
+  "availabilityStatusClosed": "Closed (Read Only)",
+  "availabilityStatusNotStarted": "Not Started",
+  "availabilityProgress": "{answered} of {total} slots answered",
+  "@availabilityProgress": {
+    "placeholders": {
+      "answered": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "availabilityAvailable": "Available",
+  "availabilityUnavailable": "Unavailable",
+  "availabilityUnanswered": "Unanswered",
+  "availabilityAllDayAvailable": "All Day Available",
+  "availabilityAllDayUnavailable": "All Day Unavailable",
+  "availabilitySubmitButton": "Submit Availability",
+  "availabilityEditNotice": "Editing an answered slot will return your submission to Draft until resubmitted.",
+  "availabilitySubmittedConfirmation": "Availability submitted successfully for {week}",
+  "@availabilitySubmittedConfirmation": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      }
+    }
+  },
+  "availabilitySavingDraft": "Saving draft...",
+  "availabilityDraftSaved": "Draft saved",
+  "managerAvailabilityTitle": "Team Availability Matrix",
+  "managerAvailabilitySubtitle": "Review submitted workforce availability, submission progress, and operational readiness.",
+  "managerKpiEligible": "Eligible Workforce",
+  "managerKpiSubmitted": "Submitted",
+  "managerKpiDraft": "In Draft",
+  "managerKpiNotStarted": "Not Started",
+  "managerKpiNotSubmitted": "Pending Submission",
+  "managerFilterAll": "All Members",
+  "managerFilterSubmitted": "Submitted",
+  "managerFilterDraft": "Draft",
+  "managerFilterNotStarted": "Not Started",
+  "managerOpenPeriod": "Open Submissions",
+  "managerClosePeriod": "Close Submissions",
+  "managerReopenPeriod": "Reopen Submissions",
+  "managerCreatePeriod": "Create Period",
+  "managerPeriodHistory": "Past Periods",
+  "scheduleTitle": "Weekly Shift Schedule",
+  "scheduleSubtitle": "Assign employees, balance shift staffing, and publish official station schedules.",
+  "scheduleDraftStatus": "Draft",
+  "schedulePublishedStatus": "Official Published",
+  "schedulePublishAction": "Publish Schedule",
+  "scheduleStaffingCoverage": "Staffing Coverage: {percent}%",
+  "@scheduleStaffingCoverage": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "myShiftsTitle": "My Shifts",
+  "myShiftsEmptyDraft": "No official schedule published for this week",
+  "myShiftsEmptyAssigned": "You have no assigned shifts for this week",
+  "candidateAssignAction": "Assign",
+  "candidateOverrideAction": "Assign with Override",
+  "candidateAlreadyAssigned": "Assigned",
+  "attendanceTitle": "Station Attendance",
+  "attendanceNotCheckedIn": "Not Checked In",
+  "attendanceCurrentlyWorking": "Currently Working",
+  "attendanceScanQrAction": "Scan Station QR",
+  "attendanceCheckOutAction": "Check Out",
+  "attendanceRecentHistory": "Recent Shifts",
+  "attendanceKioskMode": "Station Kiosk",
+  "attendanceLiveMonitor": "Live Attendance Roster",
+  "navNotifications": "Notifications",
+  "notificationsTitle": "Notification Center",
+  "notificationsSubtitle": "Realtime shift updates, live attendance alerts, reminders, and operational events",
+  "notificationsMarkAllRead": "Mark all as read",
+  "notificationsEmptyTitle": "No notifications found",
+  "notificationsEmptyDesc": "You are all caught up! New schedule, attendance, and system notices will appear here.",
+  "notificationsUnreadOnly": "Unread only",
+  "notificationPreferencesTitle": "Notification Channels & Preferences",
+  "notificationPreferencesSubtitle": "Configure in-app, push, email, and SMS delivery for each category",
+  "notificationMandatoryNotice": "Mandatory Compliance & Security Notices",
+  "notificationMandatoryDesc": "Critical security alerts, manual attendance adjustments, and identity overrides are mandatory and always delivered in-app for auditing.",
+  "notificationDeliveryMatrix": "Delivery Matrix",
+  "notificationDeliveryMatrixDesc": "Toggle preferred communication channels for each operational category",
+  "navMyHours": "My Hours",
+  "myHoursTitle": "My Worked Hours",
+  "myHoursSubtitle": "Personal attendance timeline, shift duration history, and active sessions across all stations",
+  "reportsTitle": "Station Operational Reports",
+  "reportsSubtitle": "Authoritative time records, station metrics, employee breakdowns, and daily shift rosters",
+  "kpiTotalWorked": "Total Worked Time",
+  "kpiCompletedShifts": "Completed Shifts",
+  "kpiLateShifts": "Late Shifts",
+  "kpiTotalLateTime": "Total Late Time",
+  "kpiCorrectedRecords": "Corrected Records",
+  "kpiActiveOpenSessions": "Active Open Shifts",
+  "kpiRepeatedLateness": "Repeated Lateness",
+  "kpiActiveWorkforce": "Active Station Workforce",
+  "kpiAverageShift": "Avg Shift Duration",
+  "kpiOnTimeRate": "On-Time Rate",
+  "presetToday": "Today",
+  "presetCurrentWeek": "This Week",
+  "presetCurrentMonth": "This Month",
+  "presetLastMonth": "Last Month",
+  "presetCustom": "Custom Range",
+  "filterAll": "All Shifts",
+  "filterCompleted": "Completed",
+  "filterLate": "Late Only",
+  "filterCorrected": "Corrected",
+  "filterOpen": "Active Open",
+  "tabBreakdown": "Workforce Breakdown",
+  "tabDailyBoard": "Daily Operational Board",
+  "searchEmployeesPlaceholder": "Search by name or employee code...",
+  "employeeDrilldownTitle": "Employee Attendance & History",
+  "correctionLedger": "Correction Ledger",
+  "noAttendanceFound": "No attendance records found for this selected period.",
+  "selectDatePrompt": "Select Operational Date",
+  "statusActive": "Active",
+  "statusInactive": "Inactive",
+  "statusSuspended": "Suspended",
+  "navDashboard": "Dashboard",
+  "navShiftTemplates": "Shift Templates",
+  "navKiosks": "Kiosk Devices",
+  "navStationSettings": "Station Settings",
+  "navSectionWorkspace": "My Workspace",
+  "navSectionManagement": "Station Management",
+  "navSectionGeneral": "Account & System",
+  "switchStationContext": "Switch Station Context",
+  "noPhoneRegistered": "No phone registered",
+  "noCodeAssigned": "None assigned",
+  "notProvided": "Not provided",
+  "joinedStationLabel": "Joined Station",
+  "allStatusesFilter": "All Statuses",
+  "filterStatusActive": "Active",
+  "filterStatusInactive": "Inactive",
+  "filterStatusSuspended": "Suspended",
+  "selectEmployeePrompt": "Select an employee to view operational details",
+  "colNameIdentity": "NAME & IDENTITY",
+  "colStationRole": "STATION ROLE",
+  "colStatus": "STATUS",
+  "colPhone": "PHONE",
+  "colCode": "CODE",
+  "dashboardStationOverview": "Station Overview",
+  "dashboardEmployeeNextShift": "Upcoming Shift",
+  "dashboardEmployeeNoShift": "No shifts scheduled for today",
+  "dashboardEmployeeAttendanceStatus": "Today's Attendance Status",
+  "dashboardEmployeeActiveShift": "Shift In Progress",
+  "dashboardEmployeeNotCheckedIn": "Not Clocked In",
+  "dashboardEmployeeClockInAction": "Clock In with QR",
+  "dashboardEmployeeClockOutAction": "Clock Out",
+  "dashboardEmployeeMyHoursTitle": "Worked Hours Summary",
+  "dashboardEmployeeAvailabilityTitle": "Shift Availability",
+  "dashboardEmployeeAvailabilityOpen": "Availability submission is open",
+  "dashboardEmployeeAvailabilitySubmitted": "Availability successfully submitted",
+  "dashboardEmployeeAvailabilityClosed": "No active submission period",
+  "dashboardManagerStaffingTitle": "Today's Operational Staffing",
+  "dashboardManagerStaffingRequired": "Required: {count}",
+  "@dashboardManagerStaffingRequired": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerStaffingAssigned": "Assigned: {count}",
+  "@dashboardManagerStaffingAssigned": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerStaffingCheckedIn": "Checked In: {count}",
+  "@dashboardManagerStaffingCheckedIn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerStaffingShortage": "Shortage: {count}",
+  "@dashboardManagerStaffingShortage": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerLiveAttendanceTitle": "Live Attendance Roster",
+  "dashboardManagerAvailabilityOverview": "Team Availability Progress",
+  "dashboardManagerAlertsTitle": "Operational Alerts",
+  "dashboardManagerLateArrivals": "{count} Late Arrivals",
+  "@dashboardManagerLateArrivals": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardManagerLongSessions": "{count} Shifts Exceeding 16h",
+  "@dashboardManagerLongSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardAdminPulseTitle": "Station Workforce Summary",
+  "dashboardAdminQuickShortcuts": "Administrative Shortcuts",
+  "dashboardAdminKioskSummary": "Kiosks Fleet",
+  "dashboardAdminSettingsAction": "Station Settings",
+  "dashboardAdminAddEmployeeAction": "Add Employee",
+  "employeeEditTitle": "Edit Employee Profile",
+  "employeeEditSubtitle": "Modify profile and station membership properties",
+  "employeeEditGlobalNotice": "First Name, Last Name, Phone, and Preferred Locale update globally across all stations.",
+  "employeeEditStationNotice": "Station Role, Membership Status, and Employee Code apply strictly to this station.",
+  "employeeEditFirstNameLabel": "First Name",
+  "employeeEditLastNameLabel": "Last Name",
+  "employeeEditPhoneLabel": "Phone Number",
+  "employeeEditEmailLabel": "Email Address",
+  "employeeEditLocaleLabel": "Preferred Language",
+  "employeeEditRoleLabel": "Station Role",
+  "employeeEditStatusLabel": "Membership Status",
+  "employeeEditCodeLabel": "Station Employee Code",
+  "employeeEditSaveButton": "Save Changes",
+  "employeeEditSuccessToast": "Employee details updated successfully",
+  "employeeEditAction": "Edit Profile",
+  "employeeResetPasswordTitle": "Reset Employee Password",
+  "employeeResetPasswordConfirm": "This will generate a new temporary password for {name} and invalidate all active sessions.",
+  "@employeeResetPasswordConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "employeeResetPasswordGenerate": "Generate New Password",
+  "employeeResetPasswordSuccessTitle": "New Temporary Password",
+  "employeeResetPasswordSuccessDesc": "A new temporary password has been issued for {name}:",
+  "@employeeResetPasswordSuccessDesc": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "employeeResetPasswordNotice": "Provide this password to the employee. It will not be shown again.",
+  "employeeRevokeSessionsConfirm": "Revoke Active Sessions",
+  "employeeRevokeSessionsSuccess": "Active sessions revoked successfully",
+  "errorLastAdminRequired": "Cannot demote or deactivate the last active Administrator of this station.",
+  "errorPermissionDenied": "Access denied. You do not have permission for this action.",
+  "errorDuplicatePhone": "This phone number is already registered to another user.",
+  "errorDuplicateEmail": "This email address is already registered to another user.",
+  "errorInvalidInput": "Please verify the entered details.",
+  "errorNotFound": "The requested record was not found.",
+  "errorGeneric": "An unexpected error occurred. Please try again.",
+  "errorExportExpired": "This export link has expired (15-minute validity). Please request a new export.",
+  "errorActiveAttendanceBlocksDeactivation": "Cannot deactivate station while active attendance sessions or scheduled shifts are open.",
+  "dialogCancel": "Cancel",
+  "copyPassword": "Copy Password",
+  "passwordCopied": "Password copied to clipboard",
+  "closeButton": "Close",
+  "navExports": "Exports",
+  "navAuditCenter": "Audit Center",
+  "navSystemHealth": "System Health",
+  "exportCenterTitle": "Operational Export Center",
+  "exportCenterSubtitle": "Generate certified server-side operational data artifacts with spreadsheet formula defense",
+  "exportMyHours": "Export My Attendance Hours",
+  "exportStationAttendanceSummary": "Station Attendance Summary",
+  "exportStationEmployeeWorkedHours": "Employee Worked Hours",
+  "exportDailyAttendanceReport": "Daily Attendance Report",
+  "exportAttendanceCorrectionLedger": "Attendance Correction Ledger",
+  "exportPublishedSchedule": "Published Schedule Roster",
+  "exportEmployeeDirectory": "Employee Directory & Roster",
+  "exportAvailabilityOverview": "Team Availability Overview",
+  "exportFormatCsv": "CSV (UTF-8 BOM)",
+  "exportFormatPdf": "PDF Document",
+  "exportButtonGenerate": "Generate Export",
+  "exportGenerating": "Generating Export...",
+  "exportSuccess": "Export generated successfully ({rowCount} rows)",
+  "@exportSuccess": {
+    "placeholders": {
+      "rowCount": {
+        "type": "int"
+      }
+    }
+  },
+  "exportDownloadButton": "Download File",
+  "exportHistoryTitle": "Recent Export Artifacts",
+  "exportHistoryEmpty": "No recent export artifacts found.",
+  "exportStatusCompleted": "Completed",
+  "exportStatusExpired": "Expired",
+  "exportStatusProcessing": "Processing",
+  "exportStatusFailed": "Failed",
+  "exportExpiryNotice": "Download links expire automatically after 15 minutes for data security.",
+  "auditCenterTitle": "Administrative Audit Center",
+  "auditCenterSubtitle": "Immutable chronological ledger of administrative mutations and operational actions",
+  "auditFilterAll": "All Activities",
+  "auditFilterMemberships": "Memberships & Roles",
+  "auditFilterSchedules": "Schedules & Shifts",
+  "auditFilterAttendance": "Attendance & Clock-In",
+  "auditFilterKiosks": "Kiosks & Hardware",
+  "auditFilterStation": "Station Configuration",
+  "auditFilterExports": "Data Exports",
+  "auditFilterAvailability": "Availability",
+  "auditSearchPlaceholder": "Search by actor, email, action or target...",
+  "auditEmptyLogs": "No audit records found matching criteria.",
+  "auditMetadataTitle": "Sanitized Metadata",
+  "auditActor": "Actor",
+  "auditAction": "Action",
+  "auditTarget": "Target",
+  "auditTimestamp": "Timestamp",
+  "auditPageInfo": "Page {current} of {total} ({count} events)",
+  "@auditPageInfo": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthTitle": "Station Operational Health",
+  "systemHealthSubtitle": "Live telemetry, kiosk fleet status, and data lifecycle management",
+  "systemHealthKiosksFleet": "Kiosk Fleet Status",
+  "systemHealthKiosksOnline": "{online} of {total} Online",
+  "@systemHealthKiosksOnline": {
+    "placeholders": {
+      "online": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthExportPipeline": "Export Pipeline (24h)",
+  "systemHealthExportsSummary": "{count} Exports ({failed} Failed)",
+  "@systemHealthExportsSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "failed": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthAnomalies": "System Health & Anomalies",
+  "systemHealthNoAnomalies": "All station systems operational",
+  "systemHealthStaleSessions": "{count} Stale Open Attendance Sessions",
+  "@systemHealthStaleSessions": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthFailedIdentity": "{count} Identity Verification Failures",
+  "@systemHealthFailedIdentity": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataRetentionTitle": "Data Lifecycle & Retention",
+  "dataRetentionSummary": "Historical attendance records, shifts, and audit logs are permanently retained. Ephemeral QR challenge tokens and expired file artifacts are automatically scrubbed.",
+  "dataRetentionRunButton": "Run Lifecycle Cleanup",
+  "dataRetentionSuccess": "Cleanup completed: {exports} expired exports marked, {challenges} QR tokens cleared.",
+  "@dataRetentionSuccess": {
+    "placeholders": {
+      "exports": {
+        "type": "int"
+      },
+      "challenges": {
+        "type": "int"
+      }
+    }
+  },
+  "stationTimezoneLabel": "Station Timezone (IANA)",
+  "stationTimezoneHelper": "Timezone used for shift boundaries and timestamp formatting",
+  "stationLateGraceMinutes": "Late Grace Period (Minutes)",
+  "stationLateGraceHelper": "Arrivals within this grace period are recorded as on-time",
+  "stationCheckInEarlyMinutes": "Early Check-in Window (Minutes)",
+  "stationCheckInEarlyHelper": "Allow employees to clock-in before scheduled shift starts",
+  "stationDangerZone": "Sensitive Station Controls",
+  "stationDeactivateAction": "Deactivate Station",
+  "stationDeactivateNotice": "Deactivating the station will prevent all employee clock-ins and scheduling activities.",
+  "stationDeactivateBlockedActive": "Cannot deactivate station while active attendance sessions or open shifts exist.",
+  "stationForceDeactivateConfirm": "Force Station Deactivation",
+  "connectionOnline": "Online",
+  "connectionDegraded": "Degraded Connection",
+  "connectionReconnecting": "Reconnecting...",
+  "connectionOffline": "Offline — Read Only",
+  "errorOfflineActionBlocked": "Active internet connection is required to complete this action.",
+  "errorReconcilingAttendance": "Verifying attendance status after network timeout...",
+  "errorKioskDisconnected": "Kiosk Disconnected from Network",
+  "errorKioskReconnecting": "Attempting to reconnect...",
+  "appUpdateAvailable": "A new version of YellowShifts is available.",
+  "appUpdateReloadNow": "Reload Now",
+  "appUpdateLater": "Later",
+  "startupConfigError": "Configuration Error",
+  "startupConfigErrorMessage": "Application failed to initialize due to invalid configuration.",
+  "startupLoading": "Loading YellowShifts...",
+  "startupRetry": "Retry Initialization",
+  "errorRateLimited": "Too many requests. Please slow down and try again shortly.",
+  "errorScheduleConflict": "Schedule assignment conflict detected.",
+  "errorVersionConflict": "Schedule was updated by another manager. Please refresh.",
+  "errorStationDeactivated": "This station is currently inactive.",
+  "errorMembershipDeactivated": "Your station membership is inactive or suspended.",
+  "errorTimeout": "The request timed out. Please check your connection.",
+  "errorServiceUnavailable": "Server is temporarily unavailable. Please try again soon.",
+  "systemHealthHealthy": "Healthy",
+  "systemHealthDegraded": "Degraded",
+  "systemHealthUnavailable": "Unavailable",
+  "systemHealthUnknown": "Unknown",
+  "settingsTitle": "Settings & Preferences",
+  "settingsSubtitle": "Manage user identity, language, and station operational settings",
+  "settingsUserProfile": "User Profile",
+  "settingsUserPhone": "Phone: {phone}",
+  "@settingsUserPhone": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsBiometricFace": "Biometric Face Assurance",
+  "settingsBiometricFaceSubtitle": "Enroll, manage, or revoke optional Face ID verification",
+  "settingsNotifications": "Notification Preferences",
+  "settingsNotificationsSubtitle": "Configure in-app, push, email, and SMS alert delivery channels",
+  "settingsStationAdmin": "Station Administration",
+  "settingsOperationalParams": "Operational Parameters",
+  "settingsOperationalParamsSubtitle": "Timezone, code, locale, and week start",
+  "settingsBiometricPolicy": "Station Biometric Policy",
+  "settingsBiometricPolicySubtitle": "Configure check-in/out verification modes & team readiness",
+  "settingsShiftTemplates": "Shift Templates",
+  "settingsShiftTemplatesSubtitle": "Configure working shifts, hours, and sort order",
+  "settingsShiftManagerCaps": "Shift Manager Capabilities",
+  "settingsShiftManagerCapsSubtitle": "Station-specific permission overrides for Shift Managers",
+  "settingsKioskDevices": "Station Kiosk Devices",
+  "settingsKioskDevicesSubtitle": "Provision and manage physical tablet kiosk displays",
+  "settingsExportCenter": "Operational Export Center",
+  "settingsExportCenterSubtitle": "Generate certified CSV and PDF operational report artifacts",
+  "settingsAuditCenter": "Audit Center",
+  "settingsAuditCenterSubtitle": "Inspect immutable chronological administrative activity ledger",
+  "settingsSystemHealth": "Operational Health & Lifecycle",
+  "settingsSystemHealthSubtitle": "Live telemetry, kiosk fleet health, and data retention maintenance",
+  "settingsCurrentStationDetails": "Current Station Details",
+  "settingsStationName": "Station Name",
+  "settingsStationCode": "Operational Code",
+  "settingsStationTimezone": "Timezone",
+  "settingsStationLocale": "Station Locale",
+  "settingsLanguageDirection": "Language & Directionality",
+  "settingsSignOut": "Sign Out from YellowShifts",
+  "identityAssuranceTitle": "Identity Assurance & Face ID",
+  "identityAssuranceSubtitle": "Manage biometric check-in assurance and privacy consent",
+  "identityStatusLabel": "Verification Status",
+  "identityStatusNotEnrolled": "Not Enrolled",
+  "identityStatusActive": "Active & Verified",
+  "identityStatusPending": "Pending Enrollment",
+  "identityStatusRevoked": "Revoked",
+  "identityPrivacyTitle": "Privacy-First Architecture",
+  "identityPrivacyBullet1": "Zero raw face photos or video recordings are stored in PostgreSQL or Supabase storage.",
+  "identityPrivacyBullet2": "The device performs local liveness checks and verifies against an opaque provider token.",
+  "identityPrivacyBullet3": "You maintain full control to revoke your biometric profile at any time.",
+  "identityConsentText": "I consent to biometric liveness verification for YellowShifts station attendance assurance.",
+  "identityConsentFooter": "Version {version} • Opaque token stored • Zero photos saved",
+  "@identityConsentFooter": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "identityEnrollButton": "Enroll Face ID",
+  "identityRevokeButton": "Revoke Biometric ID",
+  "identityRevokeConfirmTitle": "Revoke Biometric ID?",
+  "identityRevokeConfirmDesc": "Your biometric verification profile will be revoked and subject identifier erased. You can re-enroll at any time.",
+  "identityEnrolledSuccess": "Biometric profile enrolled successfully!",
+  "identityRevokedSuccess": "Biometric profile revoked.",
+  "identityEnrollmentFailed": "Biometric enrollment failed.",
+  "identityAcceptConsentRequired": "Please accept the biometric privacy notice to proceed.",
+  "systemHealthAllDevicesHealthy": "All fleet devices healthy",
+  "systemHealthKiosksOfflineCount": "{count, plural, =1{1 kiosk offline} other{{count} kiosks offline}}",
+  "@systemHealthKiosksOfflineCount": {
+    "placeholders": {
+      "count": {
+        "type": "num"
+      }
+    }
+  },
+  "systemHealthDefenseSubtitle": "Completed with server-side formula defense",
+  "systemHealthStaleSessionsSubtitle": "Sessions open for > 16 hours requiring manager review",
+  "systemHealthFailedIdentitySubtitle": "Identity verifications failed or inconclusive in the last 24h",
+  "kioskDevicesTitle": "Kiosk Devices",
+  "kioskLaunchModeButton": "Launch Kiosk Mode",
+  "kioskProvisionNewTitle": "Provision New Kiosk",
+  "kioskDeviceNameLabel": "Device Name (e.g. Front Desk Tablet)",
+  "kioskDeviceIdentifierLabel": "Device Identifier (e.g. KIOSK-01)",
+  "kioskProvisionAction": "Provision",
+  "kioskSecretTitle": "Kiosk Device Secret",
+  "kioskSecretWarning": "Save this secret now. It will NEVER be shown again in the system.",
+  "kioskDeviceLabel": "Device: {identifier}",
+  "@kioskDeviceLabel": {
+    "placeholders": {
+      "identifier": {
+        "type": "String"
+      }
+    }
+  },
+  "kioskCopySecretAction": "Copy Secret",
+  "kioskSecretCopiedToast": "Secret copied to clipboard!",
+  "kioskDoneAction": "Done",
+  "kioskEmptyTitle": "No Kiosk Devices Provisioned",
+  "kioskEmptyDesc": "Provision a physical tablet or browser display to generate station attendance QR codes.",
+  "kioskStatusOnline": "Online",
+  "kioskStatusOffline": "Offline / Idle",
+  "kioskStatusInactive": "Inactive",
+  "kioskLastSeen": "Last seen: {time}",
+  "@kioskLastSeen": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "kioskNeverConnected": "Never connected",
+  "kioskRotateSecretAction": "Rotate Secret",
+  "kioskDeactivateAction": "Deactivate",
+  "kioskReactivateAction": "Reactivate",
+  "kioskDeactivatedToast": "Kiosk device deactivated",
+  "kioskReactivatedToast": "Kiosk device reactivated",
+  "exportPreset7Days": "7 Days",
+  "exportPreset30Days": "30 Days",
+  "exportPresetThisMonth": "This Month",
+  "exportPresetLastMonth": "Last Month",
+  "exportPresetCustom": "Custom",
+  "exportFormatLabel": "Format",
+  "availabilityDeadlineInfo": "Deadline: {deadline} • {count} shifts / day",
+  "@availabilityDeadlineInfo": {
+    "placeholders": {
+      "deadline": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "availabilitySlotsAnswered": "{answered} of {total} slots answered",
+  "@availabilitySlotsAnswered": {
+    "placeholders": {
+      "answered": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "statusOpen": "Open",
+  "statusClosed": "Closed",
+  "statusDraft": "Draft",
+  "statusSubmitted": "Submitted",
+  "statusNotStarted": "Not Started",
+  "noEmployeeRecordsFound": "No employee records found.",
+  "stationSectionIdentity": "Operational Identity",
+  "stationSectionRegional": "Regional & Calendar Defaults",
+  "stationSectionGrace": "Shift & Grace Policies",
+  "stationActiveStatus": "Station Active",
+  "stationDeactivatedStatus": "Station Deactivated",
+  "stationActiveDesc": "Kiosks and employee clock-ins are currently accepting operations.",
+  "stationDeactivatedDesc": "Station is paused and blocked from active operations.",
+  "policyOptionDisabledTitle": "Disabled (QR Only)",
+  "policyOptionDisabledSubtitle": "Attendance uses Phase 4 rotating QR challenges only.",
+  "policyOptionCheckInOnlyTitle": "Check-In Only (Recommended)",
+  "policyOptionCheckInOnlySubtitle": "Requires biometric verification on check-in. Check-out is QR only.",
+  "policyOptionStrictTitle": "Strict: Check-In & Check-Out",
+  "policyOptionStrictSubtitle": "Requires biometric verification for both check-in and check-out.",
+  "policyApplyAction": "Apply Policy Change",
+  "policyTeamReadinessTitle": "Team Biometric Readiness",
+  "policyNoMembersRegistered": "No active team members registered.",
+  "attendanceLiveMonitor": "Live Attendance",
+  "kpiWorkingNow": "Working Now",
+  "kpiUpcoming": "Upcoming",
+  "kpiLate": "Late",
+  "kpiCompleted": "Completed",
+  "kpiNotCheckedIn": "Not Checked In",
+  "attendanceRosterTitle": "Today's Shift Roster",
+  "rosterScheduledCount": "{count} scheduled",
+  "@rosterScheduledCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noEmployeesScheduledToday": "No employees scheduled for today.",
+  "attendanceStatusWorking": "Working",
+  "attendanceStatusUpcoming": "Upcoming",
+  "attendanceStatusLate": "Late {minutes}m",
+  "@attendanceStatusLate": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "attendanceStatusCompleted": "Completed",
+  "attendanceStatusNotCheckedIn": "Not Checked In",
+  "scannerTabCamera": "Camera Scan",
+  "scannerTabManual": "Manual Code",
+  "scannerCameraUnavailable": "Camera Unavailable",
+  "scannerCameraPermError": "Please check permissions or use the manual code entry tab.",
+  "scannerEnterKioskCode": "Enter Kiosk Code",
+  "scannerEnterCodeDesc": "Type the 6-character code displayed below the QR code on the station kiosk.",
+  "scannerVerifyCodeAction": "Verify Code",
+  "attendanceNotCheckedIn": "Not Checked In",
+  "attendanceScanPrompt": "Scan station kiosk QR code or enter code to begin your shift",
+  "attendanceScanQrAction": "Scan Station QR",
+  "attendanceCurrentlyWorking": "CURRENTLY WORKING",
+  "attendanceActiveShift": "Active Shift",
+  "attendanceLateDuration": "Late {minutes} min",
+  "@attendanceLateDuration": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "attendanceCheckOutAction": "Scan QR to Check Out",
+  "attendanceConfirmCheckIn": "Confirm Check-In",
+  "attendanceConfirmCheckOut": "Confirm Check-Out",
+  "shiftLabel": "Shift",
+  "scheduledShift": "Scheduled Shift",
+  "scheduledWindow": "Scheduled Window",
+  "workedTimeLabel": "Worked Time",
+  "checkInNowAction": "Check In Now",
+  "checkOutNowAction": "Check Out Now",
+  "correctionDialogTitle": "Correct Attendance",
+  "correctionReasonLabel": "Reason for correction (required)",
+  "correctionReasonHint": "e.g. Employee forgot to clock out on station tablet",
+  "correctionSaveAction": "Save Correction",
+  "checkInLabel": "Check In",
+  "checkOutLabel": "Check Out",
+  "attendanceNoHistory": "No attendance history recorded yet.",
+  "attendanceWorkShift": "Work Shift",
+  "timeNow": "Now",
+  "identityVerifyingFace": "Verifying face liveness...",
+  "kpiActiveEmployees": "{count} active employees",
+  "@kpiActiveEmployees": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kpiActiveOpen": "{count} active open",
+  "@kpiActiveOpen": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "kpiLateShiftsCount": "{count} late shifts ({minutes}m)",
+  "@kpiLateShiftsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "kpiEmployeesLateThreshold": "employees with >= 3 late shifts",
+  "kpiAttentionBadge": "Attention",
+  "kpiManualAdjustmentsAudited": "manual adjustments audited",
+  "workforceRecordsTitle": "Workforce Records ({count})",
+  "@workforceRecordsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tableColEmployee": "Employee",
+  "tableColCode": "Code",
+  "tableColWorkedTime": "Worked Time",
+  "tableColCompleted": "Completed",
+  "tableColLateShifts": "Late Shifts",
+  "tableColCorrections": "Corrections",
+  "tableColStatus": "Status",
+  "repeatedLatenessTag": "Repeated Lateness (>=3)",
+  "statusActive": "Active",
+  "statusInactive": "Inactive",
+  "statusSuspended": "Suspended",
+  "tableMetricWorked": "Worked",
+  "tableMetricShifts": "Shifts",
+  "tableMetricLate": "Late",
+  "tableMetricCorrected": "Corrected",
+  "dailyNoRecords": "No scheduled shifts or walk-in records on this date.",
+  "dailyScheduledShiftsTitle": "Scheduled Operational Shifts ({count})",
+  "@dailyScheduledShiftsTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyWalkInTitle": "Unscheduled Walk-In Attendance ({count})",
+  "@dailyWalkInTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyRequiredStaff": "Required: {count}",
+  "@dailyRequiredStaff": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyAssignedStaff": "Assigned: {count}",
+  "@dailyAssignedStaff": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyCheckedInStaff": "Checked In: {count}",
+  "@dailyCheckedInStaff": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyLateStaff": "Late: {count}",
+  "@dailyLateStaff": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyActiveOpenStaff": "Active Open: {count}",
+  "@dailyActiveOpenStaff": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyNoShiftRecords": "No attendance records checked in for this scheduled shift.",
+  "checkedInLabel": "Checked in",
+  "lateMinutesLabel": "Late {minutes}m",
+  "@lateMinutesLabel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "shiftHistoryTitle": "Shift History ({count})",
+  "@shiftHistoryTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "allStationsFilter": "All Stations",
+  "stationsWorkedCount": "{count} stations",
+  "@stationsWorkedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "lateTimeDuration": "{minutes}m late time",
+  "@lateTimeDuration": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "repeatedBadge": "Repeated",
+  "operationalWeekRange": "Operational Week Range",
+  "submissionDeadline": "Submission Deadline",
+  "operationalNotesOptional": "Operational Notes (Optional)",
+  "operationalNotesHint": "e.g. Holiday coverage required, minimum 4 shifts...",
+  "createPeriodAction": "Create Period",
+  "submissionDeadlineFutureError": "Submission deadline must be in the future.",
+  "kioskScreenTitle": "Station Attendance Kiosk",
+  "kioskScreenUnconfiguredDesc": "This tablet is not configured yet. Set up credentials to start broadcasting attendance QR codes.",
+  "kioskConfigureDeviceAction": "Configure Kiosk Device",
+  "kioskSetupDialogTitle": "Configure Station Kiosk",
+  "kioskDeviceIdentifierLabel": "Device Identifier",
+  "kioskDeviceIdentifierHint": "e.g. KIOSK-MAIN-01",
+  "kioskDeviceSecretLabel": "Device Secret",
+  "kioskDeviceSecretHint": "Paste secret generated in Admin settings",
+  "kioskConnectAction": "Connect Kiosk",
+  "kioskValidationRequired": "Please enter both Device Identifier and Secret.",
+  "kioskConnectionFailed": "Connection failed: {error}",
+  "@kioskConnectionFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "kioskDefaultTitle": "Station Kiosk",
+  "kioskScanInstruction": "Scan with the YellowShifts mobile app to check in or out",
+  "kioskConnectedStatus": "Kiosk Connected: {identifier}",
+  "@kioskConnectedStatus": {
+    "placeholders": {
+      "identifier": {
+        "type": "String"
+      }
+    }
+  },
+  "kioskSecondsRemaining": "{seconds}s",
+  "@kioskSecondsRemaining": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "reportsAccessRestrictedTitle": "Access Restricted",
+  "reportsAccessRestrictedDesc": "You must be an active station manager or administrator to view operational reporting.",
+  "walkInShift": "Walk-In Shift",
+  "activeShiftInProgress": "ACTIVE SHIFT IN PROGRESS",
+  "shiftExceedsWarning": "Shift exceeds 16 hours. Review checkout status.",
+  "repeatedLatenessPattern": "Repeated Lateness Pattern: 3 or more late shifts in this reporting period.",
+  "attendanceCorrectionHistory": "Attendance & Correction History",
+  "noRecordsInPeriod": "No attendance records in period.",
+  "correctionsCount": "{count, plural, =1{1 correction} other{{count} corrections}}",
+  "@correctionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "correctionLedger": "Correction Ledger",
+  "correctionByActor": "By: {name}",
+  "@correctionByActor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "correctionDurationChange": "Duration: {oldDuration} -> {newDuration}",
+  "@correctionDurationChange": {
+    "placeholders": {
+      "oldDuration": {
+        "type": "String"
+      },
+      "newDuration": {
+        "type": "String"
+      }
+    }
+  },
+  "correctionReasonPrefix": "Reason: \"{reason}\"",
+  "@correctionReasonPrefix": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "stationLabel": "Station",
+  "kpiWorkedHours": "Worked Hours",
+  "kpiLateArrivals": "Late Arrivals",
+  "statusCorrected": "Corrected",
+
+  "rolePlatformAdmin": "Platform Admin",
+  "roleStationManager": "Station Manager",
+  "platformAdminTitle": "Platform Administration",
+  "platformAdminMode": "Platform Mode",
+  "platformOverviewTitle": "Platform Overview",
+  "platformOverviewSubtitle": "Network-wide operational summary for YellowShifts operators.",
+  "platformNavOverview": "Overview",
+  "platformNavStations": "Stations",
+  "platformNavAudit": "Audit / Operations",
+  "platformNavHealth": "System Health",
+  "platformStationsTitle": "Stations",
+  "platformStationsSubtitle": "Provision, inspect, and operate every station in the YellowShifts network.",
+  "platformCreateStation": "Create Station",
+  "platformCreateStationTitle": "Create Station",
+  "platformCreateStationSubtitle": "Provision a station and assign the initial Station Manager.",
+  "platformStationName": "Station Name",
+  "platformStationCode": "Station Code",
+  "platformStationTimezone": "Timezone",
+  "platformStationLocale": "Locale",
+  "platformStationStatus": "Status",
+  "platformWeekStart": "Week starts on",
+  "platformWeekStartSunday": "Sunday",
+  "platformWeekStartMonday": "Monday",
+  "platformInitialManager": "Initial Station Manager",
+  "platformManagerEmail": "Manager email",
+  "platformManagerFirstName": "First name",
+  "platformManagerLastName": "Last name",
+  "platformManagerPhone": "Phone (optional)",
+  "platformAssignManager": "Assign Manager",
+  "platformAddManager": "Add Station Manager",
+  "platformReplaceManager": "Replace Station Manager",
+  "platformRemoveManager": "Remove Manager role",
+  "platformDeactivateManager": "Deactivate Station Manager",
+  "platformReactivateManager": "Reactivate Station Manager",
+  "platformStationManagers": "Station Managers",
+  "platformStationManagersSubtitle": "Only Platform Admins can grant or revoke Station Manager access.",
+  "platformDeactivateStation": "Deactivate Station",
+  "platformReactivateStation": "Reactivate Station",
+  "platformOpenStation": "Open Station",
+  "platformOperatingStation": "Operating Station",
+  "platformOperatingBanner": "Platform Admin · Operating: {stationName}",
+  "@platformOperatingBanner": {
+    "placeholders": {
+      "stationName": {
+        "type": "String"
+      }
+    }
+  },
+  "platformReturnToPlatform": "Return to Platform Administration",
+  "platformConfirmDeactivateTitle": "Deactivate this station?",
+  "platformConfirmDeactivateBody": "Ordinary station access will fail closed. Historical attendance, schedules, and audit records are preserved.",
+  "platformConfirmRemoveManagerTitle": "Remove Station Manager access?",
+  "platformConfirmRemoveManagerBody": "This person will no longer be a Station Manager. The station must retain at least one active Station Manager.",
+  "platformReasonLabel": "Reason",
+  "platformReasonHint": "Describe why this change is required",
+  "platformForceDeactivate": "Force deactivate despite active operations",
+  "platformMetricTotalStations": "Total stations",
+  "platformMetricActiveStations": "Active stations",
+  "platformMetricInactiveStations": "Inactive stations",
+  "platformMetricActiveMemberships": "Active memberships",
+  "platformMetricStationAdmins": "Station Managers",
+  "platformMetricShiftManagers": "Shift Managers",
+  "platformMetricKiosksOnline": "Kiosks online",
+  "platformMetricKiosksOffline": "Kiosks offline",
+  "platformMetricAlerts": "Operational alerts",
+  "platformColEmployees": "Active employees",
+  "platformColManagers": "Station Managers",
+  "platformColShiftManagers": "Shift Managers",
+  "platformColKiosks": "Kiosk status",
+  "platformHealthSummary": "Operational health",
+  "platformAuditTitle": "Platform Audit",
+  "platformAuditSubtitle": "Inspect platform and station operations. Station Admins remain tenant-scoped.",
+  "platformAuditFilterAction": "Action",
+  "platformHealthTitle": "Platform Health",
+  "platformHealthSubtitle": "Aggregated kiosk, export, attendance, and notification signals across the network.",
+  "platformUnauthorizedTitle": "Platform Administration unavailable",
+  "platformUnauthorizedBody": "This area is restricted to active Platform Admins.",
+  "platformEmptyStations": "No stations have been provisioned yet.",
+  "platformCreatedToast": "Station created successfully",
+  "platformUpdatedToast": "Station updated",
+  "platformDeactivatedToast": "Station deactivated",
+  "platformReactivatedToast": "Station reactivated",
+  "platformManagerAssignedToast": "Station Manager assigned",
+  "platformManagerRemovedToast": "Station Manager role removed",
+  "platformManagedByPlatform": "Managed by Platform Administration",
+  "platformAdminRoleReadonlyHint": "Station Manager access is assigned only by Platform Administration.",
+  "errorNotPlatformAdmin": "You must be an active Platform Admin to perform this action.",
+  "errorStationCodeConflict": "This station code is already in use.",
+  "errorStationAlreadyInactive": "This station is already inactive.",
+  "errorStationAlreadyActive": "This station is already active.",
+  "errorStationProvisioningFailed": "Station provisioning failed. No partial station was left active.",
+  "errorStationAdminRoleForbidden": "Station Managers cannot grant or revoke Station Manager access."
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="YellowShifts — Multi-Station Workforce Operations Platform">
+
+  <!-- Prevent browser cache for dev/live testing -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="YellowShifts">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>YellowShifts</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      background-color: #121417;
+      color: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #loading-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background-color: #121417;
+      z-index: 999999;
+      transition: opacity 0.3s ease;
+    }
+    .spinner-ring {
+      width: 52px;
+      height: 52px;
+      border: 4px solid rgba(245, 158, 11, 0.15);
+      border-top-color: #f59e0b;
+      border-radius: 50%;
+      animation: spin 0.9s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+    }
+    .brand-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #f59e0b;
+    }
+    .brand-subtitle {
+      font-size: 13px;
+      color: #94a3b8;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    #error-container {
+      display: none;
+      max-width: 90vw;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid #ef4444;
+      border-radius: 12px;
+      padding: 16px 20px;
+      color: #fca5a5;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-indicator">
+    <div class="spinner-ring"></div>
+    <div style="text-align: center;">
+      <div class="brand-title">YellowShifts</div>
+      <div class="brand-subtitle">טוען מערכת ניהול משמרות...</div>
+    </div>
+    <div id="error-container"></div>
+  </div>
+
+  <script>
+    // 1. Unregister any stale service workers from previous runs
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+    }
+
+    // 2. Clear browser CacheStorage to avoid stale cached bundles
+    if ('caches' in window) {
+      caches.keys().then(function(names) {
+        for (let name of names) {
+          caches.delete(name);
+        }
+      });
+    }
+
+    // 3. Global error reporter on screen if startup fails
+    window.addEventListener('error', function(e) {
+      var errBox = document.getElementById('error-container');
+      if (errBox) {
+        errBox.style.display = 'block';
+        errBox.textContent = 'שגיאת טעינה: ' + (e.message || e.toString());
+      }
+    });
+
+    function dismissLoader() {
+      var loader = document.getElementById('loading-indicator');
+      if (loader) {
+        loader.style.pointerEvents = 'none';
+        loader.style.opacity = '0';
+        setTimeout(function() {
+          if (loader && loader.parentNode) {
+            loader.parentNode.removeChild(loader);
+          }
+        }, 300);
+      }
+    }
+
+    // 4. Auto-dismiss on Flutter first frame or DOM render
+    window.addEventListener('flutter-first-frame', dismissLoader);
+
+    var observer = new MutationObserver(function(mutations, obs) {
+      var flt = document.querySelector('flutter-view') || 
+                document.querySelector('flt-glass-pane') || 
+                document.querySelector('flt-scene-host') || 
+                document.querySelector('canvas') ||
+                document.body.children.length > 2;
+      if (flt) {
+        dismissLoader();
+        obs.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Safety fallback dismiss after max 3 seconds
+    setTimeout(dismissLoader, 3000);
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
