@@ -1,0 +1,118 @@
+name: YellowShifts CI / CD Quality & Production Readiness Gates
+
+on:
+  push:
+    branches: [ main, release/** ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  flutter-validation:
+    name: Flutter Web Quality Gates & Production Builds
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter Environment
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Generate Localization Strings
+        run: flutter gen-l10n
+
+      - name: Verify Dart Code Formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Static Code Analysis
+        run: flutter analyze
+
+      - name: Run Flutter Test Suite
+        run: flutter test --coverage
+
+      - name: Build Web Release Bundle
+        run: flutter build web --release
+
+      - name: Build Web WASM Bundle
+        run: flutter build web --wasm
+
+      - name: Run Client Bundle Secret Leak Audit
+        run: python3 scripts/audit_bundle_secrets.py
+
+      - name: Verify Zero-Payroll Invariant
+        run: python3 scripts/verify_zero_payroll.py
+
+  database-security-and-regression:
+    name: PostgreSQL Invariants, Security Suites & Restore Drills
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: runner
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PostgreSQL Client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Run Database Restore Drill
+        env:
+          USER: runner
+          PGPASSWORD: password
+          PGHOST: localhost
+          PGPORT: 5432
+        run: python3 scripts/restore_drill.py
+
+      - name: Run Phase 1-9 Security & Audit Regression Suites
+        env:
+          USER: runner
+          PGPASSWORD: password
+          PGHOST: localhost
+          PGPORT: 5432
+        run: |
+          python3 test/sql/run_phase1_security_tests.py
+          python3 test/sql/run_phase2_security_tests.py
+          python3 test/sql/run_phase3_security_tests.py
+          python3 test/sql/run_phase4_security_tests.py
+          python3 test/sql/run_phase5_security_tests.py
+          python3 test/sql/run_phase6_security_tests.py
+          python3 test/sql/run_phase7_security_tests.py
+          python3 test/sql/run_phase8_security_tests.py
+          python3 test/sql/run_phase9_security_tests.py
+          python3 test/sql/run_phase9_comprehensive_audit_v2.py
+          python3 test/sql/run_phase10_security_tests.py
+          python3 test/sql/run_phase10_comprehensive_audit.py
+          python3 test/sql/run_phase10_comprehensive_audit_v2.py
+          python3 test/sql/run_phase10_performance_benchmark.py
+          python3 test/sql/run_phase10_5_platform_admin_security_tests.py
+          python3 test/sql/run_phase10_5_comprehensive_audit.py
+          python3 test/sql/run_phase10_5_edge_function_contracts.py
+          python3 test/sql/run_phase10_5_independent_audit.py
