@@ -480,8 +480,8 @@ BEGIN
             'created_at', t.created_at,
             'revoked_at', t.revoked_at,
             'last_scanned_at', t.last_scanned_at,
-            'created_by_name', cp.full_name,
-            'revoked_by_name', rp.full_name
+            'created_by_name', NULLIF(TRIM(CONCAT(cp.first_name, ' ', cp.last_name)), ''),
+            'revoked_by_name', NULLIF(TRIM(CONCAT(rp.first_name, ' ', rp.last_name)), '')
         ) ORDER BY t.created_at DESC
     ), '[]'::jsonb) INTO v_result
     FROM public.station_nfc_tags t
