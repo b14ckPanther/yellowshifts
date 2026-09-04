@@ -39,8 +39,8 @@ Future<void> _confirmAndSignOut(BuildContext context, WidgetRef ref) async {
     context: context,
     builder: (dialogCtx) => AlertDialog(
       title: Text(l10n?.settingsSignOut ?? 'Sign Out'),
-      content: Text(l10n?.platformLogoutConfirm ??
-          'Are you sure you want to sign out?'),
+      content: Text(
+          l10n?.platformLogoutConfirm ?? 'Are you sure you want to sign out?'),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(dialogCtx).pop(false),

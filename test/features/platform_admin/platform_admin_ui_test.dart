@@ -766,7 +766,8 @@ void main() {
       expect(find.text('Create Station'), findsWidgets);
     });
 
-    testWidgets('PlatformAdminShell renders unauthorized screen when user is not a platform admin',
+    testWidgets(
+        'PlatformAdminShell renders unauthorized screen when user is not a platform admin',
         (tester) async {
       await tester.pumpWidget(
         _platformRouter(
@@ -780,7 +781,8 @@ void main() {
       expect(find.text('Dashboard'), findsOneWidget);
     });
 
-    testWidgets('PlatformAdminShell renders empty scaffold without error when unauthenticated',
+    testWidgets(
+        'PlatformAdminShell renders empty scaffold without error when unauthenticated',
         (tester) async {
       await tester.pumpWidget(
         _platformRouter(
@@ -794,7 +796,8 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('PlatformAdminShell displays confirmation dialog and triggers logout',
+    testWidgets(
+        'PlatformAdminShell displays confirmation dialog and triggers logout',
         (tester) async {
       final fakeAuth = FakeAuthRepository();
       await tester.pumpWidget(
@@ -817,7 +820,8 @@ void main() {
       expect(find.text('Cancel'), findsOneWidget);
 
       // Tap confirm Sign Out in the dialog
-      final confirmBtn = find.widgetWithText(ElevatedButton, 'Sign Out from YellowShifts');
+      final confirmBtn =
+          find.widgetWithText(ElevatedButton, 'Sign Out from YellowShifts');
       expect(confirmBtn, findsOneWidget);
       await tester.tap(confirmBtn);
       await tester.pumpAndSettle();
@@ -828,5 +832,3 @@ void main() {
     });
   });
 }
-
-
