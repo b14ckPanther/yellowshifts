@@ -975,6 +975,9 @@
     }
   },
   "platformReturnToPlatform": "Return to Platform Administration",
+  "platformWorkspaceSwitch": "Station Workspace",
+  "platformLogoutConfirm": "Are you sure you want to sign out?",
+  "platformSuperAdminRole": "Super Admin",
   "platformConfirmDeactivateTitle": "Deactivate this station?",
   "platformConfirmDeactivateBody": "Ordinary station access will fail closed. Historical attendance, schedules, and audit records are preserved.",
   "platformConfirmRemoveManagerTitle": "Remove Station Manager access?",

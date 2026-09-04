@@ -818,6 +818,9 @@
     }
   },
   "platformReturnToPlatform": "חזרה לניהול הפלטפורמה",
+  "platformWorkspaceSwitch": "סביבת עבודה תחנתית",
+  "platformLogoutConfirm": "האם ברצונך להתנתק מניהול המערכת?",
+  "platformSuperAdminRole": "מנהל מערכת ראשי",
   "platformConfirmDeactivateTitle": "להשבית את התחנה?",
   "platformConfirmDeactivateBody": "גישת התחנה הרגילה תיחסם. היסטוריית נוכחות, סידורים ורשומות ביקורת יישמרו.",
   "platformConfirmRemoveManagerTitle": "להסיר הרשאת מנהל תחנה?",

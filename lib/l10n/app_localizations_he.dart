@@ -2042,6 +2042,15 @@ class AppLocalizationsHe extends AppLocalizations {
   String get platformReturnToPlatform => 'חזרה לניהול הפלטפורמה';
 
   @override
+  String get platformWorkspaceSwitch => 'סביבת עבודה תחנתית';
+
+  @override
+  String get platformLogoutConfirm => 'האם ברצונך להתנתק מניהול המערכת?';
+
+  @override
+  String get platformSuperAdminRole => 'מנהל מערכת ראשי';
+
+  @override
   String get platformConfirmDeactivateTitle => 'להשבית את התחנה?';
 
   @override

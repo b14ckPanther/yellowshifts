@@ -3794,6 +3794,24 @@ abstract class AppLocalizations {
   /// **'Return to Platform Administration'**
   String get platformReturnToPlatform;
 
+  /// No description provided for @platformWorkspaceSwitch.
+  ///
+  /// In en, this message translates to:
+  /// **'Station Workspace'**
+  String get platformWorkspaceSwitch;
+
+  /// No description provided for @platformLogoutConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to sign out?'**
+  String get platformLogoutConfirm;
+
+  /// No description provided for @platformSuperAdminRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Super Admin'**
+  String get platformSuperAdminRole;
+
   /// No description provided for @platformConfirmDeactivateTitle.
   ///
   /// In en, this message translates to:

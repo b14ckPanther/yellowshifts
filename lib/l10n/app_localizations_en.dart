@@ -2068,6 +2068,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get platformReturnToPlatform => 'Return to Platform Administration';
 
   @override
+  String get platformWorkspaceSwitch => 'Station Workspace';
+
+  @override
+  String get platformLogoutConfirm => 'Are you sure you want to sign out?';
+
+  @override
+  String get platformSuperAdminRole => 'Super Admin';
+
+  @override
   String get platformConfirmDeactivateTitle => 'Deactivate this station?';
 
   @override
