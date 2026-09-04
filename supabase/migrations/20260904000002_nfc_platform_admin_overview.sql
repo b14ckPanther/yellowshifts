@@ -254,11 +254,14 @@ SET search_path = public, pg_temp
 AS $$
 BEGIN
     RETURN jsonb_build_object(
-        'schema_version', '20260904000002',
+        'schema_version', '20260904000004',
         'platform_version', '1.0.6',
         'min_compatible_client_version', '1.0.0',
-        'migration_cutoff', '20260904000002',
-        'nfc_only_attendance', true
+        'migration_cutoff', '20260904000004',
+        'status', 'HEALTHY',
+        'nfc_only_attendance', true,
+        'server_timestamp', now()
     );
 END;
 $$;
+
