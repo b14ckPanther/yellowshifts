@@ -656,13 +656,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get attendanceScanQrAction => 'Scan Station QR';
 
   @override
-  String get attendanceCheckOutAction => 'Scan QR to Check Out';
+  String get attendanceCheckOutAction => 'Check Out';
 
   @override
   String get attendanceRecentHistory => 'Recent Shifts';
-
-  @override
-  String get attendanceKioskMode => 'Station Kiosk';
 
   @override
   String get attendanceLiveMonitor => 'Live Attendance';
@@ -828,9 +825,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navShiftTemplates => 'Shift Templates';
 
   @override
-  String get navKiosks => 'Kiosk Devices';
-
-  @override
   String get navStationSettings => 'Station Settings';
 
   @override
@@ -980,7 +974,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dashboardAdminQuickShortcuts => 'Administrative Shortcuts';
 
   @override
-  String get dashboardAdminKioskSummary => 'Kiosks Fleet';
+  String get dashboardAdminNfcSummary => 'NFC Tags Fleet';
 
   @override
   String get dashboardAdminSettingsAction => 'Station Settings';
@@ -1214,9 +1208,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get auditFilterAttendance => 'Attendance & Clock-In';
 
   @override
-  String get auditFilterKiosks => 'Kiosks & Hardware';
-
-  @override
   String get auditFilterStation => 'Station Configuration';
 
   @override
@@ -1257,15 +1248,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get systemHealthSubtitle =>
-      'Live telemetry, kiosk fleet status, and data lifecycle management';
-
-  @override
-  String get systemHealthKiosksFleet => 'Kiosk Fleet Status';
-
-  @override
-  String systemHealthKiosksOnline(int online, int total) {
-    return '$online of $total Online';
-  }
+      'Live telemetry, station NFC tag fleet status, and data lifecycle management';
 
   @override
   String get systemHealthExportPipeline => 'Export Pipeline (24h)';
@@ -1365,12 +1348,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Verifying attendance status after network timeout...';
 
   @override
-  String get errorKioskDisconnected => 'Kiosk Disconnected from Network';
-
-  @override
-  String get errorKioskReconnecting => 'Attempting to reconnect...';
-
-  @override
   String get appUpdateAvailable =>
       'A new version of YellowShifts is available.';
 
@@ -1447,13 +1424,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get settingsBiometricFace => 'Biometric Face Assurance';
-
-  @override
-  String get settingsBiometricFaceSubtitle =>
-      'Enroll, manage, or revoke optional Face ID verification';
-
-  @override
   String get settingsNotifications => 'Notification Preferences';
 
   @override
@@ -1471,13 +1441,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Timezone, code, locale, and week start';
 
   @override
-  String get settingsBiometricPolicy => 'Station Biometric Policy';
-
-  @override
-  String get settingsBiometricPolicySubtitle =>
-      'Configure check-in/out verification modes & team readiness';
-
-  @override
   String get settingsShiftTemplates => 'Shift Templates';
 
   @override
@@ -1490,13 +1453,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get settingsShiftManagerCapsSubtitle =>
       'Station-specific permission overrides for Shift Managers';
-
-  @override
-  String get settingsKioskDevices => 'Station Kiosk Devices';
-
-  @override
-  String get settingsKioskDevicesSubtitle =>
-      'Provision and manage physical tablet kiosk displays';
 
   @override
   String get settingsExportCenter => 'Operational Export Center';
@@ -1517,7 +1473,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsSystemHealthSubtitle =>
-      'Live telemetry, kiosk fleet health, and data retention maintenance';
+      'Live telemetry, station NFC tag fleet health, and data retention maintenance';
 
   @override
   String get settingsCurrentStationDetails => 'Current Station Details';
@@ -1541,181 +1497,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsSignOut => 'Sign Out from YellowShifts';
 
   @override
-  String get identityAssuranceTitle => 'Identity Assurance & Face ID';
-
-  @override
-  String get identityAssuranceSubtitle =>
-      'Manage biometric check-in assurance and privacy consent';
-
-  @override
-  String get identityStatusLabel => 'Verification Status';
-
-  @override
-  String get identityStatusNotEnrolled => 'Not Enrolled';
-
-  @override
-  String get identityStatusActive => 'Active & Verified';
-
-  @override
-  String get identityStatusPending => 'Pending Enrollment';
-
-  @override
-  String get identityStatusRevoked => 'Revoked';
-
-  @override
-  String get identityPrivacyTitle => 'Privacy-First Architecture';
-
-  @override
-  String get identityPrivacyBullet1 =>
-      'Zero raw face photos or video recordings are stored in PostgreSQL or Supabase storage.';
-
-  @override
-  String get identityPrivacyBullet2 =>
-      'The device performs local liveness checks and verifies against an opaque provider token.';
-
-  @override
-  String get identityPrivacyBullet3 =>
-      'You maintain full control to revoke your biometric profile at any time.';
-
-  @override
-  String get identityConsentText =>
-      'I consent to biometric liveness verification for YellowShifts station attendance assurance.';
-
-  @override
-  String identityConsentFooter(String version) {
-    return 'Version $version • Opaque token stored • Zero photos saved';
-  }
-
-  @override
-  String get identityEnrollButton => 'Enroll Face ID';
-
-  @override
-  String get identityRevokeButton => 'Revoke Biometric ID';
-
-  @override
-  String get identityRevokeConfirmTitle => 'Revoke Biometric ID?';
-
-  @override
-  String get identityRevokeConfirmDesc =>
-      'Your biometric verification profile will be revoked and subject identifier erased. You can re-enroll at any time.';
-
-  @override
-  String get identityEnrolledSuccess =>
-      'Biometric profile enrolled successfully!';
-
-  @override
-  String get identityRevokedSuccess => 'Biometric profile revoked.';
-
-  @override
-  String get identityEnrollmentFailed => 'Biometric enrollment failed.';
-
-  @override
-  String get identityAcceptConsentRequired =>
-      'Please accept the biometric privacy notice to proceed.';
-
-  @override
-  String get systemHealthAllDevicesHealthy => 'All fleet devices healthy';
-
-  @override
-  String systemHealthKiosksOfflineCount(num count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count kiosks offline',
-      one: '1 kiosk offline',
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get systemHealthDefenseSubtitle =>
       'Completed with server-side formula defense';
 
   @override
   String get systemHealthStaleSessionsSubtitle =>
       'Sessions open for > 16 hours requiring manager review';
-
-  @override
-  String get systemHealthFailedIdentitySubtitle =>
-      'Identity verifications failed or inconclusive in the last 24h';
-
-  @override
-  String get kioskDevicesTitle => 'Kiosk Devices';
-
-  @override
-  String get kioskLaunchModeButton => 'Launch Kiosk Mode';
-
-  @override
-  String get kioskProvisionNewTitle => 'Provision New Kiosk';
-
-  @override
-  String get kioskDeviceNameLabel => 'Device Name (e.g. Front Desk Tablet)';
-
-  @override
-  String get kioskDeviceIdentifierLabel => 'Device Identifier';
-
-  @override
-  String get kioskProvisionAction => 'Provision';
-
-  @override
-  String get kioskSecretTitle => 'Kiosk Device Secret';
-
-  @override
-  String get kioskSecretWarning =>
-      'Save this secret now. It will NEVER be shown again in the system.';
-
-  @override
-  String kioskDeviceLabel(String identifier) {
-    return 'Device: $identifier';
-  }
-
-  @override
-  String get kioskCopySecretAction => 'Copy Secret';
-
-  @override
-  String get kioskSecretCopiedToast => 'Secret copied to clipboard!';
-
-  @override
-  String get kioskDoneAction => 'Done';
-
-  @override
-  String get kioskEmptyTitle => 'No Kiosk Devices Provisioned';
-
-  @override
-  String get kioskEmptyDesc =>
-      'Provision a physical tablet or browser display to generate station attendance QR codes.';
-
-  @override
-  String get kioskStatusOnline => 'Online';
-
-  @override
-  String get kioskStatusOffline => 'Offline / Idle';
-
-  @override
-  String get kioskStatusInactive => 'Inactive';
-
-  @override
-  String kioskLastSeen(String time) {
-    return 'Last seen: $time';
-  }
-
-  @override
-  String get kioskNeverConnected => 'Never connected';
-
-  @override
-  String get kioskRotateSecretAction => 'Rotate Secret';
-
-  @override
-  String get kioskDeactivateAction => 'Deactivate';
-
-  @override
-  String get kioskReactivateAction => 'Reactivate';
-
-  @override
-  String get kioskDeactivatedToast => 'Kiosk device deactivated';
-
-  @override
-  String get kioskReactivatedToast => 'Kiosk device reactivated';
 
   @override
   String get exportPreset7Days => '7 Days';
@@ -1860,31 +1647,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get attendanceStatusNotCheckedIn => 'Not Checked In';
 
   @override
-  String get scannerTabCamera => 'Camera Scan';
-
-  @override
-  String get scannerTabManual => 'Manual Code';
-
-  @override
-  String get scannerCameraUnavailable => 'Camera Unavailable';
-
-  @override
-  String get scannerCameraPermError =>
-      'Please check permissions or use the manual code entry tab.';
-
-  @override
-  String get scannerEnterKioskCode => 'Enter Kiosk Code';
-
-  @override
-  String get scannerEnterCodeDesc =>
-      'Type the 6-character code displayed below the QR code on the station kiosk.';
-
-  @override
-  String get scannerVerifyCodeAction => 'Verify Code';
-
-  @override
   String get attendanceScanPrompt =>
-      'Scan station kiosk QR code or enter code to begin your shift';
+      'Hold your phone near the station NFC tag to record attendance';
 
   @override
   String get attendanceActiveShift => 'Active Shift';
@@ -2105,58 +1869,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get submissionDeadlineFutureError =>
       'Submission deadline must be in the future.';
-
-  @override
-  String get kioskScreenTitle => 'Station Attendance Kiosk';
-
-  @override
-  String get kioskScreenUnconfiguredDesc =>
-      'This tablet is not configured yet. Set up credentials to start broadcasting attendance QR codes.';
-
-  @override
-  String get kioskConfigureDeviceAction => 'Configure Kiosk Device';
-
-  @override
-  String get kioskSetupDialogTitle => 'Configure Station Kiosk';
-
-  @override
-  String get kioskDeviceIdentifierHint => 'e.g. KIOSK-MAIN-01';
-
-  @override
-  String get kioskDeviceSecretLabel => 'Device Secret';
-
-  @override
-  String get kioskDeviceSecretHint =>
-      'Paste secret generated in Admin settings';
-
-  @override
-  String get kioskConnectAction => 'Connect Kiosk';
-
-  @override
-  String get kioskValidationRequired =>
-      'Please enter both Device Identifier and Secret.';
-
-  @override
-  String kioskConnectionFailed(String error) {
-    return 'Connection failed: $error';
-  }
-
-  @override
-  String get kioskDefaultTitle => 'Station Kiosk';
-
-  @override
-  String get kioskScanInstruction =>
-      'Scan with the YellowShifts mobile app to check in or out';
-
-  @override
-  String kioskConnectedStatus(String identifier) {
-    return 'Kiosk Connected: $identifier';
-  }
-
-  @override
-  String kioskSecondsRemaining(int seconds) {
-    return '${seconds}s';
-  }
 
   @override
   String get reportsAccessRestrictedTitle => 'Access Restricted';
@@ -2399,12 +2111,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get platformMetricShiftManagers => 'Shift Managers';
 
   @override
-  String get platformMetricKiosksOnline => 'Kiosks online';
-
-  @override
-  String get platformMetricKiosksOffline => 'Kiosks offline';
-
-  @override
   String get platformMetricAlerts => 'Operational alerts';
 
   @override
@@ -2415,9 +2121,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get platformColShiftManagers => 'Shift Managers';
-
-  @override
-  String get platformColKiosks => 'Kiosk status';
 
   @override
   String get platformHealthSummary => 'Operational health';
@@ -2437,7 +2140,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get platformHealthSubtitle =>
-      'Aggregated kiosk, export, attendance, and notification signals across the network.';
+      'Aggregated NFC tags, export, attendance, and notification signals across the network.';
 
   @override
   String get platformUnauthorizedTitle => 'Platform Administration unavailable';
@@ -2463,6 +2166,180 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get platformManagerAssignedToast => 'Station Manager assigned';
+
+  @override
+  String get platformColNfcTags => 'NFC Tags';
+
+  @override
+  String get platformMetricNfcActive => 'Active NFC tags';
+
+  @override
+  String get platformMetricNfcTotal => 'Total NFC tags';
+
+  @override
+  String get attendanceScanNfcAction => 'Scan Station NFC Tag';
+
+  @override
+  String get settingsNfcTags => 'Station NFC Tags';
+
+  @override
+  String get settingsNfcTagsSubtitle =>
+      'Provision, program, and manage physical station NFC tags';
+
+  @override
+  String get nfcTagsManagementTitle => 'Station NFC Tags';
+
+  @override
+  String get nfcProvisionNewTitle => 'Provision New NFC Tag';
+
+  @override
+  String get nfcProvisionDialogDesc =>
+      'Register an NFC tag identifier on the server and prepare it for writing.';
+
+  @override
+  String get nfcTagNameLabel => 'Tag Name';
+
+  @override
+  String get nfcTagNameHint => 'e.g. Front Entrance Tag, Kitchen Tag';
+
+  @override
+  String get nfcTagIdLabel => 'Tag ID';
+
+  @override
+  String get nfcStationCodeLabel => 'Station Code';
+
+  @override
+  String get nfcReadyToWriteDesc =>
+      'Tap below to physically write this station configuration onto a blank NFC tag.';
+
+  @override
+  String get nfcCreateTagAction => 'Register Tag';
+
+  @override
+  String get nfcWriteToCardAction => 'Write to NFC Tag';
+
+  @override
+  String get nfcHoldToWritePrompt =>
+      'Hold phone near blank NFC tag to write station data.';
+
+  @override
+  String get nfcTagWrittenSuccess => 'NFC Tag programmed successfully!';
+
+  @override
+  String get nfcWriteTagTitle => 'Write to Physical Tag';
+
+  @override
+  String get nfcTagCreatedServerDesc =>
+      'Tag registered on server. Hold your device to write to the physical tag.';
+
+  @override
+  String get nfcNoTagsTitle => 'No Station NFC Tags';
+
+  @override
+  String get nfcNoTagsDesc =>
+      'Provision a physical NFC tag at this station to enable employee attendance check-in.';
+
+  @override
+  String get nfcTagStatusActive => 'Active';
+
+  @override
+  String get nfcTagStatusRevoked => 'Revoked';
+
+  @override
+  String nfcLastScanned(String time) {
+    return 'Last scan: $time';
+  }
+
+  @override
+  String get nfcNeverScanned => 'Never scanned';
+
+  @override
+  String get nfcReplaceAction => 'Replace';
+
+  @override
+  String get nfcRevokeAction => 'Revoke';
+
+  @override
+  String get nfcReactivateAction => 'Reactivate';
+
+  @override
+  String get nfcReplaceTagTitle => 'Replace Station NFC Tag';
+
+  @override
+  String get nfcReplaceTagWarning =>
+      'This will permanently revoke the current physical tag and generate credentials for a new replacement tag.';
+
+  @override
+  String get nfcNewTagNameLabel => 'Replacement Tag Name';
+
+  @override
+  String get nfcReplaceTagConfirm => 'Replace Tag';
+
+  @override
+  String get nfcTagReplacedSuccess => 'Tag replaced successfully';
+
+  @override
+  String get nfcTagRevokedToast => 'NFC Tag revoked';
+
+  @override
+  String get nfcTagReactivatedToast => 'NFC Tag reactivated';
+
+  @override
+  String get nfcUnavailableError =>
+      'NFC is unavailable or disabled on this device.';
+
+  @override
+  String get nfcScanCheckInPrompt =>
+      'Hold phone near station NFC tag to clock in.';
+
+  @override
+  String get nfcScanCheckOutPrompt =>
+      'Hold phone near station NFC tag to clock out.';
+
+  @override
+  String get nfcCheckInTitle => 'Scan Station NFC Tag';
+
+  @override
+  String get nfcCheckOutTitle => 'Scan Station NFC Tag';
+
+  @override
+  String get nfcHoldNearPrompt =>
+      'Hold your phone close to the physical station NFC tag to record your attendance.';
+
+  @override
+  String get nfcVerifyingPresence => 'Verifying Station Tag...';
+
+  @override
+  String get nfcAuthorizingBackend =>
+      'Validating physical presence and attendance rules on the server...';
+
+  @override
+  String get nfcCheckInSuccess => 'Check-In Verified!';
+
+  @override
+  String get nfcCheckOutSuccess => 'Check-Out Verified!';
+
+  @override
+  String get nfcVerificationFailed => 'Attendance Verification Failed';
+
+  @override
+  String get auditFilterNfcTags => 'NFC Station Tags';
+
+  @override
+  String get systemHealthNfcFleet => 'NFC Station Tags';
+
+  @override
+  String systemHealthNfcActive(int active, int total) {
+    return '$active of $total Active';
+  }
+
+  @override
+  String get systemHealthNfcTagsHealthy =>
+      'All station NFC tags active and operational';
+
+  @override
+  String get systemHealthNfcNoActiveTags =>
+      'No active NFC tags configured for this station';
 
   @override
   String get platformManagerRemovedToast => 'Station Manager role removed';

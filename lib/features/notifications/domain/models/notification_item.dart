@@ -5,7 +5,6 @@ enum NotificationCategory {
   attendance,
   availability,
   operations,
-  identity,
   system;
 
   static NotificationCategory fromString(String value) {
@@ -18,8 +17,6 @@ enum NotificationCategory {
         return NotificationCategory.availability;
       case 'OPERATIONS':
         return NotificationCategory.operations;
-      case 'IDENTITY':
-        return NotificationCategory.identity;
       case 'SYSTEM':
       default:
         return NotificationCategory.system;

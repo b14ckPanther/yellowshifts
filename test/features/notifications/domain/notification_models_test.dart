@@ -16,8 +16,6 @@ void main() {
           equals(NotificationCategory.availability));
       expect(NotificationCategory.fromString('operations'),
           equals(NotificationCategory.operations));
-      expect(NotificationCategory.fromString('IDENTITY'),
-          equals(NotificationCategory.identity));
       expect(NotificationCategory.fromString('SYSTEM'),
           equals(NotificationCategory.system));
       expect(NotificationCategory.fromString('UNKNOWN_RANDOM'),
@@ -28,7 +26,6 @@ void main() {
       expect(NotificationCategory.availability.toDbValue(),
           equals('AVAILABILITY'));
       expect(NotificationCategory.operations.toDbValue(), equals('OPERATIONS'));
-      expect(NotificationCategory.identity.toDbValue(), equals('IDENTITY'));
       expect(NotificationCategory.system.toDbValue(), equals('SYSTEM'));
     });
 
@@ -115,9 +112,9 @@ void main() {
   });
 
   group('NotificationPreferences Model Tests', () {
-    test('defaults generate all 6 categories with in-app and push enabled', () {
+    test('defaults generate all 5 categories with in-app and push enabled', () {
       final defaults = NotificationPreferences.defaults();
-      expect(defaults.preferences.length, equals(6));
+      expect(defaults.preferences.length, equals(5));
 
       for (final cat in NotificationCategory.values) {
         final pref = defaults.forCategory(cat);
@@ -139,7 +136,7 @@ void main() {
           'sms_enabled': false,
         },
         {
-          'category': 'IDENTITY',
+          'category': 'SYSTEM',
           'in_app_enabled': true,
           'push_enabled': false,
           'email_enabled': false,
@@ -152,10 +149,10 @@ void main() {
       expect(ops, isNotNull);
       expect(ops!.emailEnabled, isTrue);
 
-      final idn = prefs.forCategory(NotificationCategory.identity);
-      expect(idn, isNotNull);
-      expect(idn!.smsEnabled, isTrue);
-      expect(idn.pushEnabled, isFalse);
+      final sys = prefs.forCategory(NotificationCategory.system);
+      expect(sys, isNotNull);
+      expect(sys!.smsEnabled, isTrue);
+      expect(sys.pushEnabled, isFalse);
     });
   });
 

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 enum AttendanceStatus { open, completed, corrected }
 
-enum AttendanceVerificationMethod { qrOnly, qrPlusIdentity, manualAdmin }
+enum AttendanceVerificationMethod { nfc, manualAdmin }
 
 @immutable
 class AttendanceRecord {
@@ -17,6 +17,8 @@ class AttendanceRecord {
   final int lateMinutes;
   final AttendanceStatus status;
   final AttendanceVerificationMethod verificationMethod;
+  final String? checkInNfcTagId;
+  final String? checkOutNfcTagId;
 
   const AttendanceRecord({
     required this.id,
@@ -30,6 +32,8 @@ class AttendanceRecord {
     required this.lateMinutes,
     required this.status,
     required this.verificationMethod,
+    this.checkInNfcTagId,
+    this.checkOutNfcTagId,
   });
 
   bool get isOpen => checkOutTime == null;
@@ -45,7 +49,7 @@ class AttendanceRecord {
 
   factory AttendanceRecord.fromJson(Map<String, dynamic> json) {
     final statusStr = json['status'] as String? ?? 'OPEN';
-    final verStr = json['verification_method'] as String? ?? 'QR_ONLY';
+    final verStr = json['verification_method'] as String? ?? 'NFC';
 
     return AttendanceRecord(
       id: json['id'] as String,
@@ -71,8 +75,29 @@ class AttendanceRecord {
       lateMinutes: (json['late_minutes'] as num?)?.toInt() ?? 0,
       status: _parseStatus(statusStr),
       verificationMethod: _parseVerification(verStr),
+      checkInNfcTagId: json['check_in_nfc_tag_id'] as String?,
+      checkOutNfcTagId: json['check_out_nfc_tag_id'] as String?,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'station_id': stationId,
+        'shift_name': shiftName,
+        'scheduled_start_at': scheduledStartAt?.toIso8601String(),
+        'scheduled_end_at': scheduledEndAt?.toIso8601String(),
+        'check_in_time': checkInTime.toIso8601String(),
+        'check_out_time': checkOutTime?.toIso8601String(),
+        'worked_minutes': workedMinutes,
+        'late_minutes': lateMinutes,
+        'status': status.name.toUpperCase(),
+        'verification_method':
+            verificationMethod == AttendanceVerificationMethod.manualAdmin
+                ? 'MANUAL_ADMIN'
+                : 'NFC',
+        'check_in_nfc_tag_id': checkInNfcTagId,
+        'check_out_nfc_tag_id': checkOutNfcTagId,
+      };
 
   static AttendanceStatus _parseStatus(String s) {
     switch (s.toUpperCase()) {
@@ -88,13 +113,11 @@ class AttendanceRecord {
 
   static AttendanceVerificationMethod _parseVerification(String s) {
     switch (s.toUpperCase()) {
-      case 'QR_PLUS_IDENTITY':
-        return AttendanceVerificationMethod.qrPlusIdentity;
       case 'MANUAL_ADMIN':
         return AttendanceVerificationMethod.manualAdmin;
-      case 'QR_ONLY':
+      case 'NFC':
       default:
-        return AttendanceVerificationMethod.qrOnly;
+        return AttendanceVerificationMethod.nfc;
     }
   }
 }

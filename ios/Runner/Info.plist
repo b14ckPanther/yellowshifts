@@ -59,7 +59,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>YellowShifts requires camera access to scan physical station QR codes for attendance check-in and check-out.</string>
+	<key>NFCReaderUsageDescription</key>
+	<string>YellowShifts requires NFC access to verify physical presence at stations for attendance check-in and check-out.</string>
 </dict>
 </plist>

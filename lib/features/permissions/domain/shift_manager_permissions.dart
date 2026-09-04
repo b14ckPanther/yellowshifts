@@ -8,7 +8,7 @@ class ShiftManagerPermissions {
   final bool scheduleManage;
   final bool schedulePublish;
   final bool attendanceCorrect;
-  final bool attendanceKioskManage;
+  final bool attendanceNfcManage;
   final bool reportsTeamRead;
   final bool reportsStationRead;
 
@@ -21,7 +21,7 @@ class ShiftManagerPermissions {
     this.scheduleManage = false,
     this.schedulePublish = false,
     this.attendanceCorrect = false,
-    this.attendanceKioskManage = false,
+    this.attendanceNfcManage = false,
     this.reportsTeamRead = true,
     this.reportsStationRead = true,
   });
@@ -36,7 +36,7 @@ class ShiftManagerPermissions {
       scheduleManage: json['schedule.manage'] == true,
       schedulePublish: json['schedule.publish'] == true,
       attendanceCorrect: json['attendance.correct'] == true,
-      attendanceKioskManage: json['attendance.kiosk.manage'] == true,
+      attendanceNfcManage: json['attendance.nfc.manage'] == true,
       reportsTeamRead: json['reports.team.read'] ?? true,
       reportsStationRead: json['reports.station.read'] ?? true,
     );
@@ -52,7 +52,7 @@ class ShiftManagerPermissions {
       'schedule.manage': scheduleManage,
       'schedule.publish': schedulePublish,
       'attendance.correct': attendanceCorrect,
-      'attendance.kiosk.manage': attendanceKioskManage,
+      'attendance.nfc.manage': attendanceNfcManage,
       'reports.team.read': reportsTeamRead,
       'reports.station.read': reportsStationRead,
     };
@@ -67,7 +67,7 @@ class ShiftManagerPermissions {
     bool? scheduleManage,
     bool? schedulePublish,
     bool? attendanceCorrect,
-    bool? attendanceKioskManage,
+    bool? attendanceNfcManage,
     bool? reportsTeamRead,
     bool? reportsStationRead,
   }) {
@@ -83,8 +83,8 @@ class ShiftManagerPermissions {
       scheduleManage: scheduleManage ?? this.scheduleManage,
       schedulePublish: schedulePublish ?? this.schedulePublish,
       attendanceCorrect: attendanceCorrect ?? this.attendanceCorrect,
-      attendanceKioskManage:
-          attendanceKioskManage ?? this.attendanceKioskManage,
+      attendanceNfcManage:
+          attendanceNfcManage ?? this.attendanceNfcManage,
       reportsTeamRead: reportsTeamRead ?? this.reportsTeamRead,
       reportsStationRead: reportsStationRead ?? this.reportsStationRead,
     );

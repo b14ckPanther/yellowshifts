@@ -36,7 +36,7 @@ void main() {
       expect(ctx.canEditEmployeeProfiles, isFalse);
       expect(ctx.canManageMembershipRoles, isFalse);
       expect(ctx.canManageStationSettings, isFalse);
-      expect(ctx.canManageKiosks, isFalse);
+      expect(ctx.canManageNfcTags, isFalse);
     });
 
     test('Inactive membership in active station grants ZERO capabilities', () {
@@ -103,8 +103,7 @@ void main() {
       expect(ctx.canRevokeEmployeeSessions, isFalse);
       expect(ctx.canManageStationSettings, isFalse);
       expect(ctx.canManageShiftManagerPermissions, isFalse);
-      expect(ctx.canManageKiosks, isFalse);
-      expect(ctx.canManageIdentityPolicy, isFalse);
+      expect(ctx.canManageNfcTags, isFalse);
       expect(ctx.canManageShiftTemplates, isFalse);
       expect(ctx.canManageSchedule, isFalse);
       expect(ctx.canPublishSchedule, isFalse);
@@ -161,8 +160,7 @@ void main() {
       expect(ctx.canEditEmployeeProfiles, isFalse);
       expect(ctx.canManageMembershipRoles, isFalse);
       expect(ctx.canManageStationSettings, isFalse);
-      expect(ctx.canManageKiosks, isFalse);
-      expect(ctx.canManageIdentityPolicy, isFalse);
+      expect(ctx.canManageNfcTags, isFalse);
     });
 
     test(
@@ -266,8 +264,7 @@ void main() {
       expect(ctx.canRevokeEmployeeSessions, isTrue);
       expect(ctx.canManageStationSettings, isTrue);
       expect(ctx.canManageShiftManagerPermissions, isTrue);
-      expect(ctx.canManageKiosks, isTrue);
-      expect(ctx.canManageIdentityPolicy, isTrue);
+      expect(ctx.canManageNfcTags, isTrue);
     });
   });
 }

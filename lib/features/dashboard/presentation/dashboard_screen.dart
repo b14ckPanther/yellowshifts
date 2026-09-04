@@ -574,10 +574,10 @@ class _AdminDashboardView extends ConsumerWidget {
                   ),
                   _buildShortcutCard(
                     context: context,
-                    icon: LucideIcons.tablet,
-                    title: l10n.navKiosks,
-                    subtitle: l10n.attendanceKioskMode,
-                    route: '/settings/kiosks',
+                    icon: LucideIcons.radio,
+                    title: l10n.settingsNfcTags,
+                    subtitle: l10n.settingsNfcTagsSubtitle,
+                    route: '/settings/nfc-tags',
                   ),
                   _buildShortcutCard(
                     context: context,

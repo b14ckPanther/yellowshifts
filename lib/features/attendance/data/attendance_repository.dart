@@ -1,5 +1,4 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import '../domain/models/presence_proof.dart';
 import '../domain/models/attendance_record.dart';
 import '../domain/models/live_attendance_roster.dart';
 
@@ -8,33 +7,26 @@ class AttendanceRepository {
 
   AttendanceRepository(this._supabase);
 
-  Future<PresenceProof> scanAttendanceQr(String qrTokenOrCode) async {
-    final res = await _supabase.rpc('scan_attendance_qr', params: {
-      'p_qr_token_or_code': qrTokenOrCode.trim(),
-    });
-    return PresenceProof.fromJson(Map<String, dynamic>.from(res as Map));
-  }
-
-  Future<Map<String, dynamic>> checkInWithPresenceProof(
-    String presenceProofToken, {
-    String? identityProofToken,
+  /// Server-Authoritative NFC Check-In
+  Future<Map<String, dynamic>> nfcCheckIn({
+    required String tagIdentifier,
+    required String tagSecret,
   }) async {
-    final res = await _supabase.rpc('check_in_with_presence_proof', params: {
-      'p_presence_proof_token': presenceProofToken.trim(),
-      if (identityProofToken != null && identityProofToken.isNotEmpty)
-        'p_identity_proof_token': identityProofToken.trim(),
+    final res = await _supabase.rpc('nfc_check_in', params: {
+      'p_tag_identifier': tagIdentifier.trim(),
+      'p_tag_secret': tagSecret.trim(),
     });
     return Map<String, dynamic>.from(res as Map);
   }
 
-  Future<Map<String, dynamic>> checkOutWithPresenceProof(
-    String presenceProofToken, {
-    String? identityProofToken,
+  /// Server-Authoritative NFC Check-Out
+  Future<Map<String, dynamic>> nfcCheckOut({
+    required String tagIdentifier,
+    required String tagSecret,
   }) async {
-    final res = await _supabase.rpc('check_out_with_presence_proof', params: {
-      'p_presence_proof_token': presenceProofToken.trim(),
-      if (identityProofToken != null && identityProofToken.isNotEmpty)
-        'p_identity_proof_token': identityProofToken.trim(),
+    final res = await _supabase.rpc('nfc_check_out', params: {
+      'p_tag_identifier': tagIdentifier.trim(),
+      'p_tag_secret': tagSecret.trim(),
     });
     return Map<String, dynamic>.from(res as Map);
   }

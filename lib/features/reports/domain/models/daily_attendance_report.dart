@@ -44,7 +44,7 @@ class DailyShiftAttendanceRecord {
       workedMinutes: (json['worked_minutes'] as num?)?.toInt(),
       lateMinutes: (json['late_minutes'] as num?)?.toInt() ?? 0,
       status: json['status'] as String? ?? 'COMPLETED',
-      verificationMethod: json['verification_method'] as String? ?? 'KIOSK_QR',
+      verificationMethod: json['verification_method'] as String? ?? 'NFC',
       isCorrected: json['is_corrected'] as bool? ?? false,
     );
   }

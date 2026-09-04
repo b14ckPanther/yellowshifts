@@ -641,16 +641,13 @@ class AppLocalizationsHe extends AppLocalizations {
   String get attendanceCurrentlyWorking => 'במשמרת פעילה כעת';
 
   @override
-  String get attendanceScanQrAction => 'סרוק קוד עמדה';
+  String get attendanceScanQrAction => 'סרוק ברקוד תחנה';
 
   @override
   String get attendanceCheckOutAction => 'סרוק ליציאה ממשמרת';
 
   @override
   String get attendanceRecentHistory => 'משמרות אחרונות';
-
-  @override
-  String get attendanceKioskMode => 'קיוסק תחנה';
 
   @override
   String get attendanceLiveMonitor => 'נוכחות חיה בתחנה';
@@ -813,9 +810,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get navShiftTemplates => 'תבניות משמרת';
 
   @override
-  String get navKiosks => 'עמדות קיוסק';
-
-  @override
   String get navStationSettings => 'הגדרות תחנה';
 
   @override
@@ -958,10 +952,10 @@ class AppLocalizationsHe extends AppLocalizations {
   String get dashboardAdminPulseTitle => 'סיכום כוח אדם בתחנה';
 
   @override
-  String get dashboardAdminQuickShortcuts => 'קיצורי ניהול מהירים';
+  String get dashboardAdminQuickShortcuts => 'קיצורי דרך לניהול';
 
   @override
-  String get dashboardAdminKioskSummary => 'עמדות קיוסק';
+  String get dashboardAdminNfcSummary => 'תגי NFC בתחנה';
 
   @override
   String get dashboardAdminSettingsAction => 'הגדרות תחנה';
@@ -1195,9 +1189,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get auditFilterAttendance => 'נוכחות ושעון';
 
   @override
-  String get auditFilterKiosks => 'עמדות קיוסק';
-
-  @override
   String get auditFilterStation => 'הגדרות תחנה';
 
   @override
@@ -1238,15 +1229,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get systemHealthSubtitle =>
-      'טלמטריה חיה, מצב עמדות קיוסק וניהול מחזור חיי נתונים';
-
-  @override
-  String get systemHealthKiosksFleet => 'מצב עמדות קיוסק';
-
-  @override
-  String systemHealthKiosksOnline(int online, int total) {
-    return '$online מתוך $total מחוברים';
-  }
+      'טלמטריה חיה, מצב תגי NFC של התחנה וניהול מחזור חיי נתונים';
 
   @override
   String get systemHealthExportPipeline => 'צינור ייצוא נתונים (24 שעות)';
@@ -1345,12 +1328,6 @@ class AppLocalizationsHe extends AppLocalizations {
       'מאמת סטטוס נוכחות לאחר פסק זמן ברשת...';
 
   @override
-  String get errorKioskDisconnected => 'המכשיר מנותק מהרשת';
-
-  @override
-  String get errorKioskReconnecting => 'מנסה להתחבר מחדש...';
-
-  @override
   String get appUpdateAvailable => 'קיימת גרסה חדשה למערכת YellowShifts.';
 
   @override
@@ -1424,13 +1401,6 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get settingsBiometricFace => 'אימות זהות וזיהוי פנים (Face ID)';
-
-  @override
-  String get settingsBiometricFaceSubtitle =>
-      'רישום, ניהול או ביטול אימות פנים אופציונלי';
-
-  @override
   String get settingsNotifications => 'העדפות התראות';
 
   @override
@@ -1448,13 +1418,6 @@ class AppLocalizationsHe extends AppLocalizations {
       'אזור זמן, קוד, שפה ותחילת שבוע';
 
   @override
-  String get settingsBiometricPolicy => 'מדיניות אימות זהות תחנתית';
-
-  @override
-  String get settingsBiometricPolicySubtitle =>
-      'הגדרת מצבי אימות בכניסה/יציאה ומוכנות צוות';
-
-  @override
   String get settingsShiftTemplates => 'תבניות משמרת';
 
   @override
@@ -1467,13 +1430,6 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get settingsShiftManagerCapsSubtitle =>
       'החרגות הרשאות ייעודיות לתחנה עבור מנהלי משמרת';
-
-  @override
-  String get settingsKioskDevices => 'עמדות קיוסק תחנתיות';
-
-  @override
-  String get settingsKioskDevicesSubtitle =>
-      'הקצאה וניהול של צגי טאבלט קיוסק פיזיים';
 
   @override
   String get settingsExportCenter => 'מרכז ייצוא דוחות תפעוליים';
@@ -1494,7 +1450,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get settingsSystemHealthSubtitle =>
-      'טלמטריה חיה, תקינות עמדות קיוסק ותחזוקת נתונים';
+      'טלמטריה חיה, תקינות תגי NFC של התחנה ותחזוקת נתונים';
 
   @override
   String get settingsCurrentStationDetails => 'פרטי תחנה נוכחית';
@@ -1518,179 +1474,11 @@ class AppLocalizationsHe extends AppLocalizations {
   String get settingsSignOut => 'התנתק מ-YellowShifts';
 
   @override
-  String get identityAssuranceTitle => 'אימות זהות וזיהוי פנים (Face ID)';
-
-  @override
-  String get identityAssuranceSubtitle =>
-      'ניהול אימות ביומטרי בכניסה והסכמת פרטיות';
-
-  @override
-  String get identityStatusLabel => 'סטטוס אימות';
-
-  @override
-  String get identityStatusNotEnrolled => 'לא רשום';
-
-  @override
-  String get identityStatusActive => 'פעיל ומאומת';
-
-  @override
-  String get identityStatusPending => 'ממתין להשלמה';
-
-  @override
-  String get identityStatusRevoked => 'בוטל';
-
-  @override
-  String get identityPrivacyTitle => 'ארכיטקטורה ממוקדת פרטיות';
-
-  @override
-  String get identityPrivacyBullet1 =>
-      'אף תמונת פנים גולמית או הקלטת וידאו אינה נשמרת בשרתים או במסדי הנתונים.';
-
-  @override
-  String get identityPrivacyBullet2 =>
-      'המכשיר מבצע בדיקת חיות מקומית ומאמת מול מזהה ספק מוצפן.';
-
-  @override
-  String get identityPrivacyBullet3 =>
-      'הנך שומר על שליטה מלאה לבטל את הפרופיל הביומטרי בכל עת.';
-
-  @override
-  String get identityConsentText =>
-      'אני מסכים/ה לאימות חיות ביומטרי לצורך אבטחת נוכחות בתחנות YellowShifts.';
-
-  @override
-  String identityConsentFooter(String version) {
-    return 'גרסה $version • טוקן מוצפן בלבד • ללא שמירת תמונות';
-  }
-
-  @override
-  String get identityEnrollButton => 'רשום זיהוי פנים (Face ID)';
-
-  @override
-  String get identityRevokeButton => 'בטל פרופיל ביומטרי';
-
-  @override
-  String get identityRevokeConfirmTitle => 'לבטל את זיהוי הפנים?';
-
-  @override
-  String get identityRevokeConfirmDesc =>
-      'הפרופיל הביומטרי שלך יבוטל ומזהה האימות יימחק. תוכל להירשם מחדש בכל עת.';
-
-  @override
-  String get identityEnrolledSuccess => 'פרופיל ביומטרי נרשם בהצלחה!';
-
-  @override
-  String get identityRevokedSuccess => 'הפרופיל הביומטרי בוטל.';
-
-  @override
-  String get identityEnrollmentFailed => 'רישום ביומטרי נכשל.';
-
-  @override
-  String get identityAcceptConsentRequired =>
-      'יש לאשר את הודעת הפרטיות הביומטרית כדי להמשיך.';
-
-  @override
-  String get systemHealthAllDevicesHealthy => 'כל עמדות הקיוסק תקינות ומחוברות';
-
-  @override
-  String systemHealthKiosksOfflineCount(num count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count עמדות קיוסק מנותקות',
-      one: 'עמדת קיוסק 1 מנותקת',
-    );
-    return '$_temp0';
-  }
-
-  @override
   String get systemHealthDefenseSubtitle => 'הושלם עם הגנת נוסחאות בצד שרת';
 
   @override
   String get systemHealthStaleSessionsSubtitle =>
       'משמרות פתוחות מעל 16 שעות הדורשות בדיקת מנהל';
-
-  @override
-  String get systemHealthFailedIdentitySubtitle =>
-      'אימותי זהות שנכשלו או שלא הושלמו ב-24 השעות האחרונות';
-
-  @override
-  String get kioskDevicesTitle => 'עמדות קיוסק';
-
-  @override
-  String get kioskLaunchModeButton => 'הפעל מצב קיוסק';
-
-  @override
-  String get kioskProvisionNewTitle => 'הקצאת עמדת קיוסק חדשה';
-
-  @override
-  String get kioskDeviceNameLabel => 'שם העמדה (לדוגמה: טאבלט כניסה ראשית)';
-
-  @override
-  String get kioskDeviceIdentifierLabel => 'מזהה מכשיר';
-
-  @override
-  String get kioskProvisionAction => 'הקצה עמדה';
-
-  @override
-  String get kioskSecretTitle => 'קוד סודי של עמדת קיוסק';
-
-  @override
-  String get kioskSecretWarning =>
-      'שמור קוד סודי זה כעת. הוא לא יוצג שוב במערכת לעולם.';
-
-  @override
-  String kioskDeviceLabel(String identifier) {
-    return 'עמדה: $identifier';
-  }
-
-  @override
-  String get kioskCopySecretAction => 'העתק קוד סודי';
-
-  @override
-  String get kioskSecretCopiedToast => 'הקוד הסודי הועתק ללוח!';
-
-  @override
-  String get kioskDoneAction => 'סיום';
-
-  @override
-  String get kioskEmptyTitle => 'טרם הוקצו עמדות קיוסק';
-
-  @override
-  String get kioskEmptyDesc =>
-      'הקצה טאבלט פיזי או צג דפדפן להצגת ברקודי נוכחות תחנתיים.';
-
-  @override
-  String get kioskStatusOnline => 'מחובר';
-
-  @override
-  String get kioskStatusOffline => 'מנותק / לא פעיל';
-
-  @override
-  String get kioskStatusInactive => 'מושבת';
-
-  @override
-  String kioskLastSeen(String time) {
-    return 'נראה לאחרונה: $time';
-  }
-
-  @override
-  String get kioskNeverConnected => 'טרם התחבר';
-
-  @override
-  String get kioskRotateSecretAction => 'החלף קוד סודי';
-
-  @override
-  String get kioskDeactivateAction => 'השבת';
-
-  @override
-  String get kioskReactivateAction => 'הפעל מחדש';
-
-  @override
-  String get kioskDeactivatedToast => 'עמדת הקיוסק הושבתה';
-
-  @override
-  String get kioskReactivatedToast => 'עמדת הקיוסק הופעלה מחדש';
 
   @override
   String get exportPreset7Days => '7 ימים';
@@ -1831,34 +1619,11 @@ class AppLocalizationsHe extends AppLocalizations {
   String get attendanceStatusCompleted => 'הושלמה';
 
   @override
-  String get attendanceStatusNotCheckedIn => 'טרם נכנס/ה';
-
-  @override
-  String get scannerTabCamera => 'סריקת מצלמה';
-
-  @override
-  String get scannerTabManual => 'הזנת קוד ידני';
-
-  @override
-  String get scannerCameraUnavailable => 'המצלמה אינה זמינה';
-
-  @override
-  String get scannerCameraPermError =>
-      'אנא בדוק הרשאות גישה למצלמה או השתמש בהזנת קוד ידנית.';
-
-  @override
-  String get scannerEnterKioskCode => 'הזנת קוד עמדת קיוסק';
-
-  @override
-  String get scannerEnterCodeDesc =>
-      'הקלד את הקוד בן 6 התווים המוצג מתחת לקוד ה-QR בעמדת הקיוסק.';
-
-  @override
-  String get scannerVerifyCodeAction => 'אמת קוד';
+  String get attendanceStatusNotCheckedIn => 'Not Checked In';
 
   @override
   String get attendanceScanPrompt =>
-      'סרוק את קוד ה-QR מעמדת הקיוסק או הזן קוד ידני כדי להתחיל את המשמרת';
+      'הצמד את הטלפון לתג ה-NFC של התחנה כדי להתחיל את המשמרת';
 
   @override
   String get attendanceActiveShift => 'משמרת פעילה';
@@ -2078,56 +1843,6 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get submissionDeadlineFutureError =>
       'מועד ההגשה האחרון חייב להיות בעתיד.';
-
-  @override
-  String get kioskScreenTitle => 'עמדת קיוסק נוכחות';
-
-  @override
-  String get kioskScreenUnconfiguredDesc =>
-      'טאבלט זה עדיין אינו מוגדר. הגדר פרטי גישה כדי להתחיל בשידור קודי QR לרישום נוכחות.';
-
-  @override
-  String get kioskConfigureDeviceAction => 'הגדרת עמדת קיוסק';
-
-  @override
-  String get kioskSetupDialogTitle => 'הגדרת עמדת קיוסק לתחנה';
-
-  @override
-  String get kioskDeviceIdentifierHint => 'לדוגמה: KIOSK-MAIN-01';
-
-  @override
-  String get kioskDeviceSecretLabel => 'סוד מכשיר (Secret)';
-
-  @override
-  String get kioskDeviceSecretHint => 'הדבק את הסוד שנוצר בהגדרות מנהל';
-
-  @override
-  String get kioskConnectAction => 'חיבור עמדת קיוסק';
-
-  @override
-  String get kioskValidationRequired => 'נא להזין מזהה מכשיר וסוד מכשיר.';
-
-  @override
-  String kioskConnectionFailed(String error) {
-    return 'החיבור נכשל: $error';
-  }
-
-  @override
-  String get kioskDefaultTitle => 'קיוסק תחנה';
-
-  @override
-  String get kioskScanInstruction =>
-      'סרוק באמצעות אפליקציית YellowShifts לכניסה או יציאה';
-
-  @override
-  String kioskConnectedStatus(String identifier) {
-    return 'עמדת קיוסק מחוברת: $identifier';
-  }
-
-  @override
-  String kioskSecondsRemaining(int seconds) {
-    return '$seconds שניות';
-  }
 
   @override
   String get reportsAccessRestrictedTitle => 'הגישה מוגבלת';
@@ -2368,12 +2083,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get platformMetricShiftManagers => 'מנהלי משמרת';
 
   @override
-  String get platformMetricKiosksOnline => 'קיוסקים מקוונים';
-
-  @override
-  String get platformMetricKiosksOffline => 'קיוסקים לא מקוונים';
-
-  @override
   String get platformMetricAlerts => 'התרעות תפעול';
 
   @override
@@ -2384,9 +2093,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get platformColShiftManagers => 'מנהלי משמרת';
-
-  @override
-  String get platformColKiosks => 'סטטוס קיוסק';
 
   @override
   String get platformHealthSummary => 'בריאות תפעולית';
@@ -2432,6 +2138,178 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get platformManagerAssignedToast => 'מנהל התחנה שויך';
+
+  @override
+  String get platformColNfcTags => 'תגי NFC';
+
+  @override
+  String get platformMetricNfcActive => 'תגי NFC פעילים';
+
+  @override
+  String get platformMetricNfcTotal => 'סה״כ תגי NFC';
+
+  @override
+  String get attendanceScanNfcAction => 'סריקת תג NFC של התחנה';
+
+  @override
+  String get settingsNfcTags => 'תגי NFC של התחנה';
+
+  @override
+  String get settingsNfcTagsSubtitle =>
+      'הקצאה, תכנות וניהול תגי NFC פיזיים של התחנה';
+
+  @override
+  String get nfcTagsManagementTitle => 'תגי NFC של התחנה';
+
+  @override
+  String get nfcProvisionNewTitle => 'הקצאת תג NFC חדש';
+
+  @override
+  String get nfcProvisionDialogDesc =>
+      'רישום מזהה תג NFC בשרת והכנתו לצריבה פיזית.';
+
+  @override
+  String get nfcTagNameLabel => 'שם התג';
+
+  @override
+  String get nfcTagNameHint => 'לדוגמה: תג כניסה ראשית, תג מטבח';
+
+  @override
+  String get nfcTagIdLabel => 'מזהה תג';
+
+  @override
+  String get nfcStationCodeLabel => 'קוד תחנה';
+
+  @override
+  String get nfcReadyToWriteDesc =>
+      'לחץ למטה כדי לצרוב פיזית את פרטי התחנה על גבי כרטיס/מדבקת NFC ריקה.';
+
+  @override
+  String get nfcCreateTagAction => 'רישום תג';
+
+  @override
+  String get nfcWriteToCardAction => 'צריבה לתג NFC';
+
+  @override
+  String get nfcHoldToWritePrompt =>
+      'הצמד את הטלפון לתג NFC ריק לצריבת נתוני התחנה.';
+
+  @override
+  String get nfcTagWrittenSuccess => 'תג NFC נצרב בהצלחה!';
+
+  @override
+  String get nfcWriteTagTitle => 'צריבה לתג פיזי';
+
+  @override
+  String get nfcTagCreatedServerDesc =>
+      'התג נרשם בשרת. הצמד את המכשיר לצריבת התג הפיזי.';
+
+  @override
+  String get nfcNoTagsTitle => 'אין תגי NFC בתחנה';
+
+  @override
+  String get nfcNoTagsDesc =>
+      'הקצה תג NFC פיזי לתחנה זו כדי לאפשר לעובדים לדווח נוכחות.';
+
+  @override
+  String get nfcTagStatusActive => 'פעיל';
+
+  @override
+  String get nfcTagStatusRevoked => 'מבוטל';
+
+  @override
+  String nfcLastScanned(String time) {
+    return 'סריקה אחרונה: $time';
+  }
+
+  @override
+  String get nfcNeverScanned => 'מעולם לא נסרק';
+
+  @override
+  String get nfcReplaceAction => 'החלפה';
+
+  @override
+  String get nfcRevokeAction => 'ביטול';
+
+  @override
+  String get nfcReactivateAction => 'הפעלה מחדש';
+
+  @override
+  String get nfcReplaceTagTitle => 'החלפת תג NFC לתחנה';
+
+  @override
+  String get nfcReplaceTagWarning =>
+      'פעולה זו תבטל לצמיתות את התג הפיזי הנוכחי ותייצר פרטי זיהוי לתג חלופי חדש.';
+
+  @override
+  String get nfcNewTagNameLabel => 'שם התג החלופי';
+
+  @override
+  String get nfcReplaceTagConfirm => 'החלף תג';
+
+  @override
+  String get nfcTagReplacedSuccess => 'התג הוחלף בהצלחה';
+
+  @override
+  String get nfcTagRevokedToast => 'תג ה-NFC בוטל';
+
+  @override
+  String get nfcTagReactivatedToast => 'תג ה-NFC הופעל מחדש';
+
+  @override
+  String get nfcUnavailableError => 'רכיב NFC אינו זמין או מושבת במכשיר זה.';
+
+  @override
+  String get nfcScanCheckInPrompt =>
+      'הצמד את הטלפון לתג ה-NFC של התחנה לכניסה.';
+
+  @override
+  String get nfcScanCheckOutPrompt =>
+      'הצמד את הטלפון לתג ה-NFC של התחנה ליציאה.';
+
+  @override
+  String get nfcCheckInTitle => 'סריקת תג NFC של התחנה';
+
+  @override
+  String get nfcCheckOutTitle => 'סריקת תג NFC של התחנה';
+
+  @override
+  String get nfcHoldNearPrompt =>
+      'הצמד את המכשיר לתג ה-NFC הפיזי בתחנה לרישום נוכחות.';
+
+  @override
+  String get nfcVerifyingPresence => 'מאמת תג תחנה...';
+
+  @override
+  String get nfcAuthorizingBackend =>
+      'בודק נוכחות פיזית וחוקי משמרת מול השרת...';
+
+  @override
+  String get nfcCheckInSuccess => 'כניסה אומתה בהצלחה!';
+
+  @override
+  String get nfcCheckOutSuccess => 'יציאה אומתה בהצלחה!';
+
+  @override
+  String get nfcVerificationFailed => 'אימות נוכחות נכשל';
+
+  @override
+  String get auditFilterNfcTags => 'תגי NFC של התחנה';
+
+  @override
+  String get systemHealthNfcFleet => 'תגי NFC בתחנה';
+
+  @override
+  String systemHealthNfcActive(int active, int total) {
+    return '$active מתוך $total פעילים';
+  }
+
+  @override
+  String get systemHealthNfcTagsHealthy =>
+      'כל תגי ה-NFC של התחנה פעילים ותקינים';
+
+  @override
+  String get systemHealthNfcNoActiveTags => 'לא הוגדרו תגי NFC פעילים לתחנה זו';
 
   @override
   String get platformManagerRemovedToast => 'תפקיד מנהל התחנה הוסר';

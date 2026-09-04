@@ -44,12 +44,12 @@ class SystemHealthScreen extends ConsumerWidget {
         if (res != null && res['success'] == true) {
           final exportsMarked =
               (res['expired_exports_marked'] as num?)?.toInt() ?? 0;
-          final challengesCleared =
-              (res['expired_qr_challenges_cleared'] as num?)?.toInt() ?? 0;
+          final recordsCleaned =
+              (res['expired_records_cleaned'] as num?)?.toInt() ?? 0;
           AppFeedback.show(
             context,
             message:
-                l10n.dataRetentionSuccess(exportsMarked, challengesCleared),
+                l10n.dataRetentionSuccess(exportsMarked, recordsCleaned),
             type: AppFeedbackType.success,
           );
         } else {
@@ -127,18 +127,18 @@ class SystemHealthScreen extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Top Row: Kiosks & 24h Exports Pipeline
+        // Top Row: NFC Tags & 24h Exports Pipeline
         if (isWide)
           Row(
             children: [
-              Expanded(child: _buildKioskFleetCard(health, typography, l10n)),
+              Expanded(child: _buildNfcFleetCard(health, typography, l10n)),
               const SizedBox(width: AppSpacing.space16),
               Expanded(
                   child: _buildExportPipelineCard(health, typography, l10n)),
             ],
           )
         else ...[
-          _buildKioskFleetCard(health, typography, l10n),
+          _buildNfcFleetCard(health, typography, l10n),
           const SizedBox(height: AppSpacing.space16),
           _buildExportPipelineCard(health, typography, l10n),
         ],
@@ -156,9 +156,9 @@ class SystemHealthScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildKioskFleetCard(StationSystemHealth health,
+  Widget _buildNfcFleetCard(StationSystemHealth health,
       AppTypography typography, AppLocalizations l10n) {
-    final isHealthy = health.kiosksOffline == 0;
+    final hasActiveTags = health.nfcTagsActive > 0;
     return AppCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,15 +166,15 @@ class SystemHealthScreen extends ConsumerWidget {
           Row(
             children: [
               Icon(
-                LucideIcons.tablet,
-                color: isHealthy
+                LucideIcons.radio,
+                color: hasActiveTags
                     ? AppColors.colorStatusSuccess
-                    : AppColors.colorStatusDanger,
+                    : AppColors.colorStatusWarning,
                 size: 20,
               ),
               const SizedBox(width: AppSpacing.space8),
               Text(
-                l10n.systemHealthKiosksFleet,
+                l10n.systemHealthNfcFleet,
                 style:
                     typography.titleSmall.copyWith(fontWeight: FontWeight.bold),
               ),
@@ -182,25 +182,25 @@ class SystemHealthScreen extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.space12),
           Text(
-            l10n.systemHealthKiosksOnline(
-                health.kiosksOnline, health.kiosksTotal),
+            l10n.systemHealthNfcActive(
+                health.nfcTagsActive, health.nfcTagsTotal),
             style: typography.displayLarge.copyWith(
-              color: isHealthy
+              color: hasActiveTags
                   ? AppColors.colorStatusSuccess
-                  : AppColors.colorStatusDanger,
+                  : AppColors.colorStatusWarning,
               fontWeight: FontWeight.bold,
               fontSize: 24,
             ),
           ),
           const SizedBox(height: AppSpacing.space4),
           Text(
-            health.kiosksOffline > 0
-                ? l10n.systemHealthKiosksOfflineCount(health.kiosksOffline)
-                : l10n.systemHealthAllDevicesHealthy,
+            health.nfcTagsActive > 0
+                ? l10n.systemHealthNfcTagsHealthy
+                : l10n.systemHealthNfcNoActiveTags,
             style: typography.caption.copyWith(
-              color: health.kiosksOffline > 0
-                  ? AppColors.colorStatusDanger
-                  : AppColors.colorTextMuted,
+              color: health.nfcTagsActive > 0
+                  ? AppColors.colorTextMuted
+                  : AppColors.colorStatusWarning,
             ),
           ),
         ],
@@ -312,22 +312,6 @@ class SystemHealthScreen extends ConsumerWidget {
                     ),
                     subtitle: Text(
                       l10n.systemHealthStaleSessionsSubtitle,
-                      style: typography.caption,
-                    ),
-                  ),
-                if (health.failedIdentityAttempts > 0)
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: const Icon(LucideIcons.userX,
-                        color: AppColors.colorStatusDanger),
-                    title: Text(
-                      l10n.systemHealthFailedIdentity(
-                          health.failedIdentityAttempts),
-                      style: typography.bodyStrong
-                          .copyWith(color: AppColors.colorStatusDanger),
-                    ),
-                    subtitle: Text(
-                      l10n.systemHealthFailedIdentitySubtitle,
                       style: typography.caption,
                     ),
                   ),

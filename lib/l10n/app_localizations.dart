@@ -1295,7 +1295,7 @@ abstract class AppLocalizations {
   /// No description provided for @attendanceCheckOutAction.
   ///
   /// In en, this message translates to:
-  /// **'Scan QR to Check Out'**
+  /// **'Check Out'**
   String get attendanceCheckOutAction;
 
   /// No description provided for @attendanceRecentHistory.
@@ -1303,12 +1303,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Recent Shifts'**
   String get attendanceRecentHistory;
-
-  /// No description provided for @attendanceKioskMode.
-  ///
-  /// In en, this message translates to:
-  /// **'Station Kiosk'**
-  String get attendanceKioskMode;
 
   /// No description provided for @attendanceLiveMonitor.
   ///
@@ -1616,12 +1610,6 @@ abstract class AppLocalizations {
   /// **'Shift Templates'**
   String get navShiftTemplates;
 
-  /// No description provided for @navKiosks.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk Devices'**
-  String get navKiosks;
-
   /// No description provided for @navStationSettings.
   ///
   /// In en, this message translates to:
@@ -1886,11 +1874,11 @@ abstract class AppLocalizations {
   /// **'Administrative Shortcuts'**
   String get dashboardAdminQuickShortcuts;
 
-  /// No description provided for @dashboardAdminKioskSummary.
+  /// No description provided for @dashboardAdminNfcSummary.
   ///
   /// In en, this message translates to:
-  /// **'Kiosks Fleet'**
-  String get dashboardAdminKioskSummary;
+  /// **'NFC Tags Fleet'**
+  String get dashboardAdminNfcSummary;
 
   /// No description provided for @dashboardAdminSettingsAction.
   ///
@@ -2312,12 +2300,6 @@ abstract class AppLocalizations {
   /// **'Attendance & Clock-In'**
   String get auditFilterAttendance;
 
-  /// No description provided for @auditFilterKiosks.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosks & Hardware'**
-  String get auditFilterKiosks;
-
   /// No description provided for @auditFilterStation.
   ///
   /// In en, this message translates to:
@@ -2393,20 +2375,8 @@ abstract class AppLocalizations {
   /// No description provided for @systemHealthSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Live telemetry, kiosk fleet status, and data lifecycle management'**
+  /// **'Live telemetry, station NFC tag fleet status, and data lifecycle management'**
   String get systemHealthSubtitle;
-
-  /// No description provided for @systemHealthKiosksFleet.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk Fleet Status'**
-  String get systemHealthKiosksFleet;
-
-  /// No description provided for @systemHealthKiosksOnline.
-  ///
-  /// In en, this message translates to:
-  /// **'{online} of {total} Online'**
-  String systemHealthKiosksOnline(int online, int total);
 
   /// No description provided for @systemHealthExportPipeline.
   ///
@@ -2570,18 +2540,6 @@ abstract class AppLocalizations {
   /// **'Verifying attendance status after network timeout...'**
   String get errorReconcilingAttendance;
 
-  /// No description provided for @errorKioskDisconnected.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk Disconnected from Network'**
-  String get errorKioskDisconnected;
-
-  /// No description provided for @errorKioskReconnecting.
-  ///
-  /// In en, this message translates to:
-  /// **'Attempting to reconnect...'**
-  String get errorKioskReconnecting;
-
   /// No description provided for @appUpdateAvailable.
   ///
   /// In en, this message translates to:
@@ -2714,18 +2672,6 @@ abstract class AppLocalizations {
   /// **'Phone: {phone}'**
   String settingsUserPhone(String phone);
 
-  /// No description provided for @settingsBiometricFace.
-  ///
-  /// In en, this message translates to:
-  /// **'Biometric Face Assurance'**
-  String get settingsBiometricFace;
-
-  /// No description provided for @settingsBiometricFaceSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Enroll, manage, or revoke optional Face ID verification'**
-  String get settingsBiometricFaceSubtitle;
-
   /// No description provided for @settingsNotifications.
   ///
   /// In en, this message translates to:
@@ -2756,18 +2702,6 @@ abstract class AppLocalizations {
   /// **'Timezone, code, locale, and week start'**
   String get settingsOperationalParamsSubtitle;
 
-  /// No description provided for @settingsBiometricPolicy.
-  ///
-  /// In en, this message translates to:
-  /// **'Station Biometric Policy'**
-  String get settingsBiometricPolicy;
-
-  /// No description provided for @settingsBiometricPolicySubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Configure check-in/out verification modes & team readiness'**
-  String get settingsBiometricPolicySubtitle;
-
   /// No description provided for @settingsShiftTemplates.
   ///
   /// In en, this message translates to:
@@ -2791,18 +2725,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Station-specific permission overrides for Shift Managers'**
   String get settingsShiftManagerCapsSubtitle;
-
-  /// No description provided for @settingsKioskDevices.
-  ///
-  /// In en, this message translates to:
-  /// **'Station Kiosk Devices'**
-  String get settingsKioskDevices;
-
-  /// No description provided for @settingsKioskDevicesSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Provision and manage physical tablet kiosk displays'**
-  String get settingsKioskDevicesSubtitle;
 
   /// No description provided for @settingsExportCenter.
   ///
@@ -2837,7 +2759,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsSystemHealthSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Live telemetry, kiosk fleet health, and data retention maintenance'**
+  /// **'Live telemetry, station NFC tag fleet health, and data retention maintenance'**
   String get settingsSystemHealthSubtitle;
 
   /// No description provided for @settingsCurrentStationDetails.
@@ -2882,144 +2804,6 @@ abstract class AppLocalizations {
   /// **'Sign Out from YellowShifts'**
   String get settingsSignOut;
 
-  /// No description provided for @identityAssuranceTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Identity Assurance & Face ID'**
-  String get identityAssuranceTitle;
-
-  /// No description provided for @identityAssuranceSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Manage biometric check-in assurance and privacy consent'**
-  String get identityAssuranceSubtitle;
-
-  /// No description provided for @identityStatusLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification Status'**
-  String get identityStatusLabel;
-
-  /// No description provided for @identityStatusNotEnrolled.
-  ///
-  /// In en, this message translates to:
-  /// **'Not Enrolled'**
-  String get identityStatusNotEnrolled;
-
-  /// No description provided for @identityStatusActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active & Verified'**
-  String get identityStatusActive;
-
-  /// No description provided for @identityStatusPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending Enrollment'**
-  String get identityStatusPending;
-
-  /// No description provided for @identityStatusRevoked.
-  ///
-  /// In en, this message translates to:
-  /// **'Revoked'**
-  String get identityStatusRevoked;
-
-  /// No description provided for @identityPrivacyTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Privacy-First Architecture'**
-  String get identityPrivacyTitle;
-
-  /// No description provided for @identityPrivacyBullet1.
-  ///
-  /// In en, this message translates to:
-  /// **'Zero raw face photos or video recordings are stored in PostgreSQL or Supabase storage.'**
-  String get identityPrivacyBullet1;
-
-  /// No description provided for @identityPrivacyBullet2.
-  ///
-  /// In en, this message translates to:
-  /// **'The device performs local liveness checks and verifies against an opaque provider token.'**
-  String get identityPrivacyBullet2;
-
-  /// No description provided for @identityPrivacyBullet3.
-  ///
-  /// In en, this message translates to:
-  /// **'You maintain full control to revoke your biometric profile at any time.'**
-  String get identityPrivacyBullet3;
-
-  /// No description provided for @identityConsentText.
-  ///
-  /// In en, this message translates to:
-  /// **'I consent to biometric liveness verification for YellowShifts station attendance assurance.'**
-  String get identityConsentText;
-
-  /// No description provided for @identityConsentFooter.
-  ///
-  /// In en, this message translates to:
-  /// **'Version {version} • Opaque token stored • Zero photos saved'**
-  String identityConsentFooter(String version);
-
-  /// No description provided for @identityEnrollButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Enroll Face ID'**
-  String get identityEnrollButton;
-
-  /// No description provided for @identityRevokeButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Revoke Biometric ID'**
-  String get identityRevokeButton;
-
-  /// No description provided for @identityRevokeConfirmTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Revoke Biometric ID?'**
-  String get identityRevokeConfirmTitle;
-
-  /// No description provided for @identityRevokeConfirmDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Your biometric verification profile will be revoked and subject identifier erased. You can re-enroll at any time.'**
-  String get identityRevokeConfirmDesc;
-
-  /// No description provided for @identityEnrolledSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Biometric profile enrolled successfully!'**
-  String get identityEnrolledSuccess;
-
-  /// No description provided for @identityRevokedSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Biometric profile revoked.'**
-  String get identityRevokedSuccess;
-
-  /// No description provided for @identityEnrollmentFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Biometric enrollment failed.'**
-  String get identityEnrollmentFailed;
-
-  /// No description provided for @identityAcceptConsentRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Please accept the biometric privacy notice to proceed.'**
-  String get identityAcceptConsentRequired;
-
-  /// No description provided for @systemHealthAllDevicesHealthy.
-  ///
-  /// In en, this message translates to:
-  /// **'All fleet devices healthy'**
-  String get systemHealthAllDevicesHealthy;
-
-  /// No description provided for @systemHealthKiosksOfflineCount.
-  ///
-  /// In en, this message translates to:
-  /// **'{count, plural, =1{1 kiosk offline} other{{count} kiosks offline}}'**
-  String systemHealthKiosksOfflineCount(num count);
-
   /// No description provided for @systemHealthDefenseSubtitle.
   ///
   /// In en, this message translates to:
@@ -3031,156 +2815,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sessions open for > 16 hours requiring manager review'**
   String get systemHealthStaleSessionsSubtitle;
-
-  /// No description provided for @systemHealthFailedIdentitySubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Identity verifications failed or inconclusive in the last 24h'**
-  String get systemHealthFailedIdentitySubtitle;
-
-  /// No description provided for @kioskDevicesTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk Devices'**
-  String get kioskDevicesTitle;
-
-  /// No description provided for @kioskLaunchModeButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Launch Kiosk Mode'**
-  String get kioskLaunchModeButton;
-
-  /// No description provided for @kioskProvisionNewTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Provision New Kiosk'**
-  String get kioskProvisionNewTitle;
-
-  /// No description provided for @kioskDeviceNameLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Device Name (e.g. Front Desk Tablet)'**
-  String get kioskDeviceNameLabel;
-
-  /// No description provided for @kioskDeviceIdentifierLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Device Identifier'**
-  String get kioskDeviceIdentifierLabel;
-
-  /// No description provided for @kioskProvisionAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Provision'**
-  String get kioskProvisionAction;
-
-  /// No description provided for @kioskSecretTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk Device Secret'**
-  String get kioskSecretTitle;
-
-  /// No description provided for @kioskSecretWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Save this secret now. It will NEVER be shown again in the system.'**
-  String get kioskSecretWarning;
-
-  /// No description provided for @kioskDeviceLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Device: {identifier}'**
-  String kioskDeviceLabel(String identifier);
-
-  /// No description provided for @kioskCopySecretAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Copy Secret'**
-  String get kioskCopySecretAction;
-
-  /// No description provided for @kioskSecretCopiedToast.
-  ///
-  /// In en, this message translates to:
-  /// **'Secret copied to clipboard!'**
-  String get kioskSecretCopiedToast;
-
-  /// No description provided for @kioskDoneAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Done'**
-  String get kioskDoneAction;
-
-  /// No description provided for @kioskEmptyTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'No Kiosk Devices Provisioned'**
-  String get kioskEmptyTitle;
-
-  /// No description provided for @kioskEmptyDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Provision a physical tablet or browser display to generate station attendance QR codes.'**
-  String get kioskEmptyDesc;
-
-  /// No description provided for @kioskStatusOnline.
-  ///
-  /// In en, this message translates to:
-  /// **'Online'**
-  String get kioskStatusOnline;
-
-  /// No description provided for @kioskStatusOffline.
-  ///
-  /// In en, this message translates to:
-  /// **'Offline / Idle'**
-  String get kioskStatusOffline;
-
-  /// No description provided for @kioskStatusInactive.
-  ///
-  /// In en, this message translates to:
-  /// **'Inactive'**
-  String get kioskStatusInactive;
-
-  /// No description provided for @kioskLastSeen.
-  ///
-  /// In en, this message translates to:
-  /// **'Last seen: {time}'**
-  String kioskLastSeen(String time);
-
-  /// No description provided for @kioskNeverConnected.
-  ///
-  /// In en, this message translates to:
-  /// **'Never connected'**
-  String get kioskNeverConnected;
-
-  /// No description provided for @kioskRotateSecretAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Rotate Secret'**
-  String get kioskRotateSecretAction;
-
-  /// No description provided for @kioskDeactivateAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Deactivate'**
-  String get kioskDeactivateAction;
-
-  /// No description provided for @kioskReactivateAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Reactivate'**
-  String get kioskReactivateAction;
-
-  /// No description provided for @kioskDeactivatedToast.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk device deactivated'**
-  String get kioskDeactivatedToast;
-
-  /// No description provided for @kioskReactivatedToast.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk device reactivated'**
-  String get kioskReactivatedToast;
 
   /// No description provided for @exportPreset7Days.
   ///
@@ -3440,52 +3074,10 @@ abstract class AppLocalizations {
   /// **'Not Checked In'**
   String get attendanceStatusNotCheckedIn;
 
-  /// No description provided for @scannerTabCamera.
-  ///
-  /// In en, this message translates to:
-  /// **'Camera Scan'**
-  String get scannerTabCamera;
-
-  /// No description provided for @scannerTabManual.
-  ///
-  /// In en, this message translates to:
-  /// **'Manual Code'**
-  String get scannerTabManual;
-
-  /// No description provided for @scannerCameraUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Camera Unavailable'**
-  String get scannerCameraUnavailable;
-
-  /// No description provided for @scannerCameraPermError.
-  ///
-  /// In en, this message translates to:
-  /// **'Please check permissions or use the manual code entry tab.'**
-  String get scannerCameraPermError;
-
-  /// No description provided for @scannerEnterKioskCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter Kiosk Code'**
-  String get scannerEnterKioskCode;
-
-  /// No description provided for @scannerEnterCodeDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Type the 6-character code displayed below the QR code on the station kiosk.'**
-  String get scannerEnterCodeDesc;
-
-  /// No description provided for @scannerVerifyCodeAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Verify Code'**
-  String get scannerVerifyCodeAction;
-
   /// No description provided for @attendanceScanPrompt.
   ///
   /// In en, this message translates to:
-  /// **'Scan station kiosk QR code or enter code to begin your shift'**
+  /// **'Hold your phone near the station NFC tag to record attendance'**
   String get attendanceScanPrompt;
 
   /// No description provided for @attendanceActiveShift.
@@ -3853,90 +3445,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Submission deadline must be in the future.'**
   String get submissionDeadlineFutureError;
-
-  /// No description provided for @kioskScreenTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Station Attendance Kiosk'**
-  String get kioskScreenTitle;
-
-  /// No description provided for @kioskScreenUnconfiguredDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'This tablet is not configured yet. Set up credentials to start broadcasting attendance QR codes.'**
-  String get kioskScreenUnconfiguredDesc;
-
-  /// No description provided for @kioskConfigureDeviceAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Configure Kiosk Device'**
-  String get kioskConfigureDeviceAction;
-
-  /// No description provided for @kioskSetupDialogTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Configure Station Kiosk'**
-  String get kioskSetupDialogTitle;
-
-  /// No description provided for @kioskDeviceIdentifierHint.
-  ///
-  /// In en, this message translates to:
-  /// **'e.g. KIOSK-MAIN-01'**
-  String get kioskDeviceIdentifierHint;
-
-  /// No description provided for @kioskDeviceSecretLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Device Secret'**
-  String get kioskDeviceSecretLabel;
-
-  /// No description provided for @kioskDeviceSecretHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Paste secret generated in Admin settings'**
-  String get kioskDeviceSecretHint;
-
-  /// No description provided for @kioskConnectAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Connect Kiosk'**
-  String get kioskConnectAction;
-
-  /// No description provided for @kioskValidationRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter both Device Identifier and Secret.'**
-  String get kioskValidationRequired;
-
-  /// No description provided for @kioskConnectionFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Connection failed: {error}'**
-  String kioskConnectionFailed(String error);
-
-  /// No description provided for @kioskDefaultTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Station Kiosk'**
-  String get kioskDefaultTitle;
-
-  /// No description provided for @kioskScanInstruction.
-  ///
-  /// In en, this message translates to:
-  /// **'Scan with the YellowShifts mobile app to check in or out'**
-  String get kioskScanInstruction;
-
-  /// No description provided for @kioskConnectedStatus.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk Connected: {identifier}'**
-  String kioskConnectedStatus(String identifier);
-
-  /// No description provided for @kioskSecondsRemaining.
-  ///
-  /// In en, this message translates to:
-  /// **'{seconds}s'**
-  String kioskSecondsRemaining(int seconds);
 
   /// No description provided for @reportsAccessRestrictedTitle.
   ///
@@ -4364,18 +3872,6 @@ abstract class AppLocalizations {
   /// **'Shift Managers'**
   String get platformMetricShiftManagers;
 
-  /// No description provided for @platformMetricKiosksOnline.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosks online'**
-  String get platformMetricKiosksOnline;
-
-  /// No description provided for @platformMetricKiosksOffline.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosks offline'**
-  String get platformMetricKiosksOffline;
-
   /// No description provided for @platformMetricAlerts.
   ///
   /// In en, this message translates to:
@@ -4399,12 +3895,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shift Managers'**
   String get platformColShiftManagers;
-
-  /// No description provided for @platformColKiosks.
-  ///
-  /// In en, this message translates to:
-  /// **'Kiosk status'**
-  String get platformColKiosks;
 
   /// No description provided for @platformHealthSummary.
   ///
@@ -4439,7 +3929,7 @@ abstract class AppLocalizations {
   /// No description provided for @platformHealthSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Aggregated kiosk, export, attendance, and notification signals across the network.'**
+  /// **'Aggregated NFC tags, export, attendance, and notification signals across the network.'**
   String get platformHealthSubtitle;
 
   /// No description provided for @platformUnauthorizedTitle.
@@ -4489,6 +3979,318 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Station Manager assigned'**
   String get platformManagerAssignedToast;
+
+  /// No description provided for @platformColNfcTags.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Tags'**
+  String get platformColNfcTags;
+
+  /// No description provided for @platformMetricNfcActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active NFC tags'**
+  String get platformMetricNfcActive;
+
+  /// No description provided for @platformMetricNfcTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Total NFC tags'**
+  String get platformMetricNfcTotal;
+
+  /// No description provided for @attendanceScanNfcAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Station NFC Tag'**
+  String get attendanceScanNfcAction;
+
+  /// No description provided for @settingsNfcTags.
+  ///
+  /// In en, this message translates to:
+  /// **'Station NFC Tags'**
+  String get settingsNfcTags;
+
+  /// No description provided for @settingsNfcTagsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Provision, program, and manage physical station NFC tags'**
+  String get settingsNfcTagsSubtitle;
+
+  /// No description provided for @nfcTagsManagementTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Station NFC Tags'**
+  String get nfcTagsManagementTitle;
+
+  /// No description provided for @nfcProvisionNewTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Provision New NFC Tag'**
+  String get nfcProvisionNewTitle;
+
+  /// No description provided for @nfcProvisionDialogDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Register an NFC tag identifier on the server and prepare it for writing.'**
+  String get nfcProvisionDialogDesc;
+
+  /// No description provided for @nfcTagNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag Name'**
+  String get nfcTagNameLabel;
+
+  /// No description provided for @nfcTagNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g. Front Entrance Tag, Kitchen Tag'**
+  String get nfcTagNameHint;
+
+  /// No description provided for @nfcTagIdLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag ID'**
+  String get nfcTagIdLabel;
+
+  /// No description provided for @nfcStationCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Station Code'**
+  String get nfcStationCodeLabel;
+
+  /// No description provided for @nfcReadyToWriteDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap below to physically write this station configuration onto a blank NFC tag.'**
+  String get nfcReadyToWriteDesc;
+
+  /// No description provided for @nfcCreateTagAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Register Tag'**
+  String get nfcCreateTagAction;
+
+  /// No description provided for @nfcWriteToCardAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Write to NFC Tag'**
+  String get nfcWriteToCardAction;
+
+  /// No description provided for @nfcHoldToWritePrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold phone near blank NFC tag to write station data.'**
+  String get nfcHoldToWritePrompt;
+
+  /// No description provided for @nfcTagWrittenSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Tag programmed successfully!'**
+  String get nfcTagWrittenSuccess;
+
+  /// No description provided for @nfcWriteTagTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Write to Physical Tag'**
+  String get nfcWriteTagTitle;
+
+  /// No description provided for @nfcTagCreatedServerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag registered on server. Hold your device to write to the physical tag.'**
+  String get nfcTagCreatedServerDesc;
+
+  /// No description provided for @nfcNoTagsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No Station NFC Tags'**
+  String get nfcNoTagsTitle;
+
+  /// No description provided for @nfcNoTagsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Provision a physical NFC tag at this station to enable employee attendance check-in.'**
+  String get nfcNoTagsDesc;
+
+  /// No description provided for @nfcTagStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get nfcTagStatusActive;
+
+  /// No description provided for @nfcTagStatusRevoked.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoked'**
+  String get nfcTagStatusRevoked;
+
+  /// No description provided for @nfcLastScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'Last scan: {time}'**
+  String nfcLastScanned(String time);
+
+  /// No description provided for @nfcNeverScanned.
+  ///
+  /// In en, this message translates to:
+  /// **'Never scanned'**
+  String get nfcNeverScanned;
+
+  /// No description provided for @nfcReplaceAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace'**
+  String get nfcReplaceAction;
+
+  /// No description provided for @nfcRevokeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Revoke'**
+  String get nfcRevokeAction;
+
+  /// No description provided for @nfcReactivateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Reactivate'**
+  String get nfcReactivateAction;
+
+  /// No description provided for @nfcReplaceTagTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace Station NFC Tag'**
+  String get nfcReplaceTagTitle;
+
+  /// No description provided for @nfcReplaceTagWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently revoke the current physical tag and generate credentials for a new replacement tag.'**
+  String get nfcReplaceTagWarning;
+
+  /// No description provided for @nfcNewTagNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Replacement Tag Name'**
+  String get nfcNewTagNameLabel;
+
+  /// No description provided for @nfcReplaceTagConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace Tag'**
+  String get nfcReplaceTagConfirm;
+
+  /// No description provided for @nfcTagReplacedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag replaced successfully'**
+  String get nfcTagReplacedSuccess;
+
+  /// No description provided for @nfcTagRevokedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Tag revoked'**
+  String get nfcTagRevokedToast;
+
+  /// No description provided for @nfcTagReactivatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Tag reactivated'**
+  String get nfcTagReactivatedToast;
+
+  /// No description provided for @nfcUnavailableError.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC is unavailable or disabled on this device.'**
+  String get nfcUnavailableError;
+
+  /// No description provided for @nfcScanCheckInPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold phone near station NFC tag to clock in.'**
+  String get nfcScanCheckInPrompt;
+
+  /// No description provided for @nfcScanCheckOutPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold phone near station NFC tag to clock out.'**
+  String get nfcScanCheckOutPrompt;
+
+  /// No description provided for @nfcCheckInTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Station NFC Tag'**
+  String get nfcCheckInTitle;
+
+  /// No description provided for @nfcCheckOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan Station NFC Tag'**
+  String get nfcCheckOutTitle;
+
+  /// No description provided for @nfcHoldNearPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold your phone close to the physical station NFC tag to record your attendance.'**
+  String get nfcHoldNearPrompt;
+
+  /// No description provided for @nfcVerifyingPresence.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying Station Tag...'**
+  String get nfcVerifyingPresence;
+
+  /// No description provided for @nfcAuthorizingBackend.
+  ///
+  /// In en, this message translates to:
+  /// **'Validating physical presence and attendance rules on the server...'**
+  String get nfcAuthorizingBackend;
+
+  /// No description provided for @nfcCheckInSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-In Verified!'**
+  String get nfcCheckInSuccess;
+
+  /// No description provided for @nfcCheckOutSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Check-Out Verified!'**
+  String get nfcCheckOutSuccess;
+
+  /// No description provided for @nfcVerificationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Attendance Verification Failed'**
+  String get nfcVerificationFailed;
+
+  /// No description provided for @auditFilterNfcTags.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Station Tags'**
+  String get auditFilterNfcTags;
+
+  /// No description provided for @systemHealthNfcFleet.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Station Tags'**
+  String get systemHealthNfcFleet;
+
+  /// No description provided for @systemHealthNfcActive.
+  ///
+  /// In en, this message translates to:
+  /// **'{active} of {total} Active'**
+  String systemHealthNfcActive(int active, int total);
+
+  /// No description provided for @systemHealthNfcTagsHealthy.
+  ///
+  /// In en, this message translates to:
+  /// **'All station NFC tags active and operational'**
+  String get systemHealthNfcTagsHealthy;
+
+  /// No description provided for @systemHealthNfcNoActiveTags.
+  ///
+  /// In en, this message translates to:
+  /// **'No active NFC tags configured for this station'**
+  String get systemHealthNfcNoActiveTags;
 
   /// No description provided for @platformManagerRemovedToast.
   ///

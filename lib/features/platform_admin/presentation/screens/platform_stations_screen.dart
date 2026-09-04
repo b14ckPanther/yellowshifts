@@ -80,7 +80,7 @@ class PlatformStationsScreen extends ConsumerWidget {
                             DataColumn(label: Text(l10n.platformColManagers)),
                             DataColumn(
                                 label: Text(l10n.platformColShiftManagers)),
-                            DataColumn(label: Text(l10n.platformColKiosks)),
+                            DataColumn(label: Text(l10n.platformColNfcTags)),
                             const DataColumn(label: Text('')),
                           ],
                           rows: [
@@ -93,7 +93,7 @@ class PlatformStationsScreen extends ConsumerWidget {
                                 DataCell(Text('${station.adminCount}')),
                                 DataCell(Text('${station.shiftManagerCount}')),
                                 DataCell(Text(
-                                    '${station.kiosksOnline}/${station.kiosksTotal}')),
+                                    '${station.nfcTagsActive}/${station.nfcTagsTotal}')),
                                 DataCell(
                                     _rowActions(context, ref, station, l10n)),
                               ]),
@@ -157,7 +157,7 @@ class _StationCard extends ConsumerWidget {
             Text(station.code, style: typography.caption),
             const SizedBox(height: AppSpacing.space12),
             Text(
-              '${l10n.platformColEmployees}: ${station.activeMembers} · ${l10n.platformColManagers}: ${station.adminCount} · ${l10n.platformColKiosks}: ${station.kiosksOnline}/${station.kiosksTotal}',
+              '${l10n.platformColEmployees}: ${station.activeMembers} · ${l10n.platformColManagers}: ${station.adminCount} · ${l10n.platformColNfcTags}: ${station.nfcTagsActive}/${station.nfcTagsTotal}',
               style: typography.caption
                   .copyWith(color: AppColors.colorTextSecondary),
             ),

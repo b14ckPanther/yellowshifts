@@ -159,8 +159,7 @@ class StationAccessContext {
   bool get canManageMembershipStatuses => isAdmin;
   bool get canResetEmployeePassword => isAdmin;
   bool get canRevokeEmployeeSessions => isAdmin;
-  bool get canManageKiosks => isAdmin;
-  bool get canManageIdentityPolicy => isAdmin;
+  bool get canManageNfcTags => isAdmin;
   bool get canManageStationSettings => isAdmin;
   bool get canManageShiftManagerPermissions => isAdmin;
 }

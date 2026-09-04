@@ -13,19 +13,16 @@ import '../../features/availability/presentation/availability_history_screen.dar
 import '../../features/schedule/presentation/schedule_screen.dart';
 import '../../features/attendance/presentation/attendance_screen.dart';
 import '../../features/reports/presentation/screens/employee_my_hours_screen.dart';
-import '../../features/attendance/presentation/kiosk_screen.dart';
 import '../../features/reports/presentation/screens/manager_reports_screen.dart';
 import '../../features/reports/presentation/screens/export_center_screen.dart';
 import '../../features/audit/presentation/screens/audit_center_screen.dart';
 import '../../features/system_health/presentation/screens/system_health_screen.dart';
-import '../../features/identity/presentation/employee_identity_verification_screen.dart';
-import '../../features/identity/presentation/manager_identity_policy_screen.dart';
 import '../../features/employees/presentation/employees_screen.dart';
 import '../../features/stations/presentation/station_selector_screen.dart';
 import '../../features/settings/presentation/station_settings_screen.dart';
 import '../../features/shift_templates/presentation/shift_templates_screen.dart';
 import '../../features/settings/presentation/shift_manager_permissions_screen.dart';
-import '../../features/attendance/presentation/manager_kiosk_devices_screen.dart';
+import '../../features/attendance/presentation/manager_nfc_tags_screen.dart';
 import '../../features/notifications/presentation/screens/notification_center_screen.dart';
 import '../../features/notifications/presentation/screens/notification_preferences_screen.dart';
 import '../../features/settings/presentation/settings_screen.dart';
@@ -57,17 +54,12 @@ class RouterNotifier extends ChangeNotifier {
         : state.uri.path;
     final path = state.uri.path;
     final isLoggingIn = loc == '/login' || path == '/login';
-    final isKiosk = loc == '/kiosk' ||
-        path == '/kiosk' ||
-        loc.startsWith('/kiosk') ||
-        path.startsWith('/kiosk') ||
-        state.uri.toString().contains('kiosk');
     final isDevPreview = loc.startsWith('/dev') || path.startsWith('/dev');
     final isPlatformPath =
         loc.startsWith('/platform') || path.startsWith('/platform');
     final isPlatformAdmin = _ref.read(isPlatformAdminValueProvider);
 
-    if (isDevPreview || isKiosk) return null;
+    if (isDevPreview) return null;
 
     if (authUser == null) {
       return isLoggingIn ? null : '/login';
@@ -132,11 +124,7 @@ class RouterNotifier extends ChangeNotifier {
         !access.canManageShiftManagerPermissions) {
       return '/dashboard';
     }
-    if (path.startsWith('/settings/kiosks') && !access.canManageKiosks) {
-      return '/dashboard';
-    }
-    if (path.startsWith('/settings/identity-policy') &&
-        !access.canManageIdentityPolicy) {
+    if (path.startsWith('/settings/nfc-tags') && !access.canManageNfcTags) {
       return '/dashboard';
     }
     if (path.startsWith('/availability/matrix') &&
@@ -171,10 +159,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/station-select',
         builder: (context, state) => const StationSelectorScreen(),
-      ),
-      GoRoute(
-        path: '/kiosk',
-        builder: (context, state) => const KioskScreen(),
       ),
       ShellRoute(
         builder: (context, state, child) => PlatformAdminShell(child: child),
@@ -251,11 +235,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const ExportCenterScreen(),
           ),
           GoRoute(
-            path: '/identity-verification',
-            builder: (context, state) =>
-                const EmployeeIdentityVerificationScreen(),
-          ),
-          GoRoute(
             path: '/employees',
             builder: (context, state) => const EmployeesScreen(),
           ),
@@ -276,8 +255,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const SystemHealthScreen(),
           ),
           GoRoute(
-            path: '/settings/identity-policy',
-            builder: (context, state) => const ManagerIdentityPolicyScreen(),
+            path: '/settings/nfc-tags',
+            builder: (context, state) => const ManagerNfcTagsScreen(),
           ),
           GoRoute(
             path: '/settings/shifts',
@@ -286,10 +265,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/settings/permissions',
             builder: (context, state) => const ShiftManagerPermissionsScreen(),
-          ),
-          GoRoute(
-            path: '/settings/kiosks',
-            builder: (context, state) => const ManagerKioskDevicesScreen(),
           ),
           GoRoute(
             path: '/notifications',

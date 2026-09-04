@@ -247,7 +247,6 @@
   "attendanceScanQrAction": "סרוק ברקוד תחנה",
   "attendanceCheckOutAction": "יציאה ממשמרת",
   "attendanceRecentHistory": "משמרות אחרונות",
-  "attendanceKioskMode": "קיוסק תחנה",
   "attendanceLiveMonitor": "דוח נוכחות חי",
   "navNotifications": "התראות",
   "notificationsTitle": "מרכז התראות והודעות",
@@ -299,7 +298,6 @@
   "statusSuspended": "מושעה",
   "navDashboard": "לוח בקרה",
   "navShiftTemplates": "תבניות משמרת",
-  "navKiosks": "עמדות קיוסק",
   "navStationSettings": "הגדרות תחנה",
   "navSectionWorkspace": "סביבת עבודה אישית",
   "navSectionManagement": "ניהול תחנה",
@@ -385,8 +383,8 @@
     }
   },
   "dashboardAdminPulseTitle": "סיכום כוח אדם בתחנה",
-  "dashboardAdminQuickShortcuts": "קיצורי ניהול מהירים",
-  "dashboardAdminKioskSummary": "עמדות קיוסק",
+  "dashboardAdminQuickShortcuts": "קיצורי דרך לניהול",
+  "dashboardAdminNfcSummary": "תגי NFC בתחנה",
   "dashboardAdminSettingsAction": "הגדרות תחנה",
   "dashboardAdminAddEmployeeAction": "הוספת עובד",
   "employeeEditTitle": "עריכת פרטי עובד",
@@ -478,7 +476,6 @@
   "auditFilterMemberships": "עובדים והרשאות",
   "auditFilterSchedules": "סידורי עבודה",
   "auditFilterAttendance": "נוכחות ושעון",
-  "auditFilterKiosks": "עמדות קיוסק",
   "auditFilterStation": "הגדרות תחנה",
   "auditFilterExports": "ייצוא נתונים",
   "auditFilterAvailability": "זמינות עובדים",
@@ -504,19 +501,7 @@
     }
   },
   "systemHealthTitle": "תקינות תפעולית ומערכת",
-  "systemHealthSubtitle": "טלמטריה חיה, מצב עמדות קיוסק וניהול מחזור חיי נתונים",
-  "systemHealthKiosksFleet": "מצב עמדות קיוסק",
-  "systemHealthKiosksOnline": "{online} מתוך {total} מחוברים",
-  "@systemHealthKiosksOnline": {
-    "placeholders": {
-      "online": {
-        "type": "int"
-      },
-      "total": {
-        "type": "int"
-      }
-    }
-  },
+  "systemHealthSubtitle": "טלמטריה חיה, מצב תגי NFC של התחנה וניהול מחזור חיי נתונים",
   "systemHealthExportPipeline": "צינור ייצוא נתונים (24 שעות)",
   "systemHealthExportsSummary": "{count} קבצים הופקו ({failed} נכשלו)",
   "@systemHealthExportsSummary": {
@@ -609,27 +594,21 @@
       }
     }
   },
-  "settingsBiometricFace": "אימות זהות וזיהוי פנים (Face ID)",
-  "settingsBiometricFaceSubtitle": "רישום, ניהול או ביטול אימות פנים אופציונלי",
   "settingsNotifications": "העדפות התראות",
   "settingsNotificationsSubtitle": "הגדרת ערוצי קבלת התראות באפליקציה, פוש, אימייל ו-SMS",
   "settingsStationAdmin": "ניהול תחנה",
   "settingsOperationalParams": "פרמטרים תפעוליים",
   "settingsOperationalParamsSubtitle": "אזור זמן, קוד, שפה ותחילת שבוע",
-  "settingsBiometricPolicy": "מדיניות אימות זהות תחנתית",
-  "settingsBiometricPolicySubtitle": "הגדרת מצבי אימות בכניסה/יציאה ומוכנות צוות",
   "settingsShiftTemplates": "תבניות משמרת",
   "settingsShiftTemplatesSubtitle": "הגדרת משמרות עבודה, שעות וסדר תצוגה",
   "settingsShiftManagerCaps": "סמכויות מנהל משמרת",
   "settingsShiftManagerCapsSubtitle": "החרגות הרשאות ייעודיות לתחנה עבור מנהלי משמרת",
-  "settingsKioskDevices": "עמדות קיוסק תחנתיות",
-  "settingsKioskDevicesSubtitle": "הקצאה וניהול של צגי טאבלט קיוסק פיזיים",
   "settingsExportCenter": "מרכז ייצוא דוחות תפעוליים",
   "settingsExportCenterSubtitle": "הפקת קובצי CSV ו-PDF מוסמכים של דוחות תפעול",
   "settingsAuditCenter": "יומן ביקורת תפעולי",
   "settingsAuditCenterSubtitle": "בדיקת יומן פעולות ניהול כרונולוגי ובלתי ניתן לשינוי",
   "settingsSystemHealth": "תקינות תפעולית ומחזור חיים",
-  "settingsSystemHealthSubtitle": "טלמטריה חיה, תקינות עמדות קיוסק ותחזוקת נתונים",
+  "settingsSystemHealthSubtitle": "טלמטריה חיה, תקינות תגי NFC של התחנה ותחזוקת נתונים",
   "settingsCurrentStationDetails": "פרטי תחנה נוכחית",
   "settingsStationName": "שם התחנה",
   "settingsStationCode": "קוד תפעולי",
@@ -637,84 +616,8 @@
   "settingsStationLocale": "שפת ממשק תחנתית",
   "settingsLanguageDirection": "שפה וכיווניות",
   "settingsSignOut": "התנתק מ-YellowShifts",
-  "identityAssuranceTitle": "אימות זהות וזיהוי פנים (Face ID)",
-  "identityAssuranceSubtitle": "ניהול אימות ביומטרי בכניסה והסכמת פרטיות",
-  "identityStatusLabel": "סטטוס אימות",
-  "identityStatusNotEnrolled": "לא רשום",
-  "identityStatusActive": "פעיל ומאומת",
-  "identityStatusPending": "ממתין להשלמה",
-  "identityStatusRevoked": "בוטל",
-  "identityPrivacyTitle": "ארכיטקטורה ממוקדת פרטיות",
-  "identityPrivacyBullet1": "אף תמונת פנים גולמית או הקלטת וידאו אינה נשמרת בשרתים או במסדי הנתונים.",
-  "identityPrivacyBullet2": "המכשיר מבצע בדיקת חיות מקומית ומאמת מול מזהה ספק מוצפן.",
-  "identityPrivacyBullet3": "הנך שומר על שליטה מלאה לבטל את הפרופיל הביומטרי בכל עת.",
-  "identityConsentText": "אני מסכים/ה לאימות חיות ביומטרי לצורך אבטחת נוכחות בתחנות YellowShifts.",
-  "identityConsentFooter": "גרסה {version} • טוקן מוצפן בלבד • ללא שמירת תמונות",
-  "@identityConsentFooter": {
-    "placeholders": {
-      "version": {
-        "type": "String"
-      }
-    }
-  },
-  "identityEnrollButton": "רשום זיהוי פנים (Face ID)",
-  "identityRevokeButton": "בטל פרופיל ביומטרי",
-  "identityRevokeConfirmTitle": "לבטל את זיהוי הפנים?",
-  "identityRevokeConfirmDesc": "הפרופיל הביומטרי שלך יבוטל ומזהה האימות יימחק. תוכל להירשם מחדש בכל עת.",
-  "identityEnrolledSuccess": "פרופיל ביומטרי נרשם בהצלחה!",
-  "identityRevokedSuccess": "הפרופיל הביומטרי בוטל.",
-  "identityEnrollmentFailed": "רישום ביומטרי נכשל.",
-  "identityAcceptConsentRequired": "יש לאשר את הודעת הפרטיות הביומטרית כדי להמשיך.",
-  "systemHealthAllDevicesHealthy": "כל עמדות הקיוסק תקינות ומחוברות",
-  "systemHealthKiosksOfflineCount": "{count, plural, =1{עמדת קיוסק 1 מנותקת} other{{count} עמדות קיוסק מנותקות}}",
-  "@systemHealthKiosksOfflineCount": {
-    "placeholders": {
-      "count": {
-        "type": "num"
-      }
-    }
-  },
   "systemHealthDefenseSubtitle": "הושלם עם הגנת נוסחאות בצד שרת",
   "systemHealthStaleSessionsSubtitle": "משמרות פתוחות מעל 16 שעות הדורשות בדיקת מנהל",
-  "systemHealthFailedIdentitySubtitle": "אימותי זהות שנכשלו או שלא הושלמו ב-24 השעות האחרונות",
-  "kioskDevicesTitle": "עמדות קיוסק",
-  "kioskLaunchModeButton": "הפעל מצב קיוסק",
-  "kioskProvisionNewTitle": "הקצאת עמדת קיוסק חדשה",
-  "kioskDeviceNameLabel": "שם העמדה (לדוגמה: טאבלט כניסה ראשית)",
-  "kioskDeviceIdentifierLabel": "מזהה עמדה (לדוגמה: KIOSK-01)",
-  "kioskProvisionAction": "הקצה עמדה",
-  "kioskSecretTitle": "קוד סודי של עמדת קיוסק",
-  "kioskSecretWarning": "שמור קוד סודי זה כעת. הוא לא יוצג שוב במערכת לעולם.",
-  "kioskDeviceLabel": "עמדה: {identifier}",
-  "@kioskDeviceLabel": {
-    "placeholders": {
-      "identifier": {
-        "type": "String"
-      }
-    }
-  },
-  "kioskCopySecretAction": "העתק קוד סודי",
-  "kioskSecretCopiedToast": "הקוד הסודי הועתק ללוח!",
-  "kioskDoneAction": "סיום",
-  "kioskEmptyTitle": "טרם הוקצו עמדות קיוסק",
-  "kioskEmptyDesc": "הקצה טאבלט פיזי או צג דפדפן להצגת ברקודי נוכחות תחנתיים.",
-  "kioskStatusOnline": "מחובר",
-  "kioskStatusOffline": "מנותק / לא פעיל",
-  "kioskStatusInactive": "מושבת",
-  "kioskLastSeen": "נראה לאחרונה: {time}",
-  "@kioskLastSeen": {
-    "placeholders": {
-      "time": {
-        "type": "String"
-      }
-    }
-  },
-  "kioskNeverConnected": "טרם התחבר",
-  "kioskRotateSecretAction": "החלף קוד סודי",
-  "kioskDeactivateAction": "השבת",
-  "kioskReactivateAction": "הפעל מחדש",
-  "kioskDeactivatedToast": "עמדת הקיוסק הושבתה",
-  "kioskReactivatedToast": "עמדת הקיוסק הופעלה מחדש",
   "exportPreset7Days": "7 ימים",
   "exportPreset30Days": "30 ימים",
   "exportPresetThisMonth": "החודש",
@@ -778,17 +681,9 @@
   "attendanceStatusUpcoming": "קרובה",
   "attendanceStatusLate": "איחור {minutes} דק'",
   "attendanceStatusCompleted": "הושלמה",
-  "attendanceStatusNotCheckedIn": "טרם נכנס/ה",
-  "scannerTabCamera": "סריקת מצלמה",
-  "scannerTabManual": "הזנת קוד ידני",
-  "scannerCameraUnavailable": "המצלמה אינה זמינה",
-  "scannerCameraPermError": "אנא בדוק הרשאות גישה למצלמה או השתמש בהזנת קוד ידנית.",
-  "scannerEnterKioskCode": "הזנת קוד עמדת קיוסק",
-  "scannerEnterCodeDesc": "הקלד את הקוד בן 6 התווים המוצג מתחת לקוד ה-QR בעמדת הקיוסק.",
-  "scannerVerifyCodeAction": "אמת קוד",
   "attendanceNotCheckedIn": "טרם נכנסת למשמרת",
-  "attendanceScanPrompt": "סרוק את קוד ה-QR מעמדת הקיוסק או הזן קוד ידני כדי להתחיל את המשמרת",
-  "attendanceScanQrAction": "סרוק קוד עמדה",
+  "attendanceScanPrompt": "הצמד את הטלפון לתג ה-NFC של התחנה כדי להתחיל את המשמרת",
+  "attendanceScanNfcAction": "סריקת תג NFC של התחנה",
   "attendanceCurrentlyWorking": "במשמרת פעילה כעת",
   "attendanceActiveShift": "משמרת פעילה",
   "attendanceLateDuration": "איחור של {minutes} דק'",
@@ -855,21 +750,6 @@
   "operationalNotesHint": "לדוגמה: נדרש כיסוי חגים, מינימום 4 משמרות...",
   "createPeriodAction": "צור תקופה",
   "submissionDeadlineFutureError": "מועד ההגשה האחרון חייב להיות בעתיד.",
-  "kioskScreenTitle": "עמדת קיוסק נוכחות",
-  "kioskScreenUnconfiguredDesc": "טאבלט זה עדיין אינו מוגדר. הגדר פרטי גישה כדי להתחיל בשידור קודי QR לרישום נוכחות.",
-  "kioskConfigureDeviceAction": "הגדרת עמדת קיוסק",
-  "kioskSetupDialogTitle": "הגדרת עמדת קיוסק לתחנה",
-  "kioskDeviceIdentifierLabel": "מזהה מכשיר",
-  "kioskDeviceIdentifierHint": "לדוגמה: KIOSK-MAIN-01",
-  "kioskDeviceSecretLabel": "סוד מכשיר (Secret)",
-  "kioskDeviceSecretHint": "הדבק את הסוד שנוצר בהגדרות מנהל",
-  "kioskConnectAction": "חיבור עמדת קיוסק",
-  "kioskValidationRequired": "נא להזין מזהה מכשיר וסוד מכשיר.",
-  "kioskConnectionFailed": "החיבור נכשל: {error}",
-  "kioskDefaultTitle": "קיוסק תחנה",
-  "kioskScanInstruction": "סרוק באמצעות אפליקציית YellowShifts לכניסה או יציאה",
-  "kioskConnectedStatus": "עמדת קיוסק מחוברת: {identifier}",
-  "kioskSecondsRemaining": "{seconds} שניות",
   "reportsAccessRestrictedTitle": "הגישה מוגבלת",
   "reportsAccessRestrictedDesc": "עליך להיות מנהל תחנה פעיל או מנהל מערכת כדי לצפות בדוחות תפעוליים.",
   "walkInShift": "משמרת ללא שיבוץ",
@@ -950,13 +830,10 @@
   "platformMetricActiveMemberships": "חברויות פעילות",
   "platformMetricStationAdmins": "מנהלי תחנה",
   "platformMetricShiftManagers": "מנהלי משמרת",
-  "platformMetricKiosksOnline": "קיוסקים מקוונים",
-  "platformMetricKiosksOffline": "קיוסקים לא מקוונים",
   "platformMetricAlerts": "התרעות תפעול",
   "platformColEmployees": "עובדים פעילים",
   "platformColManagers": "מנהלי תחנה",
   "platformColShiftManagers": "מנהלי משמרת",
-  "platformColKiosks": "סטטוס קיוסק",
   "platformHealthSummary": "בריאות תפעולית",
   "platformAuditTitle": "ביקורת פלטפורמה",
   "platformAuditSubtitle": "צפייה באירועי פלטפורמה ותחנות. מנהלי תחנה נשארים בגבולות התחנה בלבד.",
@@ -972,6 +849,75 @@
   "platformReactivatedToast": "התחנה הופעלה מחדש",
   "platformManagerAssignedToast": "מנהל התחנה שויך",
   "platformManagerRemovedToast": "תפקיד מנהל התחנה הוסר",
+  "platformColNfcTags": "תגי NFC",
+  "platformMetricNfcActive": "תגי NFC פעילים",
+  "platformMetricNfcTotal": "סה״כ תגי NFC",
+  "attendanceScanNfcAction": "סריקת תג NFC של התחנה",
+  "settingsNfcTags": "תגי NFC של התחנה",
+  "settingsNfcTagsSubtitle": "הקצאה, תכנות וניהול תגי NFC פיזיים של התחנה",
+  "nfcTagsManagementTitle": "תגי NFC של התחנה",
+  "nfcProvisionNewTitle": "הקצאת תג NFC חדש",
+  "nfcProvisionDialogDesc": "רישום מזהה תג NFC בשרת והכנתו לצריבה פיזית.",
+  "nfcTagNameLabel": "שם התג",
+  "nfcTagNameHint": "לדוגמה: תג כניסה ראשית, תג מטבח",
+  "nfcTagIdLabel": "מזהה תג",
+  "nfcStationCodeLabel": "קוד תחנה",
+  "nfcReadyToWriteDesc": "לחץ למטה כדי לצרוב פיזית את פרטי התחנה על גבי כרטיס/מדבקת NFC ריקה.",
+  "nfcCreateTagAction": "רישום תג",
+  "nfcWriteToCardAction": "צריבה לתג NFC",
+  "nfcHoldToWritePrompt": "הצמד את הטלפון לתג NFC ריק לצריבת נתוני התחנה.",
+  "nfcTagWrittenSuccess": "תג NFC נצרב בהצלחה!",
+  "nfcWriteTagTitle": "צריבה לתג פיזי",
+  "nfcTagCreatedServerDesc": "התג נרשם בשרת. הצמד את המכשיר לצריבת התג הפיזי.",
+  "nfcNoTagsTitle": "אין תגי NFC בתחנה",
+  "nfcNoTagsDesc": "הקצה תג NFC פיזי לתחנה זו כדי לאפשר לעובדים לדווח נוכחות.",
+  "nfcTagStatusActive": "פעיל",
+  "nfcTagStatusRevoked": "מבוטל",
+  "nfcLastScanned": "סריקה אחרונה: {time}",
+  "@nfcLastScanned": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "nfcNeverScanned": "מעולם לא נסרק",
+  "nfcReplaceAction": "החלפה",
+  "nfcRevokeAction": "ביטול",
+  "nfcReactivateAction": "הפעלה מחדש",
+  "nfcReplaceTagTitle": "החלפת תג NFC לתחנה",
+  "nfcReplaceTagWarning": "פעולה זו תבטל לצמיתות את התג הפיזי הנוכחי ותייצר פרטי זיהוי לתג חלופי חדש.",
+  "nfcNewTagNameLabel": "שם התג החלופי",
+  "nfcReplaceTagConfirm": "החלף תג",
+  "nfcTagReplacedSuccess": "התג הוחלף בהצלחה",
+  "nfcTagRevokedToast": "תג ה-NFC בוטל",
+  "nfcTagReactivatedToast": "תג ה-NFC הופעל מחדש",
+  "nfcUnavailableError": "רכיב NFC אינו זמין או מושבת במכשיר זה.",
+  "nfcScanCheckInPrompt": "הצמד את הטלפון לתג ה-NFC של התחנה לכניסה.",
+  "nfcScanCheckOutPrompt": "הצמד את הטלפון לתג ה-NFC של התחנה ליציאה.",
+  "nfcCheckInTitle": "סריקת תג NFC של התחנה",
+  "nfcCheckOutTitle": "סריקת תג NFC של התחנה",
+  "nfcHoldNearPrompt": "הצמד את המכשיר לתג ה-NFC הפיזי בתחנה לרישום נוכחות.",
+  "nfcVerifyingPresence": "מאמת תג תחנה...",
+  "nfcAuthorizingBackend": "בודק נוכחות פיזית וחוקי משמרת מול השרת...",
+  "nfcCheckInSuccess": "כניסה אומתה בהצלחה!",
+  "nfcCheckOutSuccess": "יציאה אומתה בהצלחה!",
+  "nfcVerificationFailed": "אימות נוכחות נכשל",
+  "auditFilterNfcTags": "תגי NFC של התחנה",
+  "systemHealthNfcFleet": "תגי NFC בתחנה",
+  "systemHealthNfcActive": "{active} מתוך {total} פעילים",
+  "@systemHealthNfcActive": {
+    "placeholders": {
+      "active": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "systemHealthNfcTagsHealthy": "כל תגי ה-NFC של התחנה פעילים ותקינים",
+  "systemHealthNfcNoActiveTags": "לא הוגדרו תגי NFC פעילים לתחנה זו",
   "platformManagedByPlatform": "מנוהל באמצעות ניהול הפלטפורמה",
   "platformAdminRoleReadonlyHint": "הרשאות מנהל תחנה משויכות רק על ידי ניהול הפלטפורמה.",
   "errorNotPlatformAdmin": "יש להיות מנהל פלטפורמה פעיל כדי לבצע פעולה זו.",

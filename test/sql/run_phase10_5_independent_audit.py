@@ -409,6 +409,18 @@ def main():
 
     code, res, err = run_as(
         "authenticated", u_aa,
+        f"public.admin_update_employee_profile('{sta_a}'::uuid,'{u_aa}'::uuid,'Admin','Alpha','+972507000001','he')",
+    )
+    ok("Station ADMIN can update own profile fields", code == 0 and isinstance(res, dict) and res.get("success") is True, f"{res} {err}")
+
+    code, res, err = run_as(
+        "authenticated", u_aa,
+        f"public.admin_update_membership('{sta_a}'::uuid,'{mem_aa}'::uuid,'ADMIN','ACTIVE','ADM-SELF')",
+    )
+    ok("Station ADMIN can update own employee_code while remaining ADMIN", code == 0 and res.get("role") == "ADMIN" and res.get("employee_code") == "ADM-SELF", f"{res} {err}")
+
+    code, res, err = run_as(
+        "authenticated", u_aa,
         f"public.admin_update_membership('{sta_a}'::uuid,'{mem_ea}'::uuid,'SHIFT_MANAGER','ACTIVE')",
     )
     ok("Station ADMIN can promote EMPLOYEE to SHIFT_MANAGER", code == 0 and res.get("role") == "SHIFT_MANAGER", str(res))

@@ -114,10 +114,10 @@ class AppNavigationRegistry {
       mobilePriority: 0,
     ),
     AppNavDestination(
-      route: '/settings/kiosks',
-      labelBuilder: _labelKiosks,
-      icon: LucideIcons.tablet,
-      isVisible: _isVisibleKiosks,
+      route: '/settings/nfc-tags',
+      labelBuilder: _labelNfcTags,
+      icon: LucideIcons.radio,
+      isVisible: _isVisibleNfcTags,
       section: NavSection.management,
       mobilePriority: 0,
     ),
@@ -155,11 +155,11 @@ class AppNavigationRegistry {
       icon: LucideIcons.settings,
       isVisible: _isVisibleAuthenticated,
       section: NavSection.general,
-      mobilePriority: 10,
+      mobilePriority: 40,
     ),
   ];
 
-  // Predicate helpers (FAIL-CLOSED)
+  // Visibility helpers
   static bool _isVisibleActive(StationAccessContext access) => access.isActive;
   static bool _isVisibleAuthenticated(StationAccessContext access) =>
       access.isAuthenticated;
@@ -179,8 +179,8 @@ class AppNavigationRegistry {
       access.canManageEmployees;
   static bool _isVisibleShiftTemplates(StationAccessContext access) =>
       access.canManageShiftTemplates;
-  static bool _isVisibleKiosks(StationAccessContext access) =>
-      access.canManageKiosks;
+  static bool _isVisibleNfcTags(StationAccessContext access) =>
+      access.canManageNfcTags;
   static bool _isVisibleAuditCenter(StationAccessContext access) =>
       access.canAccessAuditCenter;
   static bool _isVisibleSystemHealth(StationAccessContext access) =>
@@ -198,7 +198,7 @@ class AppNavigationRegistry {
   static String _labelEmployees(AppLocalizations l10n) => l10n.navEmployees;
   static String _labelShiftTemplates(AppLocalizations l10n) =>
       l10n.navShiftTemplates;
-  static String _labelKiosks(AppLocalizations l10n) => l10n.navKiosks;
+  static String _labelNfcTags(AppLocalizations l10n) => l10n.settingsNfcTags;
   static String _labelAuditCenter(AppLocalizations l10n) => l10n.navAuditCenter;
   static String _labelSystemHealth(AppLocalizations l10n) =>
       l10n.navSystemHealth;

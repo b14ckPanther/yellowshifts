@@ -5,12 +5,11 @@ class PlatformOverview {
   final int activeMemberships;
   final int stationAdminCount;
   final int shiftManagerCount;
-  final int kiosksOnline;
-  final int kiosksOffline;
+  final int nfcTagsTotal;
+  final int nfcTagsActive;
   final int staleOpenSessions;
   final int failedExports24h;
   final int pendingNotifications;
-  final int identityFailures24h;
   final int operationalAlertCount;
   final String schemaVersion;
   final DateTime telemetryTimestamp;
@@ -22,12 +21,11 @@ class PlatformOverview {
     required this.activeMemberships,
     required this.stationAdminCount,
     required this.shiftManagerCount,
-    required this.kiosksOnline,
-    required this.kiosksOffline,
+    required this.nfcTagsTotal,
+    required this.nfcTagsActive,
     required this.staleOpenSessions,
     required this.failedExports24h,
     required this.pendingNotifications,
-    required this.identityFailures24h,
     required this.operationalAlertCount,
     required this.schemaVersion,
     required this.telemetryTimestamp,
@@ -41,14 +39,12 @@ class PlatformOverview {
       activeMemberships: (json['active_memberships'] as num?)?.toInt() ?? 0,
       stationAdminCount: (json['station_admin_count'] as num?)?.toInt() ?? 0,
       shiftManagerCount: (json['shift_manager_count'] as num?)?.toInt() ?? 0,
-      kiosksOnline: (json['kiosks_online'] as num?)?.toInt() ?? 0,
-      kiosksOffline: (json['kiosks_offline'] as num?)?.toInt() ?? 0,
+      nfcTagsTotal: (json['nfc_tags_total'] as num?)?.toInt() ?? 0,
+      nfcTagsActive: (json['nfc_tags_active'] as num?)?.toInt() ?? 0,
       staleOpenSessions: (json['stale_open_sessions'] as num?)?.toInt() ?? 0,
       failedExports24h: (json['failed_exports_24h'] as num?)?.toInt() ?? 0,
       pendingNotifications:
           (json['pending_notifications'] as num?)?.toInt() ?? 0,
-      identityFailures24h:
-          (json['identity_failures_24h'] as num?)?.toInt() ?? 0,
       operationalAlertCount:
           (json['operational_alert_count'] as num?)?.toInt() ?? 0,
       schemaVersion: json['schema_version'] as String? ?? '',

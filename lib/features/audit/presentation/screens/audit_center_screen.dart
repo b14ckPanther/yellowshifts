@@ -44,8 +44,8 @@ class _AuditCenterScreenState extends ConsumerState<AuditCenterScreen> {
         return l10n.auditFilterSchedules;
       case 'ATTENDANCE':
         return l10n.auditFilterAttendance;
-      case 'KIOSK':
-        return l10n.auditFilterKiosks;
+      case 'NFC_TAG':
+        return l10n.auditFilterNfcTags;
       case 'STATION':
         return l10n.auditFilterStation;
       case 'EXPORT':
@@ -67,13 +67,15 @@ class _AuditCenterScreenState extends ConsumerState<AuditCenterScreen> {
     if (action.contains('CREATE') ||
         action.contains('ASSIGN') ||
         action.contains('PUBLISH') ||
-        action.contains('VERIFY')) {
+        action.contains('VERIFY') ||
+        action.contains('PROVISION')) {
       return AppColors.colorStatusSuccess;
     }
     if (action.contains('UPDATE') ||
         action.contains('RESET') ||
         action.contains('EDIT') ||
-        action.contains('CORRECT')) {
+        action.contains('CORRECT') ||
+        action.contains('REPLACE')) {
       return AppColors.colorStatusInfo;
     }
     return AppColors.colorTextMuted;
@@ -89,7 +91,7 @@ class _AuditCenterScreenState extends ConsumerState<AuditCenterScreen> {
       'MEMBERSHIP',
       'SCHEDULE',
       'ATTENDANCE',
-      'KIOSK',
+      'NFC_TAG',
       'STATION',
       'EXPORT',
       'AVAILABILITY',

@@ -238,6 +238,16 @@ def main():
     """)
     assert_test("Station Admin cannot promote to ADMIN (P00105)", rc != 0 and "P00105" in err, err)
 
+    rc, out, err = run_as_user_json(admin_a, f"""
+        SELECT public.admin_update_employee_profile('{st_north}', '{admin_a}', 'Avi', 'Admin', '+972506666666', 'he');
+    """)
+    assert_test("Station Admin can update own profile", rc == 0 and out.get('success') is True and out.get('phone') == '+972506666666', str(out))
+
+    rc, out, err = run_as_user_json(admin_a, f"""
+        SELECT public.admin_update_membership('{st_north}', '{mem_adm_a}', 'ADMIN', 'ACTIVE', 'ADM-001');
+    """)
+    assert_test("Station Admin can keep ADMIN role and update employee code", rc == 0 and out.get('role') == 'ADMIN', str(out))
+
     # Manager remains SHIFT_MANAGER
     rc, out, err = run_psql(f"SELECT role FROM public.station_memberships WHERE id = '{mem_mgr_a}';")
     assert_test("Shift Manager role unchanged after forbidden ADMIN promotion", rc == 0 and out == "SHIFT_MANAGER", out)

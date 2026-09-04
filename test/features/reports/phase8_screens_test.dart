@@ -83,13 +83,11 @@ class _MockSystemHealthRepository implements SystemHealthRepository {
   Future<StationSystemHealth> getStationSystemHealth(String stationId) async {
     return StationSystemHealth(
       stationId: stationId,
-      kiosksTotal: 3,
-      kiosksOnline: 3,
-      kiosksOffline: 0,
+      nfcTagsTotal: 3,
+      nfcTagsActive: 3,
       exportsTotal24h: 8,
       exportsFailed24h: 0,
       staleOpenSessions: 0,
-      failedIdentityAttempts: 0,
       serverTime: DateTime(2026, 8, 27, 12, 0),
     );
   }
@@ -264,7 +262,7 @@ void main() {
     });
 
     testWidgets(
-        'SystemHealthScreen renders kiosk fleet health and data retention controls',
+        'SystemHealthScreen renders NFC tag fleet health and data retention controls',
         (tester) async {
       tester.view.physicalSize = const Size(1200, 900);
       tester.view.devicePixelRatio = 1.0;
@@ -275,7 +273,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Station Operational Health'), findsOneWidget);
-      expect(find.text('3 of 3 Online'), findsOneWidget);
+      expect(find.text('3 of 3 Active'), findsOneWidget);
+      expect(find.text('NFC Station Tags'), findsWidgets);
       expect(find.text('Data Lifecycle & Retention'), findsOneWidget);
       expect(find.text('Run Lifecycle Cleanup'), findsOneWidget);
     });

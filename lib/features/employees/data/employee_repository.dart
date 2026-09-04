@@ -202,9 +202,15 @@ class SupabaseEmployeeRepository implements EmployeeRepository {
       }
       return {'success': true};
     } catch (e) {
-      if (e is AppFailure) rethrow;
+      final allowAdminProfileFallback = role == StationRole.admin &&
+          (e is AppFailure
+              ? e.code == 'P00105'
+              : e.toString().contains('P00105'));
+      if (e is AppFailure && !allowAdminProfileFallback) rethrow;
 
-      // If Edge Function is unavailable or fails with 404, fallback directly to RPCs
+      // If Edge Function is unavailable or rejects ADMIN membership mutation,
+      // fall back to the profile RPC. Station Manager profile fields (including
+      // self) are allowed; grant/revoke of ADMIN remains P00105.
       try {
         await _client.rpc(
           'admin_update_employee_profile',
@@ -219,19 +225,21 @@ class SupabaseEmployeeRepository implements EmployeeRepository {
           },
         );
 
-        await _client.rpc(
-          'admin_update_membership',
-          params: {
-            'p_station_id': stationId,
-            'p_membership_id': membershipId,
-            'p_role': role.value,
-            'p_status': status.value,
-            'p_employee_code':
-                employeeCode != null && employeeCode.trim().isNotEmpty
-                    ? employeeCode.trim()
-                    : null,
-          },
-        );
+        if (role != StationRole.admin) {
+          await _client.rpc(
+            'admin_update_membership',
+            params: {
+              'p_station_id': stationId,
+              'p_membership_id': membershipId,
+              'p_role': role.value,
+              'p_status': status.value,
+              'p_employee_code':
+                  employeeCode != null && employeeCode.trim().isNotEmpty
+                      ? employeeCode.trim()
+                      : null,
+            },
+          );
+        }
 
         return {'success': true};
       } catch (rpcErr) {

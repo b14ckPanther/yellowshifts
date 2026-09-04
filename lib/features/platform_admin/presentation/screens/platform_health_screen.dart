@@ -35,12 +35,12 @@ class PlatformHealthScreen extends ConsumerWidget {
                 data: (overview) {
                   final rows = [
                     (
-                      l10n.platformMetricKiosksOnline,
-                      '${overview.kiosksOnline}'
+                      l10n.platformMetricNfcActive,
+                      '${overview.nfcTagsActive}'
                     ),
                     (
-                      l10n.platformMetricKiosksOffline,
-                      '${overview.kiosksOffline}'
+                      l10n.platformMetricNfcTotal,
+                      '${overview.nfcTagsTotal}'
                     ),
                     (
                       l10n.platformMetricAlerts,

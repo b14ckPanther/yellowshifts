@@ -53,8 +53,6 @@ class _NotificationCenterScreenState
         return isHe ? 'זמינות' : 'Availability';
       case NotificationCategory.operations:
         return isHe ? 'תפעול' : 'Operations';
-      case NotificationCategory.identity:
-        return isHe ? 'אימות זהות' : 'Identity';
       case NotificationCategory.system:
         return isHe ? 'מערכת' : 'System';
     }

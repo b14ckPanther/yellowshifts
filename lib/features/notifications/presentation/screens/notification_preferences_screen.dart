@@ -95,9 +95,7 @@ class _NotificationPreferencesScreenState
       case NotificationCategory.availability:
         return isHe ? 'תזכורות ומועדי זמינות' : 'Availability Deadlines';
       case NotificationCategory.operations:
-        return isHe ? 'התראות תפעוליות וקיוסק' : 'Station Operations & Kiosk';
-      case NotificationCategory.identity:
-        return isHe ? 'אימות זהות וחריגות' : 'Identity Verification';
+        return isHe ? 'התראות תפעוליות ותגי NFC' : 'Station Operations & NFC Tags';
       case NotificationCategory.system:
         return isHe ? 'הודעות מערכת כלליות' : 'General System Notices';
     }
@@ -119,12 +117,8 @@ class _NotificationPreferencesScreenState
             : 'Reminders for opening and closing submission deadlines';
       case NotificationCategory.operations:
         return isHe
-            ? 'התראות ניתוק קיוסקים ומצבי חירום בתחנה'
-            : 'Kiosk offline/recovery status and station pulse';
-      case NotificationCategory.identity:
-        return isHe
-            ? 'חריגות זיהוי מנהל, כשלים וביטולי פרופיל ביומטרי'
-            : 'Admin overrides, failures, and identity revocations';
+            ? 'התראות תגי NFC ומצבי פעילות בתחנה'
+            : 'NFC tag provisioning, revocations, and station activity';
       case NotificationCategory.system:
         return isHe
             ? 'הודעות תשתית, עדכוני מערכת ואבטחה'

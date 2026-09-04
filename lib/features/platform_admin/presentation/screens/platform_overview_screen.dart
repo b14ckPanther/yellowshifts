@@ -68,14 +68,9 @@ class PlatformOverviewScreen extends ConsumerWidget {
                       LucideIcons.userCheck
                     ),
                     (
-                      l10n.platformMetricKiosksOnline,
-                      overview.kiosksOnline,
-                      LucideIcons.wifi
-                    ),
-                    (
-                      l10n.platformMetricKiosksOffline,
-                      overview.kiosksOffline,
-                      LucideIcons.wifiOff
+                      l10n.platformMetricNfcActive,
+                      overview.nfcTagsActive,
+                      LucideIcons.radio
                     ),
                     (
                       l10n.platformMetricAlerts,

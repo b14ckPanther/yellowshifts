@@ -90,13 +90,6 @@ class SettingsScreen extends ConsumerWidget {
                           ),
                           const Divider(color: AppColors.colorBorderSubtle),
                           _buildNavTile(
-                            icon: LucideIcons.scanFace,
-                            title: l10n.settingsBiometricFace,
-                            subtitle: l10n.settingsBiometricFaceSubtitle,
-                            onTap: () => context.go('/identity-verification'),
-                          ),
-                          const Divider(color: AppColors.colorBorderSubtle),
-                          _buildNavTile(
                             icon: LucideIcons.bellRing,
                             title: l10n.settingsNotifications,
                             subtitle: l10n.settingsNotificationsSubtitle,
@@ -127,11 +120,10 @@ class SettingsScreen extends ConsumerWidget {
                             ),
                             const Divider(color: AppColors.colorBorderSubtle),
                             _buildNavTile(
-                              icon: LucideIcons.shieldCheck,
-                              title: l10n.settingsBiometricPolicy,
-                              subtitle: l10n.settingsBiometricPolicySubtitle,
-                              onTap: () =>
-                                  context.go('/settings/identity-policy'),
+                              icon: LucideIcons.radio,
+                              title: l10n.settingsNfcTags,
+                              subtitle: l10n.settingsNfcTagsSubtitle,
+                              onTap: () => context.go('/settings/nfc-tags'),
                             ),
                             const Divider(color: AppColors.colorBorderSubtle),
                             _buildNavTile(
@@ -146,13 +138,6 @@ class SettingsScreen extends ConsumerWidget {
                               title: l10n.settingsShiftManagerCaps,
                               subtitle: l10n.settingsShiftManagerCapsSubtitle,
                               onTap: () => context.go('/settings/permissions'),
-                            ),
-                            const Divider(color: AppColors.colorBorderSubtle),
-                            _buildNavTile(
-                              icon: LucideIcons.tablet,
-                              title: l10n.settingsKioskDevices,
-                              subtitle: l10n.settingsKioskDevicesSubtitle,
-                              onTap: () => context.go('/settings/kiosks'),
                             ),
                             const Divider(color: AppColors.colorBorderSubtle),
                             _buildNavTile(

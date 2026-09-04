@@ -27,8 +27,6 @@ class NotificationTile extends StatelessWidget {
         return LucideIcons.calendarCheck;
       case NotificationCategory.operations:
         return LucideIcons.radio;
-      case NotificationCategory.identity:
-        return LucideIcons.shieldCheck;
       case NotificationCategory.system:
         return LucideIcons.bell;
     }
@@ -44,8 +42,6 @@ class NotificationTile extends StatelessWidget {
         return AppColors.colorBrandYellow; // Amber
       case NotificationCategory.operations:
         return const Color(0xFFF97316); // Orange
-      case NotificationCategory.identity:
-        return const Color(0xFFA855F7); // Purple
       case NotificationCategory.system:
         return AppColors.colorTextSecondary;
     }
@@ -134,12 +130,10 @@ class NotificationTile extends StatelessWidget {
         data['late_minutes']?.toString() ??
         data['worked_minutes']?.toString() ??
         '0';
-    final hours = data['hours_remaining']?.toString() ?? '24';
-    final reason = data['reason']?.toString() ?? '';
-    final admin = data['admin_name']?.toString() ?? 'Admin';
     final date = data['operational_date']?.toString() ?? '';
     final ver = data['version']?.toString() ?? '1';
     final missingCount = data['missing_count']?.toString() ?? '0';
+    final tagName = data['tag_name']?.toString() ?? 'Station Tag';
 
     switch (key) {
       case 'notif_schedule_published_body':
@@ -148,32 +142,24 @@ class NotificationTile extends StatelessWidget {
             : 'Official work schedule published for week ${data['week_start_date'] ?? ''} (v$ver).';
       case 'notif_schedule_revised_body':
         return isHe
-            ? 'סידור העבודה בתחנת $stName עודכן לגרסה $ver.'
-            : 'Schedule for $stName updated to version $ver.';
-      case 'notif_schedule_pub_complete_body':
-        return isHe
-            ? 'פרסום סידור עבודה גרסה $ver לתחנת $stName הושלם.'
-            : 'Schedule v$ver successfully published for $stName.';
+            ? 'סידור עבודה עודכן לשבוע ${data['week_start_date'] ?? ''} (גרסה $ver).'
+            : 'Schedule revised for week ${data['week_start_date'] ?? ''} (v$ver).';
       case 'notif_shift_assigned_body':
         return isHe
             ? 'שובצת למשמרת $shift בתאריך $date.'
-            : 'You have been assigned to $shift on $date.';
-      case 'notif_shift_changed_body':
+            : 'You were assigned to $shift on $date.';
+      case 'notif_shift_updated_body':
         return isHe
-            ? 'שיבוצך עודכן למשמרת $shift בתחנת $stName.'
-            : 'Your shift assignment was moved to $shift at $stName.';
-      case 'notif_shift_removed_body':
+            ? 'פרטי משמרת $shift בתאריך $date עודכנו.'
+            : 'Details for $shift on $date were updated.';
+      case 'notif_shift_cancelled_body':
         return isHe
-            ? 'הוסרת משיבוץ משמרת $shift בתאריך $date.'
-            : 'You were removed from $shift on $date.';
-      case 'notif_emp_checked_in_body':
+            ? 'המשמרת $shift בתאריך $date בוטלה.'
+            : 'Shift $shift on $date was cancelled.';
+      case 'notif_shift_starting_soon_body':
         return isHe
-            ? '$emp נכנס/ה למשמרת $shift בתחנת $stName.'
-            : '$emp checked in for $shift at $stName.';
-      case 'notif_emp_checked_out_body':
-        return isHe
-            ? '$emp סיים/ה משמרת $shift ($minutes דקות עבודה).'
-            : '$emp checked out from $shift ($minutes min worked).';
+            ? 'משמרת $shift מתחילה בעוד $minutes דקות.'
+            : 'Shift $shift starts in $minutes minutes.';
       case 'notif_check_in_confirmed_body':
         return isHe
             ? 'נכנסת בהצלחה למשמרת $shift.'
@@ -192,52 +178,36 @@ class NotificationTile extends StatelessWidget {
             : '$emp missed check-in for scheduled shift $shift.';
       case 'notif_attendance_corrected_body':
         return isHe
-            ? 'נוכחות $emp עודכנה ידנית ($reason).'
-            : 'Attendance for $emp was adjusted: $reason.';
+            ? 'רישום נוכחות עודכן עבור $emp בתחנת $stName.'
+            : 'Attendance record for $emp was adjusted at $stName.';
       case 'notif_avail_reminder_body':
         return isHe
             ? 'נא להגיש זמינות שבועית עבור תחנת $stName.'
-            : 'Please submit your weekly shift availability for $stName.';
+            : 'Please submit your availability for $stName.';
       case 'notif_avail_deadline_body':
         return isHe
-            ? 'נותרו עוד $hours שעות להגשת זמינות לתחנת $stName!'
-            : 'Only $hours hours remaining to submit availability for $stName!';
+            ? 'מועד הגשת זמינות לשבוע הבא עומד להסתיים בתחנת $stName.'
+            : 'Availability deadline approaching for next week at $stName.';
       case 'notif_avail_submitted_body':
         return isHe
-            ? 'טופס הזמינות השבועי שלך לתחנת $stName נקלט בהצלחה.'
-            : 'Your availability submission for $stName was received.';
+            ? 'הגשת הזמינות שלך נקלטה בהצלחה עבור תחנת $stName.'
+            : 'Your availability was received for $stName.';
       case 'notif_avail_missing_body':
         return isHe
             ? 'טרם הוגשה זמינות ע״י $missingCount עובדים עבור תחנת $stName.'
             : '$missingCount employees have not submitted availability for $stName.';
-      case 'notif_kiosk_offline_body':
+      case 'notif_nfc_tag_revoked_body':
         return isHe
-            ? 'קיוסק "${data['kiosk_name'] ?? 'Kiosk'}" מנותק כבר $minutes דקות בתחנת $stName.'
-            : 'Kiosk "${data['kiosk_name'] ?? 'Kiosk'}" has been offline for $minutes min at $stName.';
-      case 'notif_kiosk_recovered_body':
+            ? 'תג ה-NFC "$tagName" בוטל בתחנת $stName.'
+            : 'NFC tag "$tagName" was revoked at $stName.';
+      case 'notif_nfc_tag_replaced_body':
         return isHe
-            ? 'קיוסק "${data['kiosk_name'] ?? 'Kiosk'}" חזר לפעילות תקינה.'
-            : 'Kiosk "${data['kiosk_name'] ?? 'Kiosk'}" is back online.';
-      case 'notif_identity_enroll_req_body':
+            ? 'תג ה-NFC "$tagName" הוחלף בתחנת $stName.'
+            : 'NFC tag "$tagName" was replaced at $stName.';
+      case 'notif_nfc_tag_provisioned_body':
         return isHe
-            ? 'נדרש רישום אימות זהות עבור תחנת $stName.'
-            : 'Identity enrollment is required for $stName.';
-      case 'notif_identity_enrolled_body':
-        return isHe
-            ? 'רישום אימות הזהות שלך הושלם בהצלחה בתחנת $stName.'
-            : 'Identity enrollment completed for $stName.';
-      case 'notif_identity_override_body':
-        return isHe
-            ? 'מנהל $admin אישר חריגת אימות זהות עבור $emp ($reason).'
-            : 'Admin $admin authorized identity override for $emp ($reason).';
-      case 'notif_identity_exception_body':
-        return isHe
-            ? 'התרחש כשל באימות זהות עבור $emp בתחנת $stName.'
-            : 'Identity verification failed for $emp at $stName.';
-      case 'notif_identity_revoked_body':
-        return isHe
-            ? 'פרופיל אימות הזהות של $emp בוטל ($reason).'
-            : 'Identity profile for $emp was revoked ($reason).';
+            ? 'תג NFC חדש "$tagName" הוקצה בתחנת $stName.'
+            : 'New NFC tag "$tagName" was provisioned at $stName.';
       default:
         return data['event_type']?.toString() ??
             'System notification received.';
@@ -261,11 +231,8 @@ class NotificationTile extends StatelessWidget {
       case 'NAVIGATE_AVAILABILITY':
         context.go('/availability');
         break;
-      case 'NAVIGATE_IDENTITY':
-        context.go('/identity-verification');
-        break;
-      case 'NAVIGATE_KIOSK':
-        context.go('/settings/kiosks');
+      case 'NAVIGATE_NFC_TAGS':
+        context.go('/settings/nfc-tags');
         break;
     }
   }

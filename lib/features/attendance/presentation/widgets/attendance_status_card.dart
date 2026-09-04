@@ -85,7 +85,7 @@ class _AttendanceStatusCardState extends State<AttendanceStatusCard> {
                 shape: BoxShape.circle,
               ),
               child: const Icon(
-                LucideIcons.qrCode,
+                LucideIcons.radio,
                 size: 40,
                 color: AppColors.colorTextPrimary,
               ),
@@ -112,9 +112,9 @@ class _AttendanceStatusCardState extends State<AttendanceStatusCard> {
               height: 52,
               child: ElevatedButton.icon(
                 onPressed: widget.onScanTap,
-                icon: const Icon(LucideIcons.scanLine, size: 20),
+                icon: const Icon(LucideIcons.radio, size: 20),
                 label: Text(
-                  l10n.attendanceScanQrAction,
+                  l10n.attendanceScanNfcAction,
                   style: typography.bodyLarge.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Colors.black,

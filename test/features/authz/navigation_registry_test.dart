@@ -37,7 +37,7 @@ void main() {
       expect(routes, isNot(contains('/employees')));
       expect(routes, isNot(contains('/reports')));
       expect(routes, isNot(contains('/settings/shifts')));
-      expect(routes, isNot(contains('/settings/kiosks')));
+      expect(routes, isNot(contains('/settings/nfc-tags')));
 
       // Compact bottom bar should never include /employees
       final bottomNav =
@@ -75,7 +75,7 @@ void main() {
       expect(routes, contains('/reports'));
       expect(routes, contains('/employees'));
       expect(routes, contains('/settings/shifts'));
-      expect(routes, contains('/settings/kiosks'));
+      expect(routes, contains('/settings/nfc-tags'));
       expect(routes, contains('/notifications'));
       expect(routes, contains('/settings'));
 

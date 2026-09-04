@@ -104,13 +104,11 @@ void main() {
       final now = DateTime.now();
       final healthy = StationSystemHealth(
         stationId: 'st-1',
-        kiosksTotal: 5,
-        kiosksOnline: 5,
-        kiosksOffline: 0,
+        nfcTagsTotal: 5,
+        nfcTagsActive: 5,
         exportsTotal24h: 12,
         exportsFailed24h: 0,
         staleOpenSessions: 0,
-        failedIdentityAttempts: 0,
         serverTime: now,
       );
 
@@ -118,13 +116,11 @@ void main() {
 
       final withStale = StationSystemHealth(
         stationId: 'st-1',
-        kiosksTotal: 5,
-        kiosksOnline: 4,
-        kiosksOffline: 1,
+        nfcTagsTotal: 5,
+        nfcTagsActive: 4,
         exportsTotal24h: 12,
         exportsFailed24h: 1,
         staleOpenSessions: 2,
-        failedIdentityAttempts: 3,
         serverTime: now,
       );
 

@@ -47,10 +47,9 @@ serve(async (req) => {
       email,
       phone,
       preferred_locale,
-      role,
-      status,
       employee_code,
     } = body;
+    let { role, status } = body;
 
     if (!station_id || !user_id || !first_name || !last_name) {
       return new Response(
@@ -62,7 +61,7 @@ serve(async (req) => {
     // 2. Privileged admin client for admin verification & mutations
     const adminClient = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Verify caller is active ADMIN for station_id
+    // Verify caller is active ADMIN for station_id, or a Platform Admin.
     const { data: adminMembership, error: adminCheckError } = await adminClient
       .from("station_memberships")
       .select("id, role, status")
@@ -72,14 +71,14 @@ serve(async (req) => {
       .eq("status", "ACTIVE")
       .single();
 
-    if (adminCheckError || !adminMembership) {
-      const { data: isPlatformAdmin } = await callerClient.rpc("is_platform_admin");
-      if (isPlatformAdmin !== true) {
-        return new Response(
-          JSON.stringify({ error: { code: "FORBIDDEN", message: "Caller is not an active Administrator of this station" } }),
-          { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-        );
-      }
+    const { data: platformAdminFlag } = await callerClient.rpc("is_platform_admin");
+    const isPlatformAdmin = platformAdminFlag === true;
+
+    if ((adminCheckError || !adminMembership) && !isPlatformAdmin) {
+      return new Response(
+        JSON.stringify({ error: { code: "FORBIDDEN", message: "Caller is not an active Administrator of this station" } }),
+        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
     // Verify target user is a member of station_id
@@ -97,9 +96,24 @@ serve(async (req) => {
       );
     }
 
-    // Station admins may not grant, revoke, or mutate Station Manager (ADMIN) memberships.
-    if (targetMembership.role === "ADMIN") {
-      if ((role && role !== "ADMIN") || (status && status !== targetMembership.status)) {
+    // P00105: station admins may not grant/revoke ADMIN. Profile fields on an
+    // existing ADMIN (including self) remain allowed.
+    if (!isPlatformAdmin) {
+      if (targetMembership.role === "ADMIN") {
+        if ((role && role !== "ADMIN") || (status && status !== targetMembership.status)) {
+          return new Response(
+            JSON.stringify({
+              error: {
+                code: "P00105",
+                message: "Station administrators cannot grant or revoke Station Manager privileges",
+              },
+            }),
+            { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+        role = undefined;
+        status = undefined;
+      } else if (role === "ADMIN") {
         return new Response(
           JSON.stringify({
             error: {
@@ -109,24 +123,12 @@ serve(async (req) => {
           }),
           { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
+      } else if (role && !["EMPLOYEE", "SHIFT_MANAGER"].includes(role)) {
+        return new Response(
+          JSON.stringify({ error: { code: "VALIDATION_ERROR", message: "Invalid role specified" } }),
+          { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
       }
-      role = undefined;
-      status = undefined;
-    } else if (role === "ADMIN") {
-      return new Response(
-        JSON.stringify({
-          error: {
-            code: "P00105",
-            message: "Station administrators cannot grant or revoke Station Manager privileges",
-          },
-        }),
-        { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    } else if (role && !["EMPLOYEE", "SHIFT_MANAGER"].includes(role)) {
-      return new Response(
-        JSON.stringify({ error: { code: "VALIDATION_ERROR", message: "Invalid role specified" } }),
-        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
     }
 
     // 3. Handle Email Update if specified and changed
