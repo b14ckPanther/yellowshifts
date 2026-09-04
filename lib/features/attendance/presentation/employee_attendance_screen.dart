@@ -170,8 +170,7 @@ class _EmployeeAttendanceScreenState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item.shiftName ??
-                                      l10n.attendanceWorkShift,
+                                  item.shiftName ?? l10n.attendanceWorkShift,
                                   style: typography.bodyStrong.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: AppColors.colorTextPrimary,
@@ -212,8 +211,7 @@ class _EmployeeAttendanceScreenState
                   },
                 );
               },
-              loading: () =>
-                  const Center(child: CircularProgressIndicator()),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, _) => Text('Error: $err'),
             ),
           ],

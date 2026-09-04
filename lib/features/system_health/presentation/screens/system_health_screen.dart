@@ -48,8 +48,7 @@ class SystemHealthScreen extends ConsumerWidget {
               (res['expired_records_cleaned'] as num?)?.toInt() ?? 0;
           AppFeedback.show(
             context,
-            message:
-                l10n.dataRetentionSuccess(exportsMarked, recordsCleaned),
+            message: l10n.dataRetentionSuccess(exportsMarked, recordsCleaned),
             type: AppFeedbackType.success,
           );
         } else {

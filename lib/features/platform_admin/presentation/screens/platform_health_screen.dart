@@ -34,14 +34,8 @@ class PlatformHealthScreen extends ConsumerWidget {
                     Center(child: Text(ErrorLocalizer.localize(e, l10n))),
                 data: (overview) {
                   final rows = [
-                    (
-                      l10n.platformMetricNfcActive,
-                      '${overview.nfcTagsActive}'
-                    ),
-                    (
-                      l10n.platformMetricNfcTotal,
-                      '${overview.nfcTagsTotal}'
-                    ),
+                    (l10n.platformMetricNfcActive, '${overview.nfcTagsActive}'),
+                    (l10n.platformMetricNfcTotal, '${overview.nfcTagsTotal}'),
                     (
                       l10n.platformMetricAlerts,
                       '${overview.operationalAlertCount}'

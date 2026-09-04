@@ -95,7 +95,9 @@ class _NotificationPreferencesScreenState
       case NotificationCategory.availability:
         return isHe ? 'תזכורות ומועדי זמינות' : 'Availability Deadlines';
       case NotificationCategory.operations:
-        return isHe ? 'התראות תפעוליות ותגי NFC' : 'Station Operations & NFC Tags';
+        return isHe
+            ? 'התראות תפעוליות ותגי NFC'
+            : 'Station Operations & NFC Tags';
       case NotificationCategory.system:
         return isHe ? 'הודעות מערכת כלליות' : 'General System Notices';
     }

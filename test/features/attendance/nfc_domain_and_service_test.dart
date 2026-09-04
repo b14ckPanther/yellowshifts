@@ -63,7 +63,8 @@ void main() {
         version: 1,
         stationCode: 'YS-TLV-01',
         tagIdentifier: 'ytag_1234567890abcdef',
-        rawSecret: 'abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789',
+        rawSecret:
+            'abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789',
       );
 
       final jsonStr = payload.serialize();

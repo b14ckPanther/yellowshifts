@@ -20,9 +20,7 @@ class StationSystemHealth {
     required this.serverTime,
   });
 
-  bool get hasAnomalies =>
-      exportsFailed24h > 0 ||
-      staleOpenSessions > 0;
+  bool get hasAnomalies => exportsFailed24h > 0 || staleOpenSessions > 0;
 
   factory StationSystemHealth.fromJson(Map<String, dynamic> json) {
     final nfcTags = (json['nfc_tags'] as Map<String, dynamic>?) ?? {};

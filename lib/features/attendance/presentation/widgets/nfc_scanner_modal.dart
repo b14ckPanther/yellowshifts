@@ -204,8 +204,8 @@ class _NfcScannerModalState extends ConsumerState<NfcScannerModal>
                       shape: BoxShape.circle,
                       color: AppColors.colorSurfaceBrandSubtle,
                       border: Border.all(
-                        color: AppColors.colorSurfaceBrand
-                            .withValues(alpha: 0.5 + (_pulseController.value * 0.5)),
+                        color: AppColors.colorSurfaceBrand.withValues(
+                            alpha: 0.5 + (_pulseController.value * 0.5)),
                         width: 3,
                       ),
                     ),
@@ -222,9 +222,7 @@ class _NfcScannerModalState extends ConsumerState<NfcScannerModal>
             ),
             const SizedBox(height: AppSpacing.space24),
             Text(
-              widget.isCheckIn
-                  ? l10n.nfcCheckInTitle
-                  : l10n.nfcCheckOutTitle,
+              widget.isCheckIn ? l10n.nfcCheckInTitle : l10n.nfcCheckOutTitle,
               style: typography.titleLarge.copyWith(
                 fontWeight: FontWeight.bold,
                 color: AppColors.colorTextPrimary,

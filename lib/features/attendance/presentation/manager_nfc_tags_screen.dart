@@ -25,7 +25,8 @@ class ManagerNfcTagsScreen extends ConsumerWidget {
 
   void _showReplaceDialog(BuildContext context, WidgetRef ref,
       StationNfcTag tag, AppLocalizations l10n) {
-    final nameController = TextEditingController(text: '${tag.name} (Replacement)');
+    final nameController =
+        TextEditingController(text: '${tag.name} (Replacement)');
 
     showDialog(
       context: context,
@@ -240,8 +241,8 @@ class ManagerNfcTagsScreen extends ConsumerWidget {
                         Expanded(
                           child: Text(
                             t.lastScannedAt != null
-                                ? l10n.nfcLastScanned(
-                                    dateFormat.format(t.lastScannedAt!.toLocal()))
+                                ? l10n.nfcLastScanned(dateFormat
+                                    .format(t.lastScannedAt!.toLocal()))
                                 : l10n.nfcNeverScanned,
                             style: typography.caption.copyWith(
                               color: AppColors.colorTextSecondary,
@@ -295,8 +296,7 @@ class ManagerNfcTagsScreen extends ConsumerWidget {
                               } else {
                                 await repo.reactivateStationNfcTag(t.id);
                               }
-                              ref.invalidate(
-                                  stationNfcTagsProvider(stationId));
+                              ref.invalidate(stationNfcTagsProvider(stationId));
                               if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -311,8 +311,8 @@ class ManagerNfcTagsScreen extends ConsumerWidget {
                               if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text(
-                                        ErrorLocalizer.localize(e, l10n)),
+                                    content:
+                                        Text(ErrorLocalizer.localize(e, l10n)),
                                     backgroundColor: AppColors.colorError,
                                   ),
                                 );

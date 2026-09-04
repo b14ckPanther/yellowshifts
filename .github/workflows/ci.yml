@@ -86,6 +86,7 @@ jobs:
       - name: Run Database Restore Drill
         env:
           USER: runner
+          PGUSER: runner
           PGPASSWORD: password
           PGHOST: localhost
           PGPORT: 5432
@@ -94,6 +95,7 @@ jobs:
       - name: Run Phase 1-9 Security & Audit Regression Suites
         env:
           USER: runner
+          PGUSER: runner
           PGPASSWORD: password
           PGHOST: localhost
           PGPORT: 5432

@@ -111,7 +111,8 @@ class DeviceNfcService implements NfcService {
 
     try {
       await NfcManager.instance.startSession(
-        alertMessage: alertMessage ?? 'Hold your phone near the station NFC tag.',
+        alertMessage:
+            alertMessage ?? 'Hold your phone near the station NFC tag.',
         onError: (error) async {
           _isSessionActive = false;
           onError(error.message);
@@ -157,7 +158,8 @@ class DeviceNfcService implements NfcService {
 
     try {
       await NfcManager.instance.startSession(
-        alertMessage: alertMessage ?? 'Hold phone near blank NFC tag to write station data.',
+        alertMessage: alertMessage ??
+            'Hold phone near blank NFC tag to write station data.',
         onError: (error) async {
           _isSessionActive = false;
           onError(error.message);
@@ -166,8 +168,10 @@ class DeviceNfcService implements NfcService {
           try {
             final ndef = Ndef.from(tag);
             if (ndef == null) {
-              await stopSession(errorMessage: 'Tag does not support NDEF formatting.');
-              onError('This NFC tag does not support standard NDEF formatting.');
+              await stopSession(
+                  errorMessage: 'Tag does not support NDEF formatting.');
+              onError(
+                  'This NFC tag does not support standard NDEF formatting.');
               return;
             }
 
@@ -181,7 +185,8 @@ class DeviceNfcService implements NfcService {
             final message = NdefMessage([record]);
 
             await ndef.write(message);
-            await stopSession(alertMessage: 'NFC Tag provisioned successfully!');
+            await stopSession(
+                alertMessage: 'NFC Tag provisioned successfully!');
             onSuccess();
           } catch (e) {
             await stopSession(errorMessage: 'Write failed.');

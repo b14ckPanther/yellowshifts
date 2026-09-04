@@ -681,6 +681,7 @@
   "attendanceStatusUpcoming": "קרובה",
   "attendanceStatusLate": "איחור {minutes} דק'",
   "attendanceStatusCompleted": "הושלמה",
+  "attendanceStatusNotCheckedIn": "לא נרשמה כניסה",
   "attendanceNotCheckedIn": "טרם נכנסת למשמרת",
   "attendanceScanPrompt": "הצמד את הטלפון לתג ה-NFC של התחנה כדי להתחיל את המשמרת",
   "attendanceScanNfcAction": "סריקת תג NFC של התחנה",

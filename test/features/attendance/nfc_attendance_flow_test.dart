@@ -122,7 +122,8 @@ class TestMockNfcService implements NfcService {
   }
 
   @override
-  Future<void> stopSession({String? alertMessage, String? errorMessage}) async {}
+  Future<void> stopSession(
+      {String? alertMessage, String? errorMessage}) async {}
 }
 
 void main() {

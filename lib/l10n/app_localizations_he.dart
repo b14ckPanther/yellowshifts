@@ -1619,7 +1619,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get attendanceStatusCompleted => 'הושלמה';
 
   @override
-  String get attendanceStatusNotCheckedIn => 'Not Checked In';
+  String get attendanceStatusNotCheckedIn => 'לא נרשמה כניסה';
 
   @override
   String get attendanceScanPrompt =>

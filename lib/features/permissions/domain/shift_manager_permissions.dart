@@ -83,8 +83,7 @@ class ShiftManagerPermissions {
       scheduleManage: scheduleManage ?? this.scheduleManage,
       schedulePublish: schedulePublish ?? this.schedulePublish,
       attendanceCorrect: attendanceCorrect ?? this.attendanceCorrect,
-      attendanceNfcManage:
-          attendanceNfcManage ?? this.attendanceNfcManage,
+      attendanceNfcManage: attendanceNfcManage ?? this.attendanceNfcManage,
       reportsTeamRead: reportsTeamRead ?? this.reportsTeamRead,
       reportsStationRead: reportsStationRead ?? this.reportsStationRead,
     );
