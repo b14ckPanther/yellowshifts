@@ -120,12 +120,22 @@
     }
 
     // 3. Global error reporter on screen if startup fails
-    window.addEventListener('error', function(e) {
+    function displayStartupError(msg) {
       var errBox = document.getElementById('error-container');
       if (errBox) {
         errBox.style.display = 'block';
-        errBox.textContent = 'שגיאת טעינה: ' + (e.message || e.toString());
+        errBox.textContent = 'שגיאת טעינה: ' + msg;
       }
+    }
+
+    window.addEventListener('error', function(e) {
+      displayStartupError(e.message || (e.error && e.error.message) || e.toString());
+    });
+
+    window.addEventListener('unhandledrejection', function(e) {
+      var reason = e.reason;
+      var msg = reason ? (reason.message || reason.toString()) : 'Unhandled Promise Rejection';
+      displayStartupError(msg);
     });
 
     function dismissLoader() {
@@ -148,17 +158,13 @@
       var flt = document.querySelector('flutter-view') || 
                 document.querySelector('flt-glass-pane') || 
                 document.querySelector('flt-scene-host') || 
-                document.querySelector('canvas') ||
-                document.body.children.length > 2;
+                document.querySelector('canvas');
       if (flt) {
         dismissLoader();
         obs.disconnect();
       }
     });
     observer.observe(document.body, { childList: true, subtree: true });
-
-    // Safety fallback dismiss after max 3 seconds
-    setTimeout(dismissLoader, 3000);
   </script>
 
   <script src="flutter_bootstrap.js" async></script>
