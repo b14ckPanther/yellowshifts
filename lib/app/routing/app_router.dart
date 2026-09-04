@@ -33,6 +33,7 @@ import '../../features/platform_admin/presentation/screens/platform_create_stati
 import '../../features/platform_admin/presentation/screens/platform_station_managers_screen.dart';
 import '../../features/platform_admin/presentation/screens/platform_audit_screen.dart';
 import '../../features/platform_admin/presentation/screens/platform_health_screen.dart';
+import '../../features/attendance/presentation/screens/nfc_attendance_verification_screen.dart';
 import 'shell/adaptive_app_shell.dart';
 import 'shell/platform_admin_shell.dart';
 
@@ -57,13 +58,20 @@ class RouterNotifier extends ChangeNotifier {
     final isDevPreview = loc.startsWith('/dev') || path.startsWith('/dev');
     final isPlatformPath =
         loc.startsWith('/platform') || path.startsWith('/platform');
+    final isNfcRoute = loc.startsWith('/nfc/t/') || path.startsWith('/nfc/t/');
     final isPlatformAdmin = _ref.read(isPlatformAdminValueProvider);
 
     if (isDevPreview) return null;
 
     if (authUser == null) {
+      if (isNfcRoute) {
+        return '/login?redirect=${Uri.encodeComponent(state.uri.toString())}';
+      }
       return isLoggingIn ? null : '/login';
     }
+
+    // Authenticated NFC route access: pass through directly
+    if (isNfcRoute) return null;
 
     if (isPlatformPath) {
       return isPlatformAdmin
@@ -72,6 +80,12 @@ class RouterNotifier extends ChangeNotifier {
     }
 
     if (isLoggingIn) {
+      final redirectParam = state.uri.queryParameters['redirect'];
+      if (redirectParam != null &&
+          redirectParam.isNotEmpty &&
+          redirectParam.startsWith('/')) {
+        return redirectParam;
+      }
       if (isPlatformAdmin) return '/platform';
       return access.hasActiveStation ? '/dashboard' : '/station-select';
     }
@@ -155,6 +169,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/login',
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/nfc/t/:token',
+        builder: (context, state) => NfcAttendanceVerificationScreen(
+          token: state.pathParameters['token'] ?? '',
+        ),
       ),
       GoRoute(
         path: '/station-select',

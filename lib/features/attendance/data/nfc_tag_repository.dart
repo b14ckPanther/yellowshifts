@@ -49,4 +49,11 @@ class NfcTagRepository {
     });
     return Map<String, dynamic>.from(res as Map);
   }
+
+  Future<Map<String, dynamic>> regenerateStationNfcTag(String tagId) async {
+    final res = await _supabase.rpc('regenerate_station_nfc_tag', params: {
+      'p_tag_id': tagId,
+    });
+    return Map<String, dynamic>.from(res as Map);
+  }
 }

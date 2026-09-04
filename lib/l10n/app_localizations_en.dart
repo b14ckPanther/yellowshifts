@@ -339,6 +339,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonSave => 'Save';
 
   @override
+  String get commonRetry => 'Retry';
+
+  @override
+  String get commonDone => 'Done';
+
+  @override
+  String get dialogOk => 'OK';
+
+  @override
   String get stationSettingsTitle => 'Station Operational Parameters';
 
   @override
@@ -2380,4 +2389,81 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get errorStationAdminRoleForbidden =>
       'Station Managers cannot grant or revoke Station Manager access.';
+
+  @override
+  String get nfcTagUrlLabel => 'NFC Tag URL';
+
+  @override
+  String get nfcCopyUrlAction => 'Copy NFC URL';
+
+  @override
+  String get nfcUrlCopiedToast => 'NFC URL copied to clipboard';
+
+  @override
+  String get nfcRegenerateTokenAction => 'Regenerate Token';
+
+  @override
+  String get nfcRegenerateTokenTitle => 'Regenerate Station Tag Token';
+
+  @override
+  String get nfcRegenerateTokenDesc =>
+      'This will invalidate the previous NFC URL. Any physical tag with the old URL must be reprogrammed with the new URL.';
+
+  @override
+  String get nfcRegenerateConfirm => 'Regenerate';
+
+  @override
+  String get nfcRegeneratedSuccess => 'NFC token regenerated successfully';
+
+  @override
+  String get nfcNdefWriteInstructions =>
+      'Write this exact URL as an NDEF URI/URL record to your physical NFC tag using any standard NFC writer app (e.g. NFC Tools on iOS/Android).';
+
+  @override
+  String get nfcVerificationTitle => 'NFC Check-In Verification';
+
+  @override
+  String get nfcVerifyingStation => 'Verifying NFC Station...';
+
+  @override
+  String get nfcEmployeeDetected => 'Authenticated Employee';
+
+  @override
+  String get nfcProcessingPunch => 'Recording attendance with server...';
+
+  @override
+  String get nfcCheckInSuccessTitle => 'Shift Started Successfully';
+
+  @override
+  String get nfcCheckOutSuccessTitle => 'Shift Ended Successfully';
+
+  @override
+  String get nfcStationLabel => 'Station';
+
+  @override
+  String get nfcTimeConfirmedLabel => 'Server Time Confirmed';
+
+  @override
+  String get nfcWorkedDurationLabel => 'Worked Duration';
+
+  @override
+  String get nfcReturnToDashboard => 'Go to Dashboard';
+
+  @override
+  String get nfcTapPhysicalPrompt =>
+      'Tap the physical NFC tag at your workplace with your phone to start or end your shift.';
+
+  @override
+  String get nfcErrorInvalidToken => 'Invalid or expired NFC tag token.';
+
+  @override
+  String get nfcErrorInactiveStation =>
+      'The station for this NFC tag is currently inactive.';
+
+  @override
+  String get nfcErrorUnauthorized => 'You are not authorized for this station.';
+
+  @override
+  String get nfcErrorDuplicatePunch =>
+      'Duplicate punch detected. Please wait a moment before tapping again.';
 }

@@ -326,10 +326,19 @@ class AppLocalizationsHe extends AppLocalizations {
   String get commonCancel => 'ביטול';
 
   @override
-  String get commonClose => 'סגור';
+  String get commonClose => 'סגירה';
 
   @override
-  String get commonSave => 'שמור';
+  String get commonSave => 'שמירה';
+
+  @override
+  String get commonRetry => 'נסה שוב';
+
+  @override
+  String get commonDone => 'סיום';
+
+  @override
+  String get dialogOk => 'אישור';
 
   @override
   String get stationSettingsTitle => 'פרמטרי תפעול תחנה';
@@ -2350,4 +2359,81 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get errorStationAdminRoleForbidden =>
       'מנהלי תחנה אינם יכולים להעניק או לבטל הרשאות מנהל תחנה.';
+
+  @override
+  String get nfcTagUrlLabel => 'כתובת ה-URL של תג ה-NFC';
+
+  @override
+  String get nfcCopyUrlAction => 'העתק כתובת URL';
+
+  @override
+  String get nfcUrlCopiedToast => 'כתובת ה-NFC הועתקה ללוח';
+
+  @override
+  String get nfcRegenerateTokenAction => 'צור טוקן מחדש';
+
+  @override
+  String get nfcRegenerateTokenTitle => 'יצירת טוקן חדש לתג תחנה';
+
+  @override
+  String get nfcRegenerateTokenDesc =>
+      'פעולה זו תבטל את כתובת ה-NFC הקודמת. תג פיזי עם הכתובת הישנה יחייב צריבה מחדש של הכתובת החדשה.';
+
+  @override
+  String get nfcRegenerateConfirm => 'צור מחדש';
+
+  @override
+  String get nfcRegeneratedSuccess => 'טוקן ה-NFC נוצר מחדש בהצלחה';
+
+  @override
+  String get nfcNdefWriteInstructions =>
+      'צרוב כתובת זו כרשומת NDEF URL/URI על גבי תג ה-NFC הפיזי באמצעות כל אפליקציית כתיבת NFC (כגון NFC Tools ב-iOS/Android).';
+
+  @override
+  String get nfcVerificationTitle => 'אימות נוכחות ב-NFC';
+
+  @override
+  String get nfcVerifyingStation => 'מאמת תחנת NFC...';
+
+  @override
+  String get nfcEmployeeDetected => 'עובד מאומת';
+
+  @override
+  String get nfcProcessingPunch => 'רושם נוכחות מול השרת...';
+
+  @override
+  String get nfcCheckInSuccessTitle => 'משמרת התחילה בהצלחה';
+
+  @override
+  String get nfcCheckOutSuccessTitle => 'משמרת הסתיימה בהצלחה';
+
+  @override
+  String get nfcStationLabel => 'תחנה';
+
+  @override
+  String get nfcTimeConfirmedLabel => 'זמן שרת מאומת';
+
+  @override
+  String get nfcWorkedDurationLabel => 'משך עבודה';
+
+  @override
+  String get nfcReturnToDashboard => 'מעבר ללוח הבקרה';
+
+  @override
+  String get nfcTapPhysicalPrompt =>
+      'הצמד את הטלפון לתג ה-NFC הפיזי בתחנה כדי להתחיל או לסיים משמרת.';
+
+  @override
+  String get nfcErrorInvalidToken => 'טוקן תג ה-NFC אינו חוקי או שפג תוקפו.';
+
+  @override
+  String get nfcErrorInactiveStation =>
+      'התחנה שאליה משויך תג ה-NFC אינה פעילה כעת.';
+
+  @override
+  String get nfcErrorUnauthorized => 'אינך מורשה לבצע רישום נוכחות בתחנה זו.';
+
+  @override
+  String get nfcErrorDuplicatePunch =>
+      'זוהתה החתמה כפולה. אנא המתן מספר שניות לפני החתמה נוספת.';
 }

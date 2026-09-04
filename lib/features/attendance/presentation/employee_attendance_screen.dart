@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'providers/attendance_providers.dart';
 import 'widgets/attendance_status_card.dart';
-import 'widgets/nfc_scanner_modal.dart';
 import '../../../core/design_system/tokens/app_colors.dart';
+import '../../../core/design_system/tokens/app_radius.dart';
 import '../../../core/design_system/tokens/app_typography.dart';
 import '../../../core/design_system/tokens/app_spacing.dart';
 import '../../../core/errors/error_localizer.dart';
@@ -21,17 +22,68 @@ class EmployeeAttendanceScreen extends ConsumerStatefulWidget {
 
 class _EmployeeAttendanceScreenState
     extends ConsumerState<EmployeeAttendanceScreen> {
-  void _openNfcScanner({required bool isCheckIn}) {
-    showModalBottomSheet(
+  void _showTestNfcDialog() {
+    final tokenController = TextEditingController();
+    showDialog(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (modalCtx) => NfcScannerModal(
-        isCheckIn: isCheckIn,
-        onSuccess: () {
-          ref.invalidate(currentOpenAttendanceProvider);
-          ref.invalidate(myAttendanceHistoryProvider);
-        },
+      builder: (dialogCtx) => AlertDialog(
+        backgroundColor: AppColors.colorSurfaceRaised,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        title: const Row(
+          children: [
+            Icon(LucideIcons.terminal, color: AppColors.colorTextPrimary),
+            SizedBox(width: AppSpacing.space8),
+            Text('Simulate NFC Tag Tap'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Enter an NFC station token or paste a full /nfc/t/:token URL to test the flow:',
+              style: TextStyle(color: AppColors.colorTextSecondary),
+            ),
+            const SizedBox(height: AppSpacing.space12),
+            TextField(
+              controller: tokenController,
+              autofocus: true,
+              decoration: InputDecoration(
+                hintText: 'e.g. 8cd51f15a8d746f0b52d92e08713c1d7...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogCtx).pop(),
+            child: const Text('Cancel'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              var input = tokenController.text.trim();
+              if (input.isNotEmpty) {
+                Navigator.of(dialogCtx).pop();
+                if (input.contains('/nfc/t/')) {
+                  final parts = input.split('/nfc/t/');
+                  if (parts.length > 1) {
+                    input = parts[1].split('?')[0].split('#')[0];
+                  }
+                }
+                context.go('/nfc/t/$input');
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.colorSurfaceBrand,
+              foregroundColor: Colors.black,
+            ),
+            child: const Text('Go to NFC Route'),
+          ),
+        ],
       ),
     );
   }
@@ -70,8 +122,7 @@ class _EmployeeAttendanceScreenState
             openAttAsync.when(
               data: (openRecord) => AttendanceStatusCard(
                 openAttendance: openRecord,
-                onScanTap: () => _openNfcScanner(isCheckIn: true),
-                onCheckOutTap: () => _openNfcScanner(isCheckIn: false),
+                onTestNfcTap: _showTestNfcDialog,
               ),
               loading: () => Container(
                 height: 200,

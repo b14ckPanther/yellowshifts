@@ -710,6 +710,24 @@ abstract class AppLocalizations {
   /// **'Save'**
   String get commonSave;
 
+  /// No description provided for @commonRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get commonRetry;
+
+  /// No description provided for @commonDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get commonDone;
+
+  /// No description provided for @dialogOk.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get dialogOk;
+
   /// No description provided for @stationSettingsTitle.
   ///
   /// In en, this message translates to:
@@ -4363,6 +4381,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Station Managers cannot grant or revoke Station Manager access.'**
   String get errorStationAdminRoleForbidden;
+
+  /// No description provided for @nfcTagUrlLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Tag URL'**
+  String get nfcTagUrlLabel;
+
+  /// No description provided for @nfcCopyUrlAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy NFC URL'**
+  String get nfcCopyUrlAction;
+
+  /// No description provided for @nfcUrlCopiedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC URL copied to clipboard'**
+  String get nfcUrlCopiedToast;
+
+  /// No description provided for @nfcRegenerateTokenAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate Token'**
+  String get nfcRegenerateTokenAction;
+
+  /// No description provided for @nfcRegenerateTokenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate Station Tag Token'**
+  String get nfcRegenerateTokenTitle;
+
+  /// No description provided for @nfcRegenerateTokenDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'This will invalidate the previous NFC URL. Any physical tag with the old URL must be reprogrammed with the new URL.'**
+  String get nfcRegenerateTokenDesc;
+
+  /// No description provided for @nfcRegenerateConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Regenerate'**
+  String get nfcRegenerateConfirm;
+
+  /// No description provided for @nfcRegeneratedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC token regenerated successfully'**
+  String get nfcRegeneratedSuccess;
+
+  /// No description provided for @nfcNdefWriteInstructions.
+  ///
+  /// In en, this message translates to:
+  /// **'Write this exact URL as an NDEF URI/URL record to your physical NFC tag using any standard NFC writer app (e.g. NFC Tools on iOS/Android).'**
+  String get nfcNdefWriteInstructions;
+
+  /// No description provided for @nfcVerificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'NFC Check-In Verification'**
+  String get nfcVerificationTitle;
+
+  /// No description provided for @nfcVerifyingStation.
+  ///
+  /// In en, this message translates to:
+  /// **'Verifying NFC Station...'**
+  String get nfcVerifyingStation;
+
+  /// No description provided for @nfcEmployeeDetected.
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticated Employee'**
+  String get nfcEmployeeDetected;
+
+  /// No description provided for @nfcProcessingPunch.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording attendance with server...'**
+  String get nfcProcessingPunch;
+
+  /// No description provided for @nfcCheckInSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shift Started Successfully'**
+  String get nfcCheckInSuccessTitle;
+
+  /// No description provided for @nfcCheckOutSuccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shift Ended Successfully'**
+  String get nfcCheckOutSuccessTitle;
+
+  /// No description provided for @nfcStationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Station'**
+  String get nfcStationLabel;
+
+  /// No description provided for @nfcTimeConfirmedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Server Time Confirmed'**
+  String get nfcTimeConfirmedLabel;
+
+  /// No description provided for @nfcWorkedDurationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Worked Duration'**
+  String get nfcWorkedDurationLabel;
+
+  /// No description provided for @nfcReturnToDashboard.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Dashboard'**
+  String get nfcReturnToDashboard;
+
+  /// No description provided for @nfcTapPhysicalPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the physical NFC tag at your workplace with your phone to start or end your shift.'**
+  String get nfcTapPhysicalPrompt;
+
+  /// No description provided for @nfcErrorInvalidToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid or expired NFC tag token.'**
+  String get nfcErrorInvalidToken;
+
+  /// No description provided for @nfcErrorInactiveStation.
+  ///
+  /// In en, this message translates to:
+  /// **'The station for this NFC tag is currently inactive.'**
+  String get nfcErrorInactiveStation;
+
+  /// No description provided for @nfcErrorUnauthorized.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not authorized for this station.'**
+  String get nfcErrorUnauthorized;
+
+  /// No description provided for @nfcErrorDuplicatePunch.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate punch detected. Please wait a moment before tapping again.'**
+  String get nfcErrorDuplicatePunch;
 }
 
 class _AppLocalizationsDelegate

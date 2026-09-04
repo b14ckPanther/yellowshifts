@@ -60,7 +60,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       final authRepo = ref.read(authRepositoryProvider);
       await authRepo.signInWithPassword(email: email, password: password);
       if (mounted) {
-        context.go('/dashboard');
+        final redirectParam =
+            GoRouterState.of(context).uri.queryParameters['redirect'];
+        if (redirectParam != null &&
+            redirectParam.isNotEmpty &&
+            redirectParam.startsWith('/')) {
+          context.go(redirectParam);
+        } else {
+          context.go('/dashboard');
+        }
       }
     } catch (e) {
       if (mounted) {

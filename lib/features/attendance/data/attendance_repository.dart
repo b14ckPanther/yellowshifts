@@ -7,6 +7,18 @@ class AttendanceRepository {
 
   AttendanceRepository(this._supabase);
 
+  /// Unified Server-Authoritative NFC attendance (Check-in & Check-out via URL token)
+  Future<Map<String, dynamic>> nfcProcessAttendance({
+    required String token,
+    Map<String, dynamic>? clientLocation,
+  }) async {
+    final res = await _supabase.rpc('nfc_process_attendance', params: {
+      'p_token': token.trim(),
+      if (clientLocation != null) 'p_client_location': clientLocation,
+    });
+    return Map<String, dynamic>.from(res as Map);
+  }
+
   /// Server-Authoritative NFC Check-In
   Future<Map<String, dynamic>> nfcCheckIn({
     required String tagIdentifier,

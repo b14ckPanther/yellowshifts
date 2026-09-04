@@ -153,7 +153,34 @@ class ErrorLocalizer {
       return l10n.errorRateLimited;
     }
 
-    // 11. Phase 9: Schedule & Version Conflicts
+    // 11. Phase 10: NFC URL Attendance Errors
+    if (cleanCode == 'P0020' ||
+        cleanCode == 'P0021' ||
+        lowerMsg.contains('invalid or missing nfc') ||
+        lowerMsg.contains('unrecognized or invalid station nfc') ||
+        lowerMsg.contains('deactivated or revoked')) {
+      return l10n.nfcErrorInvalidToken;
+    }
+
+    if (cleanCode == 'P0022' ||
+        lowerMsg.contains('station is inactive or not found')) {
+      return l10n.nfcErrorInactiveStation;
+    }
+
+    if (cleanCode == 'P0023' ||
+        cleanCode == 'P0026' ||
+        lowerMsg.contains('not an active member of this station') ||
+        lowerMsg.contains('station mismatch')) {
+      return l10n.nfcErrorUnauthorized;
+    }
+
+    if (cleanCode == 'P0028' ||
+        lowerMsg.contains('duplicate punch detected') ||
+        lowerMsg.contains('please wait a moment')) {
+      return l10n.nfcErrorDuplicatePunch;
+    }
+
+    // 12. Phase 9: Schedule & Version Conflicts
     if (cleanCode == 'SCHEDULE_CONFLICT' ||
         lowerMsg.contains('schedule conflict') ||
         lowerMsg.contains('already assigned')) {

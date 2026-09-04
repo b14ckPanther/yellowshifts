@@ -3,20 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../domain/models/attendance_record.dart';
 import '../../../../core/design_system/tokens/app_colors.dart';
-import '../../../../core/design_system/tokens/app_typography.dart';
+import '../../../../core/design_system/tokens/app_radius.dart';
 import '../../../../core/design_system/tokens/app_spacing.dart';
+import '../../../../core/design_system/tokens/app_typography.dart';
 import '../../../../l10n/app_localizations.dart';
 
 class AttendanceStatusCard extends StatefulWidget {
   final AttendanceRecord? openAttendance;
-  final VoidCallback onScanTap;
-  final VoidCallback onCheckOutTap;
+  final VoidCallback? onTestNfcTap;
 
   const AttendanceStatusCard({
     super.key,
     required this.openAttendance,
-    required this.onScanTap,
-    required this.onCheckOutTap,
+    this.onTestNfcTap,
   });
 
   @override
@@ -63,7 +62,7 @@ class _AttendanceStatusCardState extends State<AttendanceStatusCard> {
         padding: const EdgeInsets.all(AppSpacing.space24),
         decoration: BoxDecoration(
           color: AppColors.colorSurfaceRaised,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
             color: AppColors.colorBorderSubtle,
           ),
@@ -98,37 +97,28 @@ class _AttendanceStatusCardState extends State<AttendanceStatusCard> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: AppSpacing.space4),
+            const SizedBox(height: AppSpacing.space8),
             Text(
-              l10n.attendanceScanPrompt,
+              l10n.nfcTapPhysicalPrompt,
               textAlign: TextAlign.center,
               style: typography.bodyMedium.copyWith(
                 color: AppColors.colorTextSecondary,
+                height: 1.4,
               ),
             ),
-            const SizedBox(height: AppSpacing.space24),
-            SizedBox(
-              width: double.infinity,
-              height: 52,
-              child: ElevatedButton.icon(
-                onPressed: widget.onScanTap,
-                icon: const Icon(LucideIcons.radio, size: 20),
-                label: Text(
-                  l10n.attendanceScanNfcAction,
-                  style: typography.bodyLarge.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.colorSurfaceBrand,
-                  foregroundColor: Colors.black,
+            if (widget.onTestNfcTap != null) ...[
+              const SizedBox(height: AppSpacing.space20),
+              OutlinedButton.icon(
+                onPressed: widget.onTestNfcTap,
+                icon: const Icon(LucideIcons.terminal, size: 16),
+                label: const Text('Simulate / Test NFC URL'),
+                style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                   ),
                 ),
               ),
-            ),
+            ],
           ],
         ),
       );
@@ -142,7 +132,7 @@ class _AttendanceStatusCardState extends State<AttendanceStatusCard> {
       padding: const EdgeInsets.all(AppSpacing.space24),
       decoration: BoxDecoration(
         color: AppColors.colorSurfaceRaised,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
           color: AppColors.colorSuccess.withValues(alpha: 0.4),
           width: 2,
@@ -215,29 +205,38 @@ class _AttendanceStatusCardState extends State<AttendanceStatusCard> {
               ),
             ),
           ],
-          const SizedBox(height: AppSpacing.space24),
-          SizedBox(
-            width: double.infinity,
-            height: 52,
-            child: ElevatedButton.icon(
-              onPressed: widget.onCheckOutTap,
-              icon: const Icon(LucideIcons.logOut, size: 20),
-              label: Text(
-                l10n.attendanceCheckOutAction,
-                style: typography.bodyLarge.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+          const SizedBox(height: AppSpacing.space20),
+          Container(
+            padding: const EdgeInsets.all(AppSpacing.space12),
+            decoration: BoxDecoration(
+              color: AppColors.colorSurfaceBase,
+              borderRadius: BorderRadius.circular(AppRadius.radiusMd),
+              border: Border.all(color: AppColors.colorBorderSubtle),
+            ),
+            child: Row(
+              children: [
+                const Icon(LucideIcons.radio,
+                    size: 18, color: AppColors.colorTextSecondary),
+                const SizedBox(width: AppSpacing.space8),
+                Expanded(
+                  child: Text(
+                    l10n.nfcTapPhysicalPrompt,
+                    style: typography.caption.copyWith(
+                      color: AppColors.colorTextSecondary,
+                    ),
+                  ),
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.colorActionDestructive,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
-                ),
-              ),
+              ],
             ),
           ),
+          if (widget.onTestNfcTap != null) ...[
+            const SizedBox(height: AppSpacing.space12),
+            TextButton.icon(
+              onPressed: widget.onTestNfcTap,
+              icon: const Icon(LucideIcons.terminal, size: 14),
+              label: const Text('Simulate / Test NFC URL'),
+            ),
+          ],
         ],
       ),
     );

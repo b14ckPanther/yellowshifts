@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../core/design_system/tokens/app_colors.dart';
-import '../../../core/design_system/tokens/app_typography.dart';
+import '../../../core/design_system/tokens/app_radius.dart';
 import '../../../core/design_system/tokens/app_spacing.dart';
+import '../../../core/design_system/tokens/app_typography.dart';
 import '../../../core/errors/error_localizer.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../stations/presentation/active_station_provider.dart';
@@ -15,11 +18,202 @@ import 'widgets/nfc_provision_dialog.dart';
 class ManagerNfcTagsScreen extends ConsumerWidget {
   const ManagerNfcTagsScreen({super.key});
 
+  String _buildFullNfcUrl(String token) {
+    if (kIsWeb) {
+      final base = Uri.base;
+      final portStr = (base.hasPort && base.port != 80 && base.port != 443)
+          ? ':${base.port}'
+          : '';
+      final origin = '${base.scheme}://${base.host}$portStr';
+      return '$origin/nfc/t/$token';
+    }
+    return 'https://app.yellowshifts.com/nfc/t/$token';
+  }
+
   void _showProvisionDialog(
       BuildContext context, WidgetRef ref, String stationId) {
     showDialog(
       context: context,
       builder: (_) => NfcProvisionDialog(stationId: stationId),
+    );
+  }
+
+  void _showRegenerateDialog(BuildContext context, WidgetRef ref,
+      StationNfcTag tag, AppLocalizations l10n) {
+    showDialog(
+      context: context,
+      builder: (dialogCtx) => AlertDialog(
+        backgroundColor: AppColors.colorSurfaceRaised,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        title: Row(
+          children: [
+            const Icon(LucideIcons.refreshCw, color: AppColors.colorWarning),
+            const SizedBox(width: AppSpacing.space8),
+            Expanded(
+              child: Text(
+                l10n.nfcRegenerateTokenTitle,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.nfcRegenerateTokenDesc,
+              style: const TextStyle(color: AppColors.colorTextSecondary),
+            ),
+            const SizedBox(height: AppSpacing.space12),
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.space10),
+              decoration: BoxDecoration(
+                color: AppColors.colorSurfaceBase,
+                borderRadius: BorderRadius.circular(AppRadius.radiusSm),
+                border: Border.all(color: AppColors.colorBorderSubtle),
+              ),
+              child: Text(
+                tag.name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogCtx).pop(),
+            child: Text(l10n.dialogCancel),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.of(dialogCtx).pop();
+              try {
+                final repo = ref.read(nfcTagRepositoryProvider);
+                final res = await repo.regenerateStationNfcTag(tag.id);
+                ref.invalidate(stationNfcTagsProvider(tag.stationId));
+
+                final token = res['token'] as String? ?? '';
+                final fullUrl = _buildFullNfcUrl(token);
+
+                if (context.mounted) {
+                  _showRegeneratedUrlDialog(context, tag.name, fullUrl, l10n);
+                }
+              } catch (e) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(ErrorLocalizer.localize(e, l10n)),
+                      backgroundColor: AppColors.colorError,
+                    ),
+                  );
+                }
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.colorWarning,
+              foregroundColor: Colors.black,
+            ),
+            child: Text(l10n.nfcRegenerateConfirm),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showRegeneratedUrlDialog(BuildContext context, String tagName,
+      String fullUrl, AppLocalizations l10n) {
+    const typography = AppTypography();
+    showDialog(
+      context: context,
+      builder: (dialogCtx) => AlertDialog(
+        backgroundColor: AppColors.colorSurfaceRaised,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+        title: Row(
+          children: [
+            const Icon(LucideIcons.circleCheck, color: AppColors.colorSuccess),
+            const SizedBox(width: AppSpacing.space8),
+            Expanded(
+              child: Text(
+                l10n.nfcRegeneratedSuccess,
+                style: typography.titleMedium
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.nfcTagUrlLabel,
+              style:
+                  typography.bodyStrong.copyWith(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: AppSpacing.space8),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.space12,
+                vertical: AppSpacing.space10,
+              ),
+              decoration: BoxDecoration(
+                color: AppColors.colorSurfaceBase,
+                borderRadius: BorderRadius.circular(AppRadius.radiusSm),
+                border: Border.all(color: AppColors.colorBorderSubtle),
+              ),
+              child: SelectableText(
+                fullUrl,
+                style: typography.bodySmall.copyWith(
+                  fontFamily: 'monospace',
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.colorTextPrimary,
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.space16),
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.space12),
+              decoration: BoxDecoration(
+                color: AppColors.colorSurfaceBrandSubtle,
+                borderRadius: BorderRadius.circular(AppRadius.radiusSm),
+              ),
+              child: Text(
+                l10n.nfcNdefWriteInstructions,
+                style: typography.caption.copyWith(
+                  color: AppColors.colorTextPrimary,
+                  height: 1.4,
+                ),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          OutlinedButton.icon(
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: fullUrl));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(l10n.nfcUrlCopiedToast),
+                  backgroundColor: AppColors.colorSuccess,
+                ),
+              );
+            },
+            icon: const Icon(LucideIcons.copy, size: 16),
+            label: Text(l10n.nfcCopyUrlAction),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(dialogCtx).pop(),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.colorSurfaceBrand,
+              foregroundColor: Colors.black,
+            ),
+            child: Text(l10n.dialogOk),
+          ),
+        ],
+      ),
     );
   }
 
@@ -31,6 +225,9 @@ class ManagerNfcTagsScreen extends ConsumerWidget {
     showDialog(
       context: context,
       builder: (dialogCtx) => AlertDialog(
+        backgroundColor: AppColors.colorSurfaceRaised,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
         title: Text(l10n.nfcReplaceTagTitle),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -258,22 +455,36 @@ class ManagerNfcTagsScreen extends ConsumerWidget {
                       ],
                     ),
                     const SizedBox(height: AppSpacing.space12),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                    Wrap(
+                      spacing: AppSpacing.space8,
+                      runSpacing: AppSpacing.space8,
+                      alignment: WrapAlignment.end,
                       children: [
+                        // Regenerate Token Button
+                        OutlinedButton.icon(
+                          icon: const Icon(LucideIcons.refreshCw, size: 14),
+                          label: Text(l10n.nfcRegenerateTokenAction),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpacing.space12,
+                              vertical: AppSpacing.space8,
+                            ),
+                          ),
+                          onPressed: () =>
+                              _showRegenerateDialog(context, ref, t, l10n),
+                        ),
                         TextButton.icon(
-                          icon: const Icon(LucideIcons.repeat, size: 16),
+                          icon: const Icon(LucideIcons.repeat, size: 14),
                           label: Text(l10n.nfcReplaceAction),
                           onPressed: () =>
                               _showReplaceDialog(context, ref, t, l10n),
                         ),
-                        const SizedBox(width: AppSpacing.space8),
                         TextButton.icon(
                           icon: Icon(
                             t.isActive
                                 ? LucideIcons.ban
                                 : LucideIcons.checkCircle,
-                            size: 16,
+                            size: 14,
                             color: t.isActive
                                 ? AppColors.colorError
                                 : AppColors.colorSuccess,

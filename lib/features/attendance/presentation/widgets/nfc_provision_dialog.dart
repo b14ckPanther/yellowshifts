@@ -1,11 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../../core/design_system/tokens/app_colors.dart';
-import '../../../../core/design_system/tokens/app_typography.dart';
+import '../../../../core/design_system/tokens/app_radius.dart';
 import '../../../../core/design_system/tokens/app_spacing.dart';
+import '../../../../core/design_system/tokens/app_typography.dart';
 import '../../../../core/errors/error_localizer.dart';
-import '../../../../core/nfc/nfc_service.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../providers/nfc_providers.dart';
 
@@ -24,15 +26,27 @@ class NfcProvisionDialog extends ConsumerStatefulWidget {
 class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
   final _nameController = TextEditingController();
   bool _isProvisioningOnServer = false;
-  bool _isWritingNfc = false;
   String? _errorMessage;
-  NfcStationTagPayload? _provisionedPayload;
+  String? _provisionedUrl;
   String? _tagIdentifier;
+  String? _tagName;
 
   @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
+  }
+
+  String _buildFullNfcUrl(String token) {
+    if (kIsWeb) {
+      final base = Uri.base;
+      final portStr = (base.hasPort && base.port != 80 && base.port != 443)
+          ? ':${base.port}'
+          : '';
+      final origin = '${base.scheme}://${base.host}$portStr';
+      return '$origin/nfc/t/$token';
+    }
+    return 'https://app.yellowshifts.com/nfc/t/$token';
   }
 
   Future<void> _handleProvision() async {
@@ -52,20 +66,18 @@ class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
         name: name,
       );
 
-      final payload = NfcStationTagPayload(
-        version: 1,
-        stationCode: res['station_code'] as String? ?? '',
-        tagIdentifier: res['tag_identifier'] as String? ?? '',
-        rawSecret: res['raw_secret'] as String? ?? '',
-      );
+      final token =
+          res['token'] as String? ?? res['raw_secret'] as String? ?? '';
+      final fullUrl = _buildFullNfcUrl(token);
 
       ref.invalidate(stationNfcTagsProvider(widget.stationId));
 
       if (!mounted) return;
       setState(() {
         _isProvisioningOnServer = false;
-        _provisionedPayload = payload;
-        _tagIdentifier = payload.tagIdentifier;
+        _tagName = res['name'] as String? ?? name;
+        _tagIdentifier = res['tag_identifier'] as String? ?? '';
+        _provisionedUrl = fullUrl;
       });
     } catch (e) {
       if (!mounted) return;
@@ -76,52 +88,15 @@ class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
     }
   }
 
-  Future<void> _handleWriteNfc() async {
-    if (_provisionedPayload == null) return;
-    final l10n = AppLocalizations.of(context)!;
-    final nfcService = ref.read(nfcServiceProvider);
-
-    final isAvail = await nfcService.isAvailable();
-    if (!isAvail) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.nfcUnavailableError),
-            backgroundColor: AppColors.colorWarning,
-          ),
-        );
-      }
-      return;
-    }
-
-    setState(() {
-      _isWritingNfc = true;
-      _errorMessage = null;
-    });
-
-    await nfcService.writeStationTag(
-      payload: _provisionedPayload!,
-      alertMessage: l10n.nfcHoldToWritePrompt,
-      onSuccess: () {
-        if (!mounted) return;
-        setState(() {
-          _isWritingNfc = false;
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.nfcTagWrittenSuccess),
-            backgroundColor: AppColors.colorSuccess,
-          ),
-        );
-        Navigator.of(context).pop(true);
-      },
-      onError: (err) {
-        if (!mounted) return;
-        setState(() {
-          _isWritingNfc = false;
-          _errorMessage = err;
-        });
-      },
+  void _copyUrlToClipboard(AppLocalizations l10n) {
+    if (_provisionedUrl == null) return;
+    Clipboard.setData(ClipboardData(text: _provisionedUrl!));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(l10n.nfcUrlCopiedToast),
+        backgroundColor: AppColors.colorSuccess,
+        duration: const Duration(seconds: 2),
+      ),
     );
   }
 
@@ -132,16 +107,19 @@ class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
 
     return AlertDialog(
       backgroundColor: AppColors.colorSurfaceRaised,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
       title: Row(
         children: [
           const Icon(LucideIcons.radio, color: AppColors.colorTextPrimary),
           const SizedBox(width: AppSpacing.space8),
-          Text(
-            _provisionedPayload == null
-                ? l10n.nfcProvisionNewTitle
-                : l10n.nfcWriteTagTitle,
-            style: typography.titleMedium.copyWith(fontWeight: FontWeight.bold),
+          Expanded(
+            child: Text(
+              _provisionedUrl == null
+                  ? l10n.nfcProvisionNewTitle
+                  : l10n.nfcTagUrlLabel,
+              style:
+                  typography.titleMedium.copyWith(fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
@@ -150,7 +128,7 @@ class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (_provisionedPayload == null) ...[
+            if (_provisionedUrl == null) ...[
               Text(
                 l10n.nfcProvisionDialogDesc,
                 style: typography.bodyMedium
@@ -164,45 +142,106 @@ class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
                   labelText: l10n.nfcTagNameLabel,
                   hintText: l10n.nfcTagNameHint,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                   ),
                 ),
               ),
             ] else ...[
-              Text(
-                l10n.nfcTagCreatedServerDesc,
-                style: typography.bodyMedium
-                    .copyWith(color: AppColors.colorTextSecondary),
-              ),
-              const SizedBox(height: AppSpacing.space12),
               Container(
                 padding: const EdgeInsets.all(AppSpacing.space12),
                 decoration: BoxDecoration(
                   color: AppColors.colorSurfaceBase,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(AppRadius.radiusMd),
                   border: Border.all(color: AppColors.colorBorderSubtle),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${l10n.nfcTagIdLabel}: $_tagIdentifier',
-                      style: typography.bodyStrong,
+                      _tagName ?? '',
+                      style: typography.titleSmall.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.colorTextPrimary,
+                      ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 2),
                     Text(
-                      '${l10n.nfcStationCodeLabel}: ${_provisionedPayload?.stationCode}',
-                      style: typography.caption
-                          .copyWith(color: AppColors.colorTextSecondary),
+                      '${l10n.nfcTagIdLabel}: $_tagIdentifier',
+                      style: typography.caption.copyWith(
+                        color: AppColors.colorTextSecondary,
+                        fontFamily: 'monospace',
+                      ),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: AppSpacing.space16),
               Text(
-                l10n.nfcReadyToWriteDesc,
-                style: typography.bodySmall
-                    .copyWith(color: AppColors.colorTextMuted),
+                l10n.nfcTagUrlLabel,
+                style: typography.bodyStrong.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.colorTextPrimary,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.space8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.space12,
+                  vertical: AppSpacing.space10,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.colorSurfaceBase,
+                  borderRadius: BorderRadius.circular(AppRadius.radiusSm),
+                  border: Border.all(color: AppColors.colorBorderSubtle),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: SelectableText(
+                        _provisionedUrl!,
+                        style: typography.bodySmall.copyWith(
+                          fontFamily: 'monospace',
+                          color: AppColors.colorTextPrimary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.space8),
+                    IconButton(
+                      icon: const Icon(LucideIcons.copy, size: 18),
+                      tooltip: l10n.nfcCopyUrlAction,
+                      onPressed: () => _copyUrlToClipboard(l10n),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSpacing.space16),
+              Container(
+                padding: const EdgeInsets.all(AppSpacing.space12),
+                decoration: BoxDecoration(
+                  color: AppColors.colorSurfaceBrandSubtle,
+                  borderRadius: BorderRadius.circular(AppRadius.radiusSm),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Icon(
+                      LucideIcons.info,
+                      size: 18,
+                      color: AppColors.colorTextPrimary,
+                    ),
+                    const SizedBox(width: AppSpacing.space8),
+                    Expanded(
+                      child: Text(
+                        l10n.nfcNdefWriteInstructions,
+                        style: typography.caption.copyWith(
+                          color: AppColors.colorTextPrimary,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
             if (_errorMessage != null) ...[
@@ -216,11 +255,11 @@ class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
         ),
       ),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(l10n.dialogCancel),
-        ),
-        if (_provisionedPayload == null)
+        if (_provisionedUrl == null) ...[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(l10n.dialogCancel),
+          ),
           ElevatedButton(
             onPressed: _isProvisioningOnServer ? null : _handleProvision,
             style: ElevatedButton.styleFrom(
@@ -234,22 +273,20 @@ class _NfcProvisionDialogState extends ConsumerState<NfcProvisionDialog> {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 : Text(l10n.nfcCreateTagAction),
-          )
-        else ...[
-          ElevatedButton.icon(
-            onPressed: _isWritingNfc ? null : _handleWriteNfc,
-            icon: const Icon(LucideIcons.radio, size: 16),
-            label: _isWritingNfc
-                ? const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Text(l10n.nfcWriteToCardAction),
+          ),
+        ] else ...[
+          OutlinedButton.icon(
+            onPressed: () => _copyUrlToClipboard(l10n),
+            icon: const Icon(LucideIcons.copy, size: 16),
+            label: Text(l10n.nfcCopyUrlAction),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.colorSurfaceBrand,
               foregroundColor: Colors.black,
             ),
+            child: Text(l10n.dialogOk),
           ),
         ],
       ],
