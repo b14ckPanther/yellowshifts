@@ -34,21 +34,22 @@ String _health(AppLocalizations l10n) => l10n.platformNavHealth;
 String _audit(AppLocalizations l10n) => l10n.platformNavAudit;
 
 Future<void> _confirmAndSignOut(BuildContext context, WidgetRef ref) async {
-  final l10n = AppLocalizations.of(context)!;
+  final l10n = AppLocalizations.of(context);
   final confirmed = await showDialog<bool>(
     context: context,
     builder: (dialogCtx) => AlertDialog(
-      title: Text(l10n.settingsSignOut),
-      content: Text(l10n.platformLogoutConfirm),
+      title: Text(l10n?.settingsSignOut ?? 'Sign Out'),
+      content: Text(l10n?.platformLogoutConfirm ??
+          'Are you sure you want to sign out?'),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(dialogCtx).pop(false),
-          child: Text(l10n.dialogCancel),
+          child: Text(l10n?.dialogCancel ?? 'Cancel'),
         ),
         ElevatedButton.icon(
           onPressed: () => Navigator.of(dialogCtx).pop(true),
           icon: const Icon(LucideIcons.logOut, size: 16),
-          label: Text(l10n.settingsSignOut),
+          label: Text(l10n?.settingsSignOut ?? 'Sign Out'),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.colorError,
             foregroundColor: Colors.white,
@@ -58,12 +59,14 @@ Future<void> _confirmAndSignOut(BuildContext context, WidgetRef ref) async {
     ),
   );
 
-  if (confirmed == true && context.mounted) {
+  if (confirmed == true) {
     try {
       await ref.read(authRepositoryProvider).signOut();
     } catch (_) {}
     if (context.mounted) {
-      context.go('/login');
+      try {
+        context.go('/login');
+      } catch (_) {}
     }
   }
 }
@@ -76,8 +79,18 @@ class PlatformAdminShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final access = ref.watch(stationAccessContextProvider);
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
+
+    // If user is unauthenticated, render a clean surface while router redirects to /login
+    if (!access.isAuthenticated) {
+      return const Scaffold(
+        backgroundColor: AppColors.colorSurfaceBase,
+        body: SizedBox.shrink(),
+      );
+    }
+
     if (!access.canAccessPlatformAdministration) {
+      const typography = AppTypography();
       return Scaffold(
         backgroundColor: AppColors.colorSurfaceBase,
         body: Center(
@@ -89,12 +102,37 @@ class PlatformAdminShell extends ConsumerWidget {
                 const Icon(LucideIcons.shieldOff,
                     size: 40.0, color: AppColors.colorTextMuted),
                 const SizedBox(height: AppSpacing.space16),
-                Text(l10n.platformUnauthorizedTitle,
-                    textAlign: TextAlign.center),
+                Text(
+                  l10n?.platformUnauthorizedTitle ??
+                      'Platform Access Restricted',
+                  style: typography.titleLarge.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.colorTextPrimary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
                 const SizedBox(height: AppSpacing.space8),
                 Text(
-                  l10n.platformUnauthorizedBody,
+                  l10n?.platformUnauthorizedBody ??
+                      'You do not have active platform administrator privileges.',
+                  style: typography.bodyMedium.copyWith(
+                    color: AppColors.colorTextSecondary,
+                  ),
                   textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: AppSpacing.space24),
+                ElevatedButton.icon(
+                  onPressed: () {
+                    try {
+                      context.go('/dashboard');
+                    } catch (_) {}
+                  },
+                  icon: const Icon(LucideIcons.arrowLeft, size: 16),
+                  label: Text(l10n?.navDashboard ?? 'Dashboard'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.colorSurfaceBrand,
+                    foregroundColor: AppColors.colorTextPrimary,
+                  ),
                 ),
               ],
             ),
@@ -121,7 +159,12 @@ class _CompactPlatformShell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
-    final location = GoRouterState.of(context).uri.path;
+    String location;
+    try {
+      location = GoRouterState.of(context).uri.path;
+    } catch (_) {
+      location = '/platform';
+    }
     final currentLocale = ref.watch(localeProvider);
 
     int selected = 0;
@@ -194,7 +237,12 @@ class _WidePlatformShell extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const typography = AppTypography();
     final l10n = AppLocalizations.of(context)!;
-    final location = GoRouterState.of(context).uri.path;
+    String location;
+    try {
+      location = GoRouterState.of(context).uri.path;
+    } catch (_) {
+      location = '/platform';
+    }
     final currentLocale = ref.watch(localeProvider);
 
     return Scaffold(

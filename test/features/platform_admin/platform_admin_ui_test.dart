@@ -22,6 +22,10 @@ import 'package:yellowshifts/features/platform_admin/presentation/screens/platfo
 import 'package:yellowshifts/features/platform_admin/presentation/widgets/platform_scope_banner.dart';
 import 'package:yellowshifts/features/stations/domain/station_membership.dart';
 import 'package:yellowshifts/l10n/app_localizations.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show AuthState, User;
+import 'package:yellowshifts/core/auth/auth_repository.dart';
+import 'package:yellowshifts/shared/models/user_profile.dart';
 
 final _now = DateTime(2026, 8, 1);
 
@@ -259,17 +263,45 @@ Widget _l10nApp({
   );
 }
 
+class FakeAuthRepository implements AuthRepository {
+  bool signedOut = false;
+
+  @override
+  Stream<AuthState> get authStateChanges => const Stream.empty();
+
+  @override
+  User? get currentUser => null;
+
+  @override
+  Future<UserProfile?> getCurrentProfile() async => null;
+
+  @override
+  Future<void> signInWithPassword(
+      {required String email, required String password}) async {}
+
+  @override
+  Future<void> signOut() async {
+    signedOut = true;
+  }
+
+  @override
+  Future<void> updateProfile(UserProfile profile) async {}
+}
+
 Widget _platformRouter({
   required String location,
   required FakePlatformAdminRepository repo,
+  FakeAuthRepository? authRepo,
   StationAccessContext? access,
   Locale locale = const Locale('en'),
 }) {
   final ctx = access ?? _platformAccess();
+  final auth = authRepo ?? FakeAuthRepository();
   return ProviderScope(
     overrides: [
       platformAdminRepositoryProvider.overrideWithValue(repo),
       stationAccessContextProvider.overrideWith((ref) => ctx),
+      authRepositoryProvider.overrideWithValue(auth),
     ],
     child: MaterialApp.router(
       locale: locale,
@@ -733,5 +765,68 @@ void main() {
       expect(find.text('Station Name'), findsOneWidget);
       expect(find.text('Create Station'), findsWidgets);
     });
+
+    testWidgets('PlatformAdminShell renders unauthorized screen when user is not a platform admin',
+        (tester) async {
+      await tester.pumpWidget(
+        _platformRouter(
+          location: '/platform',
+          repo: FakePlatformAdminRepository(),
+          access: _stationAdminAccess(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Platform Administration unavailable'), findsOneWidget);
+      expect(find.text('Dashboard'), findsOneWidget);
+    });
+
+    testWidgets('PlatformAdminShell renders empty scaffold without error when unauthenticated',
+        (tester) async {
+      await tester.pumpWidget(
+        _platformRouter(
+          location: '/platform',
+          repo: FakePlatformAdminRepository(),
+          access: StationAccessContext.unauthenticated(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(Scaffold), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('PlatformAdminShell displays confirmation dialog and triggers logout',
+        (tester) async {
+      final fakeAuth = FakeAuthRepository();
+      await tester.pumpWidget(
+        _platformRouter(
+          location: '/platform',
+          repo: FakePlatformAdminRepository(),
+          authRepo: fakeAuth,
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Find and tap the logout button by icon
+      final logoutBtn = find.byIcon(LucideIcons.logOut);
+      expect(logoutBtn, findsOneWidget);
+      await tester.tap(logoutBtn);
+      await tester.pumpAndSettle();
+
+      // Verify confirmation dialog
+      expect(find.text('Are you sure you want to sign out?'), findsOneWidget);
+      expect(find.text('Cancel'), findsOneWidget);
+
+      // Tap confirm Sign Out in the dialog
+      final confirmBtn = find.widgetWithText(ElevatedButton, 'Sign Out from YellowShifts');
+      expect(confirmBtn, findsOneWidget);
+      await tester.tap(confirmBtn);
+      await tester.pumpAndSettle();
+
+      // Verify signOut was called
+      expect(fakeAuth.signedOut, isTrue);
+      expect(tester.takeException(), isNull);
+    });
   });
 }
+
+
