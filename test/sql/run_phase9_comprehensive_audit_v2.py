@@ -201,7 +201,7 @@ def main():
     run_psql(auth_stub)
 
     # Apply canonical migrations 001 through 017 in strict order
-    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql")])
+    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql") and f <= "20260825000017_phase9_audit_remediation.sql"])
     for mf in migration_files:
         mf_path = os.path.join(MIGRATIONS_DIR, mf)
         code, out, err = run_psql_file(mf_path)

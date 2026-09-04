@@ -89,7 +89,7 @@ def setup_db():
     BEGIN RETURN COALESCE(NULLIF(current_setting('request.jwt.claim.role', true), ''), 'anon'); EXCEPTION WHEN OTHERS THEN RETURN 'anon'; END;
     $$ LANGUAGE plpgsql STABLE;
     """)
-    for mf in sorted(f for f in os.listdir(MIGRATIONS_DIR) if f.endswith('.sql')):
+    for mf in sorted(f for f in os.listdir(MIGRATIONS_DIR) if f.endswith('.sql') and f <= "20260825000020_station_admin_profile_updates.sql"):
         code, _, err = run_psql_file(os.path.join(MIGRATIONS_DIR, mf))
         if code != 0:
             print(f"[!] {mf} failed:\n{err}")

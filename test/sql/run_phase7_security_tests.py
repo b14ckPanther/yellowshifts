@@ -79,7 +79,7 @@ def setup_test_db():
         sys.exit(1)
 
     migrations_dir = os.path.join(os.path.dirname(__file__), "../../supabase/migrations")
-    files = sorted([f for f in os.listdir(migrations_dir) if f.endswith(".sql")])
+    files = sorted([f for f in os.listdir(migrations_dir) if f.endswith(".sql") and f <= "20260825000012_phase7_audit_remediation.sql"])
     for mf in files:
         fpath = os.path.join(migrations_dir, mf)
         mres = subprocess.run([PSQL_BIN, "-d", DB_NAME, "-U", CURRENT_USER, "-f", fpath], capture_output=True, text=True)

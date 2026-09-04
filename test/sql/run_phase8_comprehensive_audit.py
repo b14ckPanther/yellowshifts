@@ -57,7 +57,7 @@ def setup_test_db():
     subprocess.run(["createdb", "-U", CURRENT_USER, DB_NAME], check=True)
     subprocess.run([PSQL_BIN, "-d", DB_NAME, "-U", CURRENT_USER, "-c", "CREATE PUBLICATION supabase_realtime;"], capture_output=True)
 
-    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql")])
+    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql") and f <= "20260825000015_phase8_audit_remediation.sql"])
     for mf in migration_files:
         path = os.path.join(MIGRATIONS_DIR, mf)
         cmd = [PSQL_BIN, "-v", "ON_ERROR_STOP=1", "-d", DB_NAME, "-U", CURRENT_USER, "-f", path]

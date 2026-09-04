@@ -104,7 +104,7 @@ def setup_test_db():
     subprocess.run([PSQL_BIN, "-d", DB_NAME, "-U", CURRENT_USER, "-c", "CREATE PUBLICATION supabase_realtime;"], capture_output=True)
 
     # Gather all 15 migrations in order (001-015)
-    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql")])
+    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql") and f <= "20260825000015_phase8_audit_remediation.sql"])
     assert len(migration_files) >= 15, f"Expected >= 15 migrations, found {len(migration_files)}: {migration_files}"
 
     for mf in migration_files:

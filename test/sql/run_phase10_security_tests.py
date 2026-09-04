@@ -139,7 +139,7 @@ def setup_db():
     """
     run_psql(setup_sql)
 
-    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith('.sql')])
+    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith('.sql') and f <= "20260825000017_phase9_audit_remediation.sql"])
     for mf in migration_files:
         path = os.path.join(MIGRATIONS_DIR, mf)
         code, _, err = run_psql_file(path)

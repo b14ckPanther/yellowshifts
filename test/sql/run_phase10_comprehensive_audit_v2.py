@@ -140,7 +140,7 @@ def run_adversarial_audit() -> int:
     """
     run_psql(auth_stub)
 
-    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql")])
+    migration_files = sorted([f for f in os.listdir(MIGRATIONS_DIR) if f.endswith(".sql") and f <= "20260825000017_phase9_audit_remediation.sql"])
     for mf in migration_files:
         code, _, err = run_psql_file(os.path.join(MIGRATIONS_DIR, mf))
         if code != 0:

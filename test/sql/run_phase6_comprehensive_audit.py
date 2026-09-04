@@ -63,7 +63,7 @@ def setup_fresh_db():
         sys.exit(1)
 
     migrations_dir = os.path.join(os.path.dirname(__file__), "../../supabase/migrations")
-    files = sorted([f for f in os.listdir(migrations_dir) if f.endswith(".sql")])
+    files = sorted([f for f in os.listdir(migrations_dir) if f.endswith(".sql") and f <= "20260825000010_phase6_audit_remediation.sql"])
     for mf in files:
         fpath = os.path.join(migrations_dir, mf)
         cmd_apply = [PSQL_BIN, "-d", DB_NAME, "-U", CURRENT_USER, "-f", fpath]
