@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../app/localization/locale_provider.dart';
-import '../../../core/auth/auth_repository.dart';
 import '../../../core/auth/auth_state_provider.dart';
-import '../../../core/permissions/platform_admin_provider.dart';
-import '../../../features/stations/presentation/active_station_provider.dart';
+import '../../../features/authentication/presentation/login_screen.dart';
 import '../../../core/design_system/components/app_avatar.dart';
 import '../../../core/design_system/components/app_brand_mark.dart';
 import '../../../core/design_system/responsive/app_breakpoints.dart';
@@ -62,22 +60,8 @@ Future<void> _confirmAndSignOut(BuildContext context, WidgetRef ref) async {
     ),
   );
 
-  if (confirmed == true) {
-    try {
-      await ref.read(authRepositoryProvider).signOut();
-    } catch (_) {}
-    ref.read(platformOperatingStationIdProvider.notifier).state = null;
-    ref.invalidate(activeStationIdProvider);
-    ref.invalidate(currentAuthUserProvider);
-    ref.invalidate(userMembershipsStreamProvider);
-    ref.invalidate(currentProfileProvider);
-    ref.invalidate(isPlatformAdminProvider);
-    ref.invalidate(stationAccessContextProvider);
-    if (context.mounted) {
-      try {
-        context.go('/login');
-      } catch (_) {}
-    }
+  if (confirmed == true && context.mounted) {
+    await performSignOut(ref, context);
   }
 }
 
@@ -91,7 +75,7 @@ class PlatformAdminShell extends ConsumerWidget {
     final access = ref.watch(stationAccessContextProvider);
     final l10n = AppLocalizations.of(context);
 
-    // If user is unauthenticated, redirect to /login and render a clean surface while transitioning
+    // If user is unauthenticated, redirect to /login and render login view
     if (!access.isAuthenticated) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (context.mounted) {
@@ -100,10 +84,7 @@ class PlatformAdminShell extends ConsumerWidget {
           } catch (_) {}
         }
       });
-      return const Scaffold(
-        backgroundColor: AppColors.colorSurfaceBase,
-        body: SizedBox.shrink(),
-      );
+      return const LoginScreen();
     }
 
     if (!access.canAccessPlatformAdministration) {

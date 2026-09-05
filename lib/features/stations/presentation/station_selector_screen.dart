@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../app/localization/locale_provider.dart';
-import '../../../core/auth/auth_repository.dart';
 import '../../../core/auth/auth_state_provider.dart';
-import '../../../core/permissions/platform_admin_provider.dart';
 import '../../../core/design_system/components/app_brand_mark.dart';
 import '../../../core/design_system/components/app_button.dart';
 import '../../../core/design_system/components/app_status_badge.dart';
@@ -19,6 +17,7 @@ import '../../../core/permissions/station_access_context.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/app_empty_state.dart';
 import '../../../shared/widgets/app_skeleton.dart';
+import '../../authentication/presentation/login_screen.dart';
 import '../domain/station_membership.dart';
 import 'active_station_provider.dart';
 
@@ -48,22 +47,8 @@ Future<void> _confirmAndSignOut(BuildContext context, WidgetRef ref) async {
     ),
   );
 
-  if (confirmed == true) {
-    try {
-      await ref.read(authRepositoryProvider).signOut();
-    } catch (_) {}
-    ref.read(platformOperatingStationIdProvider.notifier).state = null;
-    ref.invalidate(activeStationIdProvider);
-    ref.invalidate(currentAuthUserProvider);
-    ref.invalidate(userMembershipsStreamProvider);
-    ref.invalidate(currentProfileProvider);
-    ref.invalidate(isPlatformAdminProvider);
-    ref.invalidate(stationAccessContextProvider);
-    if (context.mounted) {
-      try {
-        context.go('/login');
-      } catch (_) {}
-    }
+  if (confirmed == true && context.mounted) {
+    await performSignOut(ref, context);
   }
 }
 
@@ -95,10 +80,7 @@ class StationSelectorScreen extends ConsumerWidget {
           } catch (_) {}
         }
       });
-      return const Scaffold(
-        backgroundColor: AppColors.colorSurfaceBase,
-        body: SizedBox.shrink(),
-      );
+      return const LoginScreen();
     }
 
     const typography = AppTypography();

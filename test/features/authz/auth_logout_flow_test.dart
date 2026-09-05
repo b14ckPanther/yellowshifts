@@ -157,6 +157,25 @@ void main() {
       // Must return null to stay on /login
       expect(redirectResult, isNull);
     });
+
+    test(
+        'setting isExplicitlySignedOutProvider immediately forces currentAuthUserProvider to null',
+        () {
+      final container = ProviderContainer(
+        overrides: [
+          authRepositoryProvider.overrideWithValue(mockRepo),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      expect(container.read(currentAuthUserProvider), isNotNull);
+
+      // Force sign out synchronously
+      container.read(isExplicitlySignedOutProvider.notifier).state = true;
+
+      // Immediately null without waiting for any async ticks or stream events
+      expect(container.read(currentAuthUserProvider), isNull);
+    });
   });
 }
 

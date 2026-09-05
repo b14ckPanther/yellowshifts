@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../core/auth/auth_repository.dart';
+import '../../../core/auth/auth_state_provider.dart';
 import '../../../core/design_system/tokens/app_colors.dart';
 import '../../../core/design_system/tokens/app_radius.dart';
 import '../../../core/design_system/tokens/app_spacing.dart';
@@ -58,6 +59,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
 
     try {
+      ref.read(isExplicitlySignedOutProvider.notifier).state = false;
       final authRepo = ref.read(authRepositoryProvider);
       await authRepo.signInWithPassword(email: email, password: password);
       if (mounted) {

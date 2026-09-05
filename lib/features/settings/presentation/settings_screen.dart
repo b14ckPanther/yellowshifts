@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import '../../../core/auth/auth_repository.dart';
 import '../../../core/auth/auth_state_provider.dart';
-import '../../../core/permissions/platform_admin_provider.dart';
 import '../../../core/design_system/tokens/app_colors.dart';
 import '../../../core/design_system/tokens/app_spacing.dart';
 import '../../../core/design_system/tokens/app_typography.dart';
@@ -283,23 +281,7 @@ class SettingsScreen extends ConsumerWidget {
                       size: AppButtonSize.large,
                       icon: LucideIcons.logOut,
                       onPressed: () async {
-                        try {
-                          await ref.read(authRepositoryProvider).signOut();
-                        } catch (_) {}
-                        ref
-                            .read(platformOperatingStationIdProvider.notifier)
-                            .state = null;
-                        ref.invalidate(activeStationIdProvider);
-                        ref.invalidate(currentAuthUserProvider);
-                        ref.invalidate(userMembershipsStreamProvider);
-                        ref.invalidate(currentProfileProvider);
-                        ref.invalidate(isPlatformAdminProvider);
-                        ref.invalidate(stationAccessContextProvider);
-                        if (context.mounted) {
-                          try {
-                            context.go('/login');
-                          } catch (_) {}
-                        }
+                        await performSignOut(ref, context);
                       },
                     ),
                     const SizedBox(height: AppSpacing.space32),
