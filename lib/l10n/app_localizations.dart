@@ -4525,6 +4525,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Duplicate punch detected. Please wait a moment before tapping again.'**
   String get nfcErrorDuplicatePunch;
+
+  /// No description provided for @stationSelectSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get stationSelectSignOut;
+
+  /// No description provided for @stationSelectRefresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get stationSelectRefresh;
+
+  /// No description provided for @stationSelectNoStationActionHint.
+  ///
+  /// In en, this message translates to:
+  /// **'You are not assigned to an active station yet. Contact your station manager to get assigned, or sign out to switch accounts.'**
+  String get stationSelectNoStationActionHint;
+
+  /// No description provided for @stationSelectSwitchAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch Account'**
+  String get stationSelectSwitchAccount;
 }
 
 class _AppLocalizationsDelegate

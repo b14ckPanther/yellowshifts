@@ -426,6 +426,7 @@ Widget _createTestRouterWidget({required Widget screen}) {
 
   return ProviderScope(
     overrides: [
+      currentAuthUserProvider.overrideWithValue(null),
       activeStationIdProvider.overrideWith(
           (ref) => ActiveStationIdNotifier(null, 'test-station-1')),
       activeMembershipProvider.overrideWith((ref) => _testMembership),

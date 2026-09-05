@@ -2466,4 +2466,17 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get nfcErrorDuplicatePunch =>
       'Duplicate punch detected. Please wait a moment before tapping again.';
+
+  @override
+  String get stationSelectSignOut => 'Sign Out';
+
+  @override
+  String get stationSelectRefresh => 'Refresh';
+
+  @override
+  String get stationSelectNoStationActionHint =>
+      'You are not assigned to an active station yet. Contact your station manager to get assigned, or sign out to switch accounts.';
+
+  @override
+  String get stationSelectSwitchAccount => 'Switch Account';
 }

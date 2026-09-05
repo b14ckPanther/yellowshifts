@@ -956,5 +956,9 @@
   "nfcErrorInvalidToken": "טוקן תג ה-NFC אינו חוקי או שפג תוקפו.",
   "nfcErrorInactiveStation": "התחנה שאליה משויך תג ה-NFC אינה פעילה כעת.",
   "nfcErrorUnauthorized": "אינך מורשה לבצע רישום נוכחות בתחנה זו.",
-  "nfcErrorDuplicatePunch": "זוהתה החתמה כפולה. אנא המתן מספר שניות לפני החתמה נוספת."
+  "nfcErrorDuplicatePunch": "זוהתה החתמה כפולה. אנא המתן מספר שניות לפני החתמה נוספת.",
+  "stationSelectSignOut": "התנתק",
+  "stationSelectRefresh": "רענן תחנות",
+  "stationSelectNoStationActionHint": "אינך משויך לתחנה פעילה כרגע. פנה למנהל התחנה לשיוך, או התנתק להחלפת חשבון.",
+  "stationSelectSwitchAccount": "החלף חשבון"
 }

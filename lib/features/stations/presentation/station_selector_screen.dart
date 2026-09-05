@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import '../../../app/localization/locale_provider.dart';
+import '../../../core/auth/auth_repository.dart';
+import '../../../core/auth/auth_state_provider.dart';
+import '../../../core/design_system/components/app_brand_mark.dart';
+import '../../../core/design_system/components/app_button.dart';
+import '../../../core/design_system/components/app_status_badge.dart';
+import '../../../core/design_system/components/app_surface.dart';
 import '../../../core/design_system/tokens/app_colors.dart';
 import '../../../core/design_system/tokens/app_radius.dart';
 import '../../../core/design_system/tokens/app_spacing.dart';
 import '../../../core/design_system/tokens/app_typography.dart';
-import '../../../core/design_system/components/app_brand_mark.dart';
-import '../../../core/design_system/components/app_surface.dart';
-import '../../../core/design_system/components/app_status_badge.dart';
 import '../../../core/errors/error_localizer.dart';
 import '../../../core/permissions/station_access_context.dart';
 import '../../../l10n/app_localizations.dart';
@@ -16,6 +20,58 @@ import '../../../shared/widgets/app_empty_state.dart';
 import '../../../shared/widgets/app_skeleton.dart';
 import '../domain/station_membership.dart';
 import 'active_station_provider.dart';
+
+Future<void> _confirmAndSignOut(BuildContext context, WidgetRef ref) async {
+  final l10n = AppLocalizations.of(context);
+  final confirmed = await showDialog<bool>(
+    context: context,
+    builder: (dialogCtx) => AlertDialog(
+      title: Text(l10n?.settingsSignOut ?? 'Sign Out'),
+      content: Text(
+          l10n?.platformLogoutConfirm ?? 'Are you sure you want to sign out?'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(dialogCtx).pop(false),
+          child: Text(l10n?.dialogCancel ?? 'Cancel'),
+        ),
+        ElevatedButton.icon(
+          onPressed: () => Navigator.of(dialogCtx).pop(true),
+          icon: const Icon(LucideIcons.logOut, size: 16),
+          label: Text(l10n?.settingsSignOut ?? 'Sign Out'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.colorError,
+            foregroundColor: Colors.white,
+          ),
+        ),
+      ],
+    ),
+  );
+
+  if (confirmed == true) {
+    try {
+      await ref.read(authRepositoryProvider).signOut();
+    } catch (_) {}
+    if (context.mounted) {
+      try {
+        context.go('/login');
+      } catch (_) {}
+    }
+  }
+}
+
+void _refreshMemberships(WidgetRef ref, BuildContext context) {
+  ref.invalidate(userMembershipsStreamProvider);
+  ref.invalidate(currentAuthUserProvider);
+  ref.invalidate(stationAccessContextProvider);
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(AppLocalizations.of(context)?.stationSelectRefresh ??
+          'Refreshing...'),
+      duration: const Duration(milliseconds: 1200),
+      behavior: SnackBarBehavior.floating,
+    ),
+  );
+}
 
 class StationSelectorScreen extends ConsumerWidget {
   const StationSelectorScreen({super.key});
@@ -27,9 +83,96 @@ class StationSelectorScreen extends ConsumerWidget {
     final membershipsAsync = ref.watch(userMembershipsStreamProvider);
     final isPlatformAdmin =
         ref.watch(stationAccessContextProvider).canAccessPlatformAdministration;
+    final user = ref.watch(currentAuthUserProvider);
+    final currentLocale = ref.watch(localeProvider);
 
     return Scaffold(
       backgroundColor: AppColors.colorSurfaceBase,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        centerTitle: false,
+        title: const AppBrandMark(size: 28.0, showTagline: false),
+        actions: [
+          if (user?.email != null)
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppSpacing.space8),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.space10,
+                    vertical: AppSpacing.space4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.colorSurfaceBrandSubtle,
+                    borderRadius: BorderRadius.circular(AppRadius.radiusPill),
+                    border: Border.all(
+                      color: AppColors.colorBorderSubtle,
+                      width: 1.0,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        LucideIcons.user,
+                        size: 13.0,
+                        color: AppColors.colorTextBrand,
+                      ),
+                      const SizedBox(width: AppSpacing.space6),
+                      Text(
+                        user!.email!,
+                        style: typography.caption.copyWith(
+                          color: AppColors.colorTextSecondary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          IconButton(
+            tooltip: currentLocale.languageCode == 'he' ? 'English' : 'עברית',
+            icon: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.space8,
+                vertical: AppSpacing.space2,
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(color: AppColors.colorBorderSubtle),
+                borderRadius: BorderRadius.circular(AppRadius.radiusSm),
+              ),
+              child: Text(
+                currentLocale.languageCode == 'he' ? 'EN' : 'עב',
+                style: typography.caption.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.colorTextPrimary,
+                ),
+              ),
+            ),
+            onPressed: () => ref.read(localeProvider.notifier).toggleLocale(),
+          ),
+          IconButton(
+            tooltip: l10n.stationSelectRefresh,
+            icon: const Icon(LucideIcons.refreshCw, size: 18),
+            color: AppColors.colorTextSecondary,
+            onPressed: () => _refreshMemberships(ref, context),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.space8),
+            child: AppButton(
+              label: l10n.stationSelectSignOut,
+              icon: LucideIcons.logOut,
+              variant: AppButtonVariant.outline,
+              size: AppButtonSize.small,
+              onPressed: () => _confirmAndSignOut(context, ref),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -41,9 +184,9 @@ class StationSelectorScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Center(
-                    child: AppBrandMark(size: 40.0, showTagline: true),
+                    child: AppBrandMark(size: 44.0, showTagline: true),
                   ),
-                  const SizedBox(height: AppSpacing.space32),
+                  const SizedBox(height: AppSpacing.space24),
                   Text(
                     l10n.stationSelectTitle,
                     textAlign: TextAlign.center,
@@ -119,17 +262,53 @@ class StationSelectorScreen extends ConsumerWidget {
                             : const SizedBox.shrink();
 
                         if (memberships.isEmpty) {
-                          return Column(
-                            children: [
-                              platformCard,
-                              Expanded(
-                                child: AppEmptyState(
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                platformCard,
+                                const SizedBox(height: AppSpacing.space12),
+                                AppEmptyState(
                                   title: l10n.emptyStationsTitle,
-                                  description: l10n.emptyStationsDescription,
+                                  description:
+                                      l10n.stationSelectNoStationActionHint,
                                   icon: LucideIcons.building,
                                 ),
-                              ),
-                            ],
+                                const SizedBox(height: AppSpacing.space24),
+                                Wrap(
+                                  spacing: AppSpacing.space12,
+                                  runSpacing: AppSpacing.space12,
+                                  alignment: WrapAlignment.center,
+                                  children: [
+                                    AppButton(
+                                      label: l10n.stationSelectRefresh,
+                                      icon: LucideIcons.refreshCw,
+                                      variant: AppButtonVariant.primary,
+                                      size: AppButtonSize.medium,
+                                      onPressed: () =>
+                                          _refreshMemberships(ref, context),
+                                    ),
+                                    AppButton(
+                                      label: l10n.stationSelectSignOut,
+                                      icon: LucideIcons.logOut,
+                                      variant: AppButtonVariant.outline,
+                                      size: AppButtonSize.medium,
+                                      onPressed: () =>
+                                          _confirmAndSignOut(context, ref),
+                                    ),
+                                    if (isPlatformAdmin)
+                                      AppButton(
+                                        label: l10n.platformAdminTitle,
+                                        icon: LucideIcons.shield,
+                                        variant: AppButtonVariant.secondary,
+                                        size: AppButtonSize.medium,
+                                        onPressed: () =>
+                                            context.go('/platform'),
+                                      ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           );
                         }
 
@@ -221,10 +400,38 @@ class StationSelectorScreen extends ConsumerWidget {
                             const SizedBox(height: AppSpacing.space12),
                         itemBuilder: (_, __) => const AppSkeletonCard(),
                       ),
-                      error: (err, _) => AppEmptyState(
-                        title: l10n.emptyStationsTitle,
-                        description: ErrorLocalizer.localize(err, l10n),
-                        icon: LucideIcons.alertCircle,
+                      error: (err, _) => Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            AppEmptyState(
+                              title: l10n.emptyStationsTitle,
+                              description: ErrorLocalizer.localize(err, l10n),
+                              icon: LucideIcons.alertCircle,
+                            ),
+                            const SizedBox(height: AppSpacing.space20),
+                            Wrap(
+                              spacing: AppSpacing.space12,
+                              runSpacing: AppSpacing.space12,
+                              children: [
+                                AppButton(
+                                  label: l10n.stationSelectRefresh,
+                                  icon: LucideIcons.refreshCw,
+                                  variant: AppButtonVariant.primary,
+                                  onPressed: () =>
+                                      _refreshMemberships(ref, context),
+                                ),
+                                AppButton(
+                                  label: l10n.stationSelectSignOut,
+                                  icon: LucideIcons.logOut,
+                                  variant: AppButtonVariant.outline,
+                                  onPressed: () =>
+                                      _confirmAndSignOut(context, ref),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

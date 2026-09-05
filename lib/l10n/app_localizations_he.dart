@@ -2436,4 +2436,17 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get nfcErrorDuplicatePunch =>
       'זוהתה החתמה כפולה. אנא המתן מספר שניות לפני החתמה נוספת.';
+
+  @override
+  String get stationSelectSignOut => 'התנתק';
+
+  @override
+  String get stationSelectRefresh => 'רענן תחנות';
+
+  @override
+  String get stationSelectNoStationActionHint =>
+      'אינך משויך לתחנה פעילה כרגע. פנה למנהל התחנה לשיוך, או התנתק להחלפת חשבון.';
+
+  @override
+  String get stationSelectSwitchAccount => 'החלף חשבון';
 }

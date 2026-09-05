@@ -1113,5 +1113,9 @@
   "nfcErrorInvalidToken": "Invalid or expired NFC tag token.",
   "nfcErrorInactiveStation": "The station for this NFC tag is currently inactive.",
   "nfcErrorUnauthorized": "You are not authorized for this station.",
-  "nfcErrorDuplicatePunch": "Duplicate punch detected. Please wait a moment before tapping again."
+  "nfcErrorDuplicatePunch": "Duplicate punch detected. Please wait a moment before tapping again.",
+  "stationSelectSignOut": "Sign Out",
+  "stationSelectRefresh": "Refresh",
+  "stationSelectNoStationActionHint": "You are not assigned to an active station yet. Contact your station manager to get assigned, or sign out to switch accounts.",
+  "stationSelectSwitchAccount": "Switch Account"
 }
