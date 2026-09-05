@@ -10,8 +10,15 @@ final authStateStreamProvider = StreamProvider<AuthState>((ref) {
 
 final currentAuthUserProvider = Provider<User?>((ref) {
   final authState = ref.watch(authStateStreamProvider);
-  return authState.value?.session?.user ??
-      ref.watch(authRepositoryProvider).currentUser;
+  if (authState.hasError) return null;
+  if (authState.hasValue) {
+    final state = authState.value!;
+    if (state.event == AuthChangeEvent.signedOut || state.session == null) {
+      return null;
+    }
+    return state.session?.user;
+  }
+  return ref.watch(authRepositoryProvider).currentUser;
 });
 
 final currentProfileProvider = FutureProvider<UserProfile?>((ref) async {

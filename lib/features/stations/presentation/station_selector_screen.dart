@@ -5,6 +5,7 @@ import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../app/localization/locale_provider.dart';
 import '../../../core/auth/auth_repository.dart';
 import '../../../core/auth/auth_state_provider.dart';
+import '../../../core/permissions/platform_admin_provider.dart';
 import '../../../core/design_system/components/app_brand_mark.dart';
 import '../../../core/design_system/components/app_button.dart';
 import '../../../core/design_system/components/app_status_badge.dart';
@@ -51,6 +52,13 @@ Future<void> _confirmAndSignOut(BuildContext context, WidgetRef ref) async {
     try {
       await ref.read(authRepositoryProvider).signOut();
     } catch (_) {}
+    ref.read(platformOperatingStationIdProvider.notifier).state = null;
+    ref.invalidate(activeStationIdProvider);
+    ref.invalidate(currentAuthUserProvider);
+    ref.invalidate(userMembershipsStreamProvider);
+    ref.invalidate(currentProfileProvider);
+    ref.invalidate(isPlatformAdminProvider);
+    ref.invalidate(stationAccessContextProvider);
     if (context.mounted) {
       try {
         context.go('/login');
