@@ -12,7 +12,10 @@ class ErrorLocalizer {
     String? code;
     String? message;
 
-    if (error is AppFailure) {
+    if (error is AuthException) {
+      code = error.statusCode;
+      message = error.message;
+    } else if (error is AppFailure) {
       code = error.code;
       message = error.message;
     } else if (error is PostgrestException) {
@@ -32,8 +35,51 @@ class ErrorLocalizer {
       message = error.toString();
     }
 
+    if (message != null) {
+      message = message
+          .replaceAll(RegExp(r'^minified:[a-zA-Z0-9_\$]+:\s*'), '')
+          .replaceAll(RegExp(r'^AuthFailure:\s*'), '')
+          .replaceAll(RegExp(r'^AuthException\(message:\s*'), '');
+    }
+
     final lowerMsg = (message ?? '').toLowerCase();
     final cleanCode = (code ?? '').toUpperCase();
+
+    // 0. Authentication & Login Errors
+    if (cleanCode == 'INVALID_CREDENTIALS' ||
+        cleanCode == 'INVALID_LOGIN_CREDENTIALS' ||
+        cleanCode == 'USER_NOT_FOUND' ||
+        cleanCode == 'WRONG_PASSWORD' ||
+        cleanCode == '400' && lowerMsg.contains('invalid') ||
+        lowerMsg.contains('invalid login credentials') ||
+        lowerMsg.contains('invalid_credentials') ||
+        lowerMsg.contains('invalid credentials') ||
+        lowerMsg.contains('user not found') ||
+        lowerMsg.contains('no such account') ||
+        lowerMsg.contains('account does not exist') ||
+        lowerMsg.contains('invalid email or password')) {
+      return l10n.loginErrorInvalidCredentials;
+    }
+
+    if (cleanCode == 'EMAIL_NOT_CONFIRMED' ||
+        lowerMsg.contains('email not confirmed') ||
+        lowerMsg.contains('email address not confirmed')) {
+      return l10n.loginErrorEmailNotConfirmed;
+    }
+
+    if (cleanCode == 'USER_BANNED' ||
+        cleanCode == 'USER_SUSPENDED' ||
+        lowerMsg.contains('user banned') ||
+        lowerMsg.contains('user_banned') ||
+        lowerMsg.contains('account suspended')) {
+      return l10n.loginErrorAccountSuspended;
+    }
+
+    if (cleanCode == 'OVER_REQUEST_RATE_LIMIT' ||
+        lowerMsg.contains('too many attempts') ||
+        lowerMsg.contains('over_request_rate_limit')) {
+      return l10n.loginErrorTooManyAttempts;
+    }
 
     // 1. Last active administrator protection
     if (cleanCode == 'P0001' ||

@@ -4549,6 +4549,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Switch Account'**
   String get stationSelectSwitchAccount;
+
+  /// No description provided for @loginErrorInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Account does not exist or incorrect password. Please check your credentials.'**
+  String get loginErrorInvalidCredentials;
+
+  /// No description provided for @loginErrorEmailNotConfirmed.
+  ///
+  /// In en, this message translates to:
+  /// **'Email address is not verified yet. Please check your inbox.'**
+  String get loginErrorEmailNotConfirmed;
+
+  /// No description provided for @loginErrorAccountSuspended.
+  ///
+  /// In en, this message translates to:
+  /// **'This account is inactive or has been suspended. Please contact your station manager.'**
+  String get loginErrorAccountSuspended;
+
+  /// No description provided for @loginErrorTooManyAttempts.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many login attempts. Please wait a moment and try again.'**
+  String get loginErrorTooManyAttempts;
 }
 
 class _AppLocalizationsDelegate

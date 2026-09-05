@@ -960,5 +960,9 @@
   "stationSelectSignOut": "התנתק",
   "stationSelectRefresh": "רענן תחנות",
   "stationSelectNoStationActionHint": "אינך משויך לתחנה פעילה כרגע. פנה למנהל התחנה לשיוך, או התנתק להחלפת חשבון.",
-  "stationSelectSwitchAccount": "החלף חשבון"
+  "stationSelectSwitchAccount": "החלף חשבון",
+  "loginErrorInvalidCredentials": "אימייל או סיסמה שגויים, או שהחשבון אינו קיים במערכת.",
+  "loginErrorEmailNotConfirmed": "כתובת האימייל טרם אומתה. אנא בדוק את תיבת הדואר הנכנס שלך.",
+  "loginErrorAccountSuspended": "חשבון זה הושבת או הושעה. אנא פנה למנהל התחנה.",
+  "loginErrorTooManyAttempts": "ניסיונות התחברות רבים מדי. אנא המתן מספר רגעים ונסה שוב."
 }

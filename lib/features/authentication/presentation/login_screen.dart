@@ -13,6 +13,7 @@ import '../../../core/design_system/components/app_text_field.dart';
 import '../../../core/design_system/components/app_feedback.dart';
 import '../../../core/design_system/responsive/app_breakpoints.dart';
 import '../../../app/localization/locale_provider.dart';
+import '../../../core/errors/error_localizer.dart';
 import '../../../l10n/app_localizations.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -72,16 +73,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
     } catch (e) {
       if (mounted) {
+        final localizedMsg = l10n != null
+            ? ErrorLocalizer.localize(e, l10n)
+            : 'Account does not exist or incorrect password.';
         setState(() {
-          _errorMessage = e
-              .toString()
-              .replaceAll('Exception: ', '')
-              .replaceAll('AuthFailure: ', '');
+          _errorMessage = localizedMsg;
           _isLoading = false;
         });
         AppFeedback.show(
           context,
-          message: _errorMessage!,
+          message: localizedMsg,
           type: AppFeedbackType.error,
         );
       }

@@ -2479,4 +2479,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get stationSelectSwitchAccount => 'Switch Account';
+
+  @override
+  String get loginErrorInvalidCredentials =>
+      'Account does not exist or incorrect password. Please check your credentials.';
+
+  @override
+  String get loginErrorEmailNotConfirmed =>
+      'Email address is not verified yet. Please check your inbox.';
+
+  @override
+  String get loginErrorAccountSuspended =>
+      'This account is inactive or has been suspended. Please contact your station manager.';
+
+  @override
+  String get loginErrorTooManyAttempts =>
+      'Too many login attempts. Please wait a moment and try again.';
 }

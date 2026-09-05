@@ -80,6 +80,19 @@ void main() {
       expect(ErrorLocalizer.localize(failure, l10nEn),
           l10nEn.errorMembershipDeactivated);
     });
+
+    test('Translates AuthException invalid login credentials to English', () {
+      const authErr =
+          AuthException('Invalid login credentials', statusCode: '400');
+      expect(ErrorLocalizer.localize(authErr, l10nEn),
+          l10nEn.loginErrorInvalidCredentials);
+    });
+
+    test('Translates minified web AuthFailure string cleanly', () {
+      const minifiedErr = 'minified:WG: Invalid login credentials (code: 400)';
+      expect(ErrorLocalizer.localize(minifiedErr, l10nEn),
+          l10nEn.loginErrorInvalidCredentials);
+    });
   });
 
   group('ErrorLocalizer Unit Tests - Hebrew RTL', () {
@@ -94,6 +107,15 @@ void main() {
       const failure = VersionConflictFailure('Version conflict');
       expect(ErrorLocalizer.localize(failure, l10nHe),
           l10nHe.errorVersionConflict);
+    });
+
+    test('Translates AuthException invalid login credentials to Hebrew', () {
+      const authErr =
+          AuthException('Invalid login credentials', statusCode: '400');
+      expect(ErrorLocalizer.localize(authErr, l10nHe),
+          l10nHe.loginErrorInvalidCredentials);
+      expect(ErrorLocalizer.localize(authErr, l10nHe),
+          contains('אימייל או סיסמה שגויים'));
     });
   });
 }

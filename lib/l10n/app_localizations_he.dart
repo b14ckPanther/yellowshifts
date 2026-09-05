@@ -2449,4 +2449,20 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get stationSelectSwitchAccount => 'החלף חשבון';
+
+  @override
+  String get loginErrorInvalidCredentials =>
+      'אימייל או סיסמה שגויים, או שהחשבון אינו קיים במערכת.';
+
+  @override
+  String get loginErrorEmailNotConfirmed =>
+      'כתובת האימייל טרם אומתה. אנא בדוק את תיבת הדואר הנכנס שלך.';
+
+  @override
+  String get loginErrorAccountSuspended =>
+      'חשבון זה הושבת או הושעה. אנא פנה למנהל התחנה.';
+
+  @override
+  String get loginErrorTooManyAttempts =>
+      'ניסיונות התחברות רבים מדי. אנא המתן מספר רגעים ונסה שוב.';
 }

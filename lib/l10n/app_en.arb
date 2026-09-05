@@ -1117,5 +1117,9 @@
   "stationSelectSignOut": "Sign Out",
   "stationSelectRefresh": "Refresh",
   "stationSelectNoStationActionHint": "You are not assigned to an active station yet. Contact your station manager to get assigned, or sign out to switch accounts.",
-  "stationSelectSwitchAccount": "Switch Account"
+  "stationSelectSwitchAccount": "Switch Account",
+  "loginErrorInvalidCredentials": "Account does not exist or incorrect password. Please check your credentials.",
+  "loginErrorEmailNotConfirmed": "Email address is not verified yet. Please check your inbox.",
+  "loginErrorAccountSuspended": "This account is inactive or has been suspended. Please contact your station manager.",
+  "loginErrorTooManyAttempts": "Too many login attempts. Please wait a moment and try again."
 }
