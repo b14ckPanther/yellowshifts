@@ -56,7 +56,7 @@ class StationAccessContext {
           activeMembership != null &&
           activeMembership!.status == MembershipStatus.active &&
           (activeMembership!.station == null ||
-              activeMembership!.station!.isActive));
+              (activeMembership!.station?.isActive ?? true)));
 
   /// The active role for the current station (null if not active member)
   StationRole? get activeRole => isActive ? activeMembership?.role : null;

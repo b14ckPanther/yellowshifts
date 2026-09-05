@@ -41,6 +41,7 @@ class RouterNotifier extends ChangeNotifier {
   final Ref _ref;
 
   RouterNotifier(this._ref) {
+    _ref.listen(authStateStreamProvider, (_, __) => notifyListeners());
     _ref.listen(currentAuthUserProvider, (_, __) => notifyListeners());
     _ref.listen(stationAccessContextProvider, (_, __) => notifyListeners());
     _ref.listen(isPlatformAdminProvider, (_, __) => notifyListeners());

@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../../core/design_system/responsive/app_breakpoints.dart';
+import '../../../core/design_system/tokens/app_colors.dart';
 import '../../../core/design_system/widgets/app_connectivity_banner.dart';
 import '../../../core/design_system/widgets/app_update_banner.dart';
+import '../../../core/permissions/station_access_context.dart';
 import '../../../features/platform_admin/presentation/widgets/platform_scope_banner.dart';
 import 'compact_app_shell.dart';
 import 'medium_app_shell.dart';
 import 'expanded_app_shell.dart';
 
-class AdaptiveAppShell extends StatelessWidget {
+class AdaptiveAppShell extends ConsumerWidget {
   final Widget child;
 
   const AdaptiveAppShell({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final access = ref.watch(stationAccessContextProvider);
+
+    if (!access.isAuthenticated) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          try {
+            context.go('/login');
+          } catch (_) {}
+        }
+      });
+      return const Scaffold(
+        backgroundColor: AppColors.colorSurfaceBase,
+        body: SizedBox.shrink(),
+      );
+    }
+
     final shellBody = Column(
       children: [
         const AppConnectivityBanner(),

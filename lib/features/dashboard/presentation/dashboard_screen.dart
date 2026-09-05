@@ -64,7 +64,8 @@ class _EmployeeDashboardView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activeMembership = ref.watch(activeMembershipProvider)!;
+    final activeMembership = ref.watch(activeMembershipProvider);
+    if (activeMembership == null) return const SizedBox.shrink();
     final myHoursState = ref.watch(myHoursControllerProvider);
     final isCompact = AppBreakpoints.isCompact(context);
     final l10n = AppLocalizations.of(context)!;
@@ -271,7 +272,8 @@ class _ManagerDashboardView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activeMembership = ref.watch(activeMembershipProvider)!;
+    final activeMembership = ref.watch(activeMembershipProvider);
+    if (activeMembership == null) return const SizedBox.shrink();
     final pulseAsync = ref.watch(stationPulseProvider);
     final isCompact = AppBreakpoints.isCompact(context);
     final l10n = AppLocalizations.of(context)!;
@@ -398,7 +400,8 @@ class _AdminDashboardView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final activeMembership = ref.watch(activeMembershipProvider)!;
+    final activeMembership = ref.watch(activeMembershipProvider);
+    if (activeMembership == null) return const SizedBox.shrink();
     final pulseAsync = ref.watch(stationPulseProvider);
     final isCompact = AppBreakpoints.isCompact(context);
     final l10n = AppLocalizations.of(context)!;

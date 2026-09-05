@@ -86,11 +86,25 @@ class StationSelectorScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final access = ref.watch(stationAccessContextProvider);
+    if (!access.isAuthenticated) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          try {
+            context.go('/login');
+          } catch (_) {}
+        }
+      });
+      return const Scaffold(
+        backgroundColor: AppColors.colorSurfaceBase,
+        body: SizedBox.shrink(),
+      );
+    }
+
     const typography = AppTypography();
     final l10n = AppLocalizations.of(context)!;
     final membershipsAsync = ref.watch(userMembershipsStreamProvider);
-    final isPlatformAdmin =
-        ref.watch(stationAccessContextProvider).canAccessPlatformAdministration;
+    final isPlatformAdmin = access.canAccessPlatformAdministration;
     final user = ref.watch(currentAuthUserProvider);
     final currentLocale = ref.watch(localeProvider);
 

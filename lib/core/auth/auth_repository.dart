@@ -65,10 +65,10 @@ class SupabaseAuthRepository implements AuthRepository {
   Future<void> signOut() async {
     try {
       await _client.auth.signOut();
-    } on AuthException catch (e) {
-      throw AuthFailure(e.message, originalError: e);
     } catch (e) {
-      throw UnknownFailure(e.toString(), originalError: e);
+      try {
+        await _client.auth.signOut(scope: SignOutScope.local);
+      } catch (_) {}
     }
   }
 
