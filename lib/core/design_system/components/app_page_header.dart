@@ -109,13 +109,17 @@ class AppPageHeader extends StatelessWidget {
                   ),
                 ),
                 if (actions != null && actions!.isNotEmpty) ...[
-                  const SizedBox(width: AppSpacing.space12),
+                  const SizedBox(width: AppSpacing.space16),
                   Flexible(
-                    child: Wrap(
-                      alignment: WrapAlignment.end,
-                      spacing: AppSpacing.space8,
-                      runSpacing: AppSpacing.space8,
-                      children: actions!,
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Wrap(
+                        alignment: WrapAlignment.end,
+                        spacing: AppSpacing.space8,
+                        runSpacing: AppSpacing.space8,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: actions!,
+                      ),
                     ),
                   ),
                 ],

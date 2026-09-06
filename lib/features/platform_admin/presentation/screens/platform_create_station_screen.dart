@@ -6,7 +6,9 @@ import '../../../../core/design_system/components/app_feedback.dart';
 import '../../../../core/design_system/components/app_page_header.dart';
 import '../../../../core/design_system/components/app_text_field.dart';
 import '../../../../core/design_system/tokens/app_colors.dart';
+import '../../../../core/design_system/tokens/app_radius.dart';
 import '../../../../core/design_system/tokens/app_spacing.dart';
+import '../../../../core/design_system/tokens/app_typography.dart';
 import '../../../../core/errors/error_localizer.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../data/platform_admin_repository.dart';
@@ -135,43 +137,51 @@ class _PlatformCreateStationScreenState
                       controller: _timezone,
                     ),
                     const SizedBox(height: AppSpacing.space12),
-                    DropdownButtonFormField<String>(
-                      key: ValueKey(_locale),
-                      initialValue: _locale,
-                      decoration: InputDecoration(
-                          labelText: l10n.platformStationLocale),
-                      items: const [
-                        DropdownMenuItem(value: 'he', child: Text('עברית')),
-                        DropdownMenuItem(value: 'en', child: Text('English')),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _customDropdownField<String>(
+                            label: l10n.platformStationLocale,
+                            value: _locale,
+                            items: const [
+                              DropdownMenuItem(value: 'he', child: Text('עברית (Hebrew)')),
+                              DropdownMenuItem(value: 'en', child: Text('English (US)')),
+                            ],
+                            onChanged: _saving
+                                ? null
+                                : (v) {
+                                    if (v != null) setState(() => _locale = v);
+                                  },
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.space12),
+                        Expanded(
+                          child: _customDropdownField<int>(
+                            label: l10n.platformWeekStart,
+                            value: _weekStart,
+                            items: [
+                              DropdownMenuItem(
+                                  value: 0, child: Text(l10n.platformWeekStartSunday)),
+                              DropdownMenuItem(
+                                  value: 1, child: Text(l10n.platformWeekStartMonday)),
+                            ],
+                            onChanged: _saving
+                                ? null
+                                : (v) {
+                                    if (v != null) setState(() => _weekStart = v);
+                                  },
+                          ),
+                        ),
                       ],
-                      onChanged: _saving
-                          ? null
-                          : (v) {
-                              if (v != null) setState(() => _locale = v);
-                            },
-                    ),
-                    const SizedBox(height: AppSpacing.space12),
-                    DropdownButtonFormField<int>(
-                      key: ValueKey(_weekStart),
-                      initialValue: _weekStart,
-                      decoration:
-                          InputDecoration(labelText: l10n.platformWeekStart),
-                      items: [
-                        DropdownMenuItem(
-                            value: 0,
-                            child: Text(l10n.platformWeekStartSunday)),
-                        DropdownMenuItem(
-                            value: 1,
-                            child: Text(l10n.platformWeekStartMonday)),
-                      ],
-                      onChanged: _saving
-                          ? null
-                          : (v) {
-                              if (v != null) setState(() => _weekStart = v);
-                            },
                     ),
                     const SizedBox(height: AppSpacing.space24),
-                    Text(l10n.platformInitialManager),
+                    Text(
+                      l10n.platformInitialManager,
+                      style: const AppTypography().bodyStrong.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.colorTextPrimary,
+                          ),
+                    ),
                     const SizedBox(height: AppSpacing.space12),
                     AppTextField(
                         label: l10n.platformManagerEmail, controller: _email),
@@ -200,6 +210,47 @@ class _PlatformCreateStationScreenState
           ],
         ),
       ),
+    );
+  }
+
+  Widget _customDropdownField<T>({
+    required String label,
+    required T value,
+    required List<DropdownMenuItem<T>> items,
+    required ValueChanged<T?>? onChanged,
+  }) {
+    const typography = AppTypography();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          label,
+          style: typography.caption.copyWith(
+            color: AppColors.colorTextSecondary,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: AppSpacing.space6),
+        Container(
+          height: 48,
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.space12),
+          decoration: BoxDecoration(
+            color: AppColors.colorSurfaceRaised,
+            borderRadius: AppRadius.borderMd,
+            border: Border.all(color: AppColors.colorBorderSubtle),
+          ),
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<T>(
+              value: value,
+              isExpanded: true,
+              style: typography.bodyLarge.copyWith(color: AppColors.colorTextPrimary),
+              items: items,
+              onChanged: onChanged,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -67,52 +67,77 @@ class PlatformStationsScreen extends ConsumerWidget {
                           _StationCard(station: stations[i]),
                     );
                   }
+                  const typography = AppTypography();
                   return SingleChildScrollView(
                     padding: AppSpacing.insetHorizontal16,
                     child: AppSurface(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: DataTable(
-                          dataRowMinHeight: 56,
-                          dataRowMaxHeight: 64,
-                          columnSpacing: 24,
-                          columns: [
-                            DataColumn(label: Text(l10n.platformStationName)),
-                            DataColumn(label: Text(l10n.platformStationCode)),
-                            DataColumn(label: Text(l10n.platformStationStatus)),
-                            DataColumn(label: Text(l10n.platformColEmployees)),
-                            DataColumn(label: Text(l10n.platformColManagers)),
-                            DataColumn(
-                                label: Text(l10n.platformColShiftManagers)),
-                            DataColumn(label: Text(l10n.platformColNfcTags)),
-                            DataColumn(label: Text(l10n.platformActionsColumn)),
-                          ],
-                          rows: [
-                            for (final station in stations)
-                              DataRow(
-                                onSelectChanged: (_) => context.go(
-                                    '/platform/stations/${station.id}/managers'),
-                                cells: [
-                                  DataCell(
-                                    Text(
-                                      station.name,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w600),
+                      padding: EdgeInsets.zero,
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: constraints.maxWidth,
+                              ),
+                              child: DataTable(
+                                showCheckboxColumn: false,
+                                dataRowMinHeight: 56,
+                                dataRowMaxHeight: 64,
+                                columnSpacing: 24,
+                                horizontalMargin: 20,
+                                headingRowColor: WidgetStateProperty.all(
+                                  AppColors.colorSurfaceBase,
+                                ),
+                                headingTextStyle: typography.bodyStrong.copyWith(
+                                  color: AppColors.colorTextSecondary,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                dataTextStyle: typography.bodyMedium.copyWith(
+                                  color: AppColors.colorTextPrimary,
+                                ),
+                                columns: [
+                                  DataColumn(label: Text(l10n.platformStationName)),
+                                  DataColumn(label: Text(l10n.platformStationCode)),
+                                  DataColumn(label: Text(l10n.platformStationStatus)),
+                                  DataColumn(label: Text(l10n.platformColEmployees)),
+                                  DataColumn(label: Text(l10n.platformColManagers)),
+                                  DataColumn(
+                                      label: Text(l10n.platformColShiftManagers)),
+                                  DataColumn(label: Text(l10n.platformColNfcTags)),
+                                  DataColumn(label: Text(l10n.platformActionsColumn)),
+                                ],
+                                rows: [
+                                  for (final station in stations)
+                                    DataRow(
+                                      onSelectChanged: (_) => context.go(
+                                          '/platform/stations/${station.id}/managers'),
+                                      cells: [
+                                        DataCell(
+                                          Text(
+                                            station.name,
+                                            style: typography.bodyStrong.copyWith(
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                        DataCell(Text(station.code,
+                                            style: typography.caption)),
+                                        DataCell(_statusBadge(station, l10n)),
+                                        DataCell(Text('${station.activeMembers}')),
+                                        DataCell(Text('${station.adminCount}')),
+                                        DataCell(Text('${station.shiftManagerCount}')),
+                                        DataCell(Text(
+                                            '${station.nfcTagsActive}/${station.nfcTagsTotal}')),
+                                        DataCell(
+                                            _rowActions(context, ref, station, l10n)),
+                                      ],
                                     ),
-                                  ),
-                                  DataCell(Text(station.code)),
-                                  DataCell(_statusBadge(station, l10n)),
-                                  DataCell(Text('${station.activeMembers}')),
-                                  DataCell(Text('${station.adminCount}')),
-                                  DataCell(Text('${station.shiftManagerCount}')),
-                                  DataCell(Text(
-                                      '${station.nfcTagsActive}/${station.nfcTagsTotal}')),
-                                  DataCell(
-                                      _rowActions(context, ref, station, l10n)),
                                 ],
                               ),
-                          ],
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   );
