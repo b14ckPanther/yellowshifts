@@ -73,6 +73,9 @@ class PlatformStationsScreen extends ConsumerWidget {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: DataTable(
+                          dataRowMinHeight: 56,
+                          dataRowMaxHeight: 64,
+                          columnSpacing: 24,
                           columns: [
                             DataColumn(label: Text(l10n.platformStationName)),
                             DataColumn(label: Text(l10n.platformStationCode)),
@@ -86,24 +89,28 @@ class PlatformStationsScreen extends ConsumerWidget {
                           ],
                           rows: [
                             for (final station in stations)
-                              DataRow(cells: [
-                                DataCell(
-                                  Text(
-                                    station.name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600),
+                              DataRow(
+                                onSelectChanged: (_) => context.go(
+                                    '/platform/stations/${station.id}/managers'),
+                                cells: [
+                                  DataCell(
+                                    Text(
+                                      station.name,
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.w600),
+                                    ),
                                   ),
-                                ),
-                                DataCell(Text(station.code)),
-                                DataCell(_statusBadge(station, l10n)),
-                                DataCell(Text('${station.activeMembers}')),
-                                DataCell(Text('${station.adminCount}')),
-                                DataCell(Text('${station.shiftManagerCount}')),
-                                DataCell(Text(
-                                    '${station.nfcTagsActive}/${station.nfcTagsTotal}')),
-                                DataCell(
-                                    _rowActions(context, ref, station, l10n)),
-                              ]),
+                                  DataCell(Text(station.code)),
+                                  DataCell(_statusBadge(station, l10n)),
+                                  DataCell(Text('${station.activeMembers}')),
+                                  DataCell(Text('${station.adminCount}')),
+                                  DataCell(Text('${station.shiftManagerCount}')),
+                                  DataCell(Text(
+                                      '${station.nfcTagsActive}/${station.nfcTagsTotal}')),
+                                  DataCell(
+                                      _rowActions(context, ref, station, l10n)),
+                                ],
+                              ),
                           ],
                         ),
                       ),
