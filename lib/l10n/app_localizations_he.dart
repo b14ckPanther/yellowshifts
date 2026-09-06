@@ -1021,7 +1021,12 @@ class AppLocalizationsHe extends AppLocalizations {
   String get employeeEditAction => 'עריכת פרופיל';
 
   @override
-  String get employeeResetPasswordTitle => 'איפוס סיסמת עובד';
+  String get employeeResetPasswordTitle => 'איפוס / שינוי סיסמת עובד';
+
+  @override
+  String employeeResetPasswordSubtitle(String name) {
+    return 'הגדרת סיסמה חדשה או יצירת סיסמה אקראית ומאובטחת עבור $name.';
+  }
 
   @override
   String employeeResetPasswordConfirm(String name) {
@@ -1029,19 +1034,45 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
+  String get employeeResetPasswordCustomLabel => 'סיסמה חדשה';
+
+  @override
+  String get employeeResetPasswordCustomHint =>
+      'הזן סיסמה חדשה (מינימום 6 תווים)...';
+
+  @override
+  String get employeeResetPasswordGenerateAction => 'צור סיסמה אקראית';
+
+  @override
+  String get employeeResetPasswordSetAction => 'הגדר סיסמה';
+
+  @override
+  String get employeeResetPasswordMinLengthError =>
+      'הסיסמה חייבת להכיל לפחות 6 תווים';
+
+  @override
   String get employeeResetPasswordGenerate => 'יצירת סיסמה חדשה';
 
   @override
-  String get employeeResetPasswordSuccessTitle => 'סיסמה זמנית חדשה';
+  String get employeeResetPasswordSuccessTitle => 'הסיסמה הוגדרה בהצלחה';
 
   @override
   String employeeResetPasswordSuccessDesc(String name) {
-    return 'הונפקה סיסמה זמנית חדשה עבור $name:';
+    return 'הסיסמה החדשה עבור $name היא:';
+  }
+
+  @override
+  String employeeResetPasswordSuccessCustom(String name) {
+    return 'הסיסמה עודכנה בהצלחה עבור $name.';
   }
 
   @override
   String get employeeResetPasswordNotice =>
-      'מסור סיסמה זו לעובד. היא לא תוצג שוב במערכת.';
+      'מסור סיסמה זו לעובד. הוא יוכל להתחבר מיד ללא צורך בסיסמה הישנה.';
+
+  @override
+  String get employeeResetPasswordNoticeCustom =>
+      'מסור סיסמה זו לעובד. הוא יוכל להתחבר מיד ללא צורך בסיסמה הישנה.';
 
   @override
   String get employeeRevokeSessionsConfirm => 'ניתוק חיבורים פעילים';

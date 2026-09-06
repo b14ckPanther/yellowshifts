@@ -2006,11 +2006,47 @@ abstract class AppLocalizations {
   /// **'Reset Employee Password'**
   String get employeeResetPasswordTitle;
 
+  /// No description provided for @employeeResetPasswordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a custom password or generate a random secure password for {name}.'**
+  String employeeResetPasswordSubtitle(String name);
+
   /// No description provided for @employeeResetPasswordConfirm.
   ///
   /// In en, this message translates to:
   /// **'This will generate a new temporary password for {name} and invalidate all active sessions.'**
   String employeeResetPasswordConfirm(String name);
+
+  /// No description provided for @employeeResetPasswordCustomLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'New Password'**
+  String get employeeResetPasswordCustomLabel;
+
+  /// No description provided for @employeeResetPasswordCustomHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter custom password (min 6 characters)...'**
+  String get employeeResetPasswordCustomHint;
+
+  /// No description provided for @employeeResetPasswordGenerateAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Generate Random'**
+  String get employeeResetPasswordGenerateAction;
+
+  /// No description provided for @employeeResetPasswordSetAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Password'**
+  String get employeeResetPasswordSetAction;
+
+  /// No description provided for @employeeResetPasswordMinLengthError.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get employeeResetPasswordMinLengthError;
 
   /// No description provided for @employeeResetPasswordGenerate.
   ///
@@ -2021,20 +2057,32 @@ abstract class AppLocalizations {
   /// No description provided for @employeeResetPasswordSuccessTitle.
   ///
   /// In en, this message translates to:
-  /// **'New Temporary Password'**
+  /// **'Password Set Successfully'**
   String get employeeResetPasswordSuccessTitle;
 
   /// No description provided for @employeeResetPasswordSuccessDesc.
   ///
   /// In en, this message translates to:
-  /// **'A new temporary password has been issued for {name}:'**
+  /// **'The new password for {name} is:'**
   String employeeResetPasswordSuccessDesc(String name);
+
+  /// No description provided for @employeeResetPasswordSuccessCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Password updated successfully for {name}.'**
+  String employeeResetPasswordSuccessCustom(String name);
 
   /// No description provided for @employeeResetPasswordNotice.
   ///
   /// In en, this message translates to:
-  /// **'Provide this password to the employee. It will not be shown again.'**
+  /// **'Provide this password to the employee. They can log in immediately without their old password.'**
   String get employeeResetPasswordNotice;
+
+  /// No description provided for @employeeResetPasswordNoticeCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Share this password with the employee. They can log in immediately without their old password.'**
+  String get employeeResetPasswordNoticeCustom;
 
   /// No description provided for @employeeRevokeSessionsConfirm.
   ///

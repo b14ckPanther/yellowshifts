@@ -1044,24 +1044,55 @@ class AppLocalizationsEn extends AppLocalizations {
   String get employeeResetPasswordTitle => 'Reset Employee Password';
 
   @override
+  String employeeResetPasswordSubtitle(String name) {
+    return 'Set a custom password or generate a random secure password for $name.';
+  }
+
+  @override
   String employeeResetPasswordConfirm(String name) {
     return 'This will generate a new temporary password for $name and invalidate all active sessions.';
   }
 
   @override
+  String get employeeResetPasswordCustomLabel => 'New Password';
+
+  @override
+  String get employeeResetPasswordCustomHint =>
+      'Enter custom password (min 6 characters)...';
+
+  @override
+  String get employeeResetPasswordGenerateAction => 'Generate Random';
+
+  @override
+  String get employeeResetPasswordSetAction => 'Set Password';
+
+  @override
+  String get employeeResetPasswordMinLengthError =>
+      'Password must be at least 6 characters';
+
+  @override
   String get employeeResetPasswordGenerate => 'Generate New Password';
 
   @override
-  String get employeeResetPasswordSuccessTitle => 'New Temporary Password';
+  String get employeeResetPasswordSuccessTitle => 'Password Set Successfully';
 
   @override
   String employeeResetPasswordSuccessDesc(String name) {
-    return 'A new temporary password has been issued for $name:';
+    return 'The new password for $name is:';
+  }
+
+  @override
+  String employeeResetPasswordSuccessCustom(String name) {
+    return 'Password updated successfully for $name.';
   }
 
   @override
   String get employeeResetPasswordNotice =>
-      'Provide this password to the employee. It will not be shown again.';
+      'Provide this password to the employee. They can log in immediately without their old password.';
+
+  @override
+  String get employeeResetPasswordNoticeCustom =>
+      'Share this password with the employee. They can log in immediately without their old password.';
 
   @override
   String get employeeRevokeSessionsConfirm => 'Revoke Active Sessions';

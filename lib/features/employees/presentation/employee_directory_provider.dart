@@ -294,13 +294,14 @@ class EmployeeDirectoryNotifier extends StateNotifier<EmployeeDirectoryState> {
     }
   }
 
-  Future<String> resetPassword(String userId) async {
+  Future<String> resetPassword(String userId, {String? newPassword}) async {
     final stationId = _ref.read(activeStationIdProvider);
     if (stationId == null) throw Exception('No active station selected');
 
     return await _repository.resetEmployeePassword(
       stationId: stationId,
       userId: userId,
+      newPassword: newPassword,
     );
   }
 

@@ -25,16 +25,20 @@ serve(async (req) => {
     }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
+    const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
     const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+
+    const jwt = authHeader.replace(/^Bearer\s+/i, "");
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+
+    const { data: { user: callerUser }, error: callerError } = await adminClient.auth.getUser(jwt);
+    if (callerError || !callerUser) {
+      return json(401, { error: { code: "UNAUTHORIZED", message: "Invalid or expired session" } });
+    }
 
     const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
       global: { headers: { Authorization: authHeader } },
     });
-
-    const { data: { user: callerUser }, error: callerError } = await callerClient.auth.getUser();
-    if (callerError || !callerUser) {
-      return json(401, { error: { code: "UNAUTHORIZED", message: "Invalid or expired session" } });
-    }
 
     const { data: isPlatformAdmin, error: adminCheckError } = await callerClient.rpc("is_platform_admin");
     if (adminCheckError || isPlatformAdmin !== true) {

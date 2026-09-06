@@ -24,14 +24,14 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
     const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
 
-    const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
+    const jwt = authHeader.replace(/^Bearer\s+/i, "");
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { data: { user: callerUser }, error: callerError } = await callerClient.auth.getUser();
+    // Verify caller session using JWT token
+    const { data: { user: callerUser }, error: callerError } = await adminClient.auth.getUser(jwt);
     if (callerError || !callerUser) {
       return new Response(
-        JSON.stringify({ error: { code: "UNAUTHORIZED", message: "Invalid session" } }),
+        JSON.stringify({ error: { code: "UNAUTHORIZED", message: "Invalid or expired session" } }),
         { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -46,19 +46,35 @@ serve(async (req) => {
       );
     }
 
-    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+    // Verify caller is active ADMIN for station_id or Platform Admin
+    let isAuthorized = false;
+    let actorScope = "STATION_ADMIN";
 
-    // Verify caller is active ADMIN for station_id
-    const { data: adminMembership } = await adminClient
-      .from("station_memberships")
-      .select("id")
-      .eq("station_id", station_id)
-      .eq("user_id", callerUser.id)
-      .eq("role", "ADMIN")
-      .eq("status", "ACTIVE")
-      .single();
+    const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: platformAdminFlag } = await callerClient.rpc("is_platform_admin");
+    if (platformAdminFlag === true) {
+      isAuthorized = true;
+      actorScope = "PLATFORM_ADMIN";
+    }
 
-    if (!adminMembership) {
+    if (!isAuthorized) {
+      const { data: adminMembership } = await adminClient
+        .from("station_memberships")
+        .select("id")
+        .eq("station_id", station_id)
+        .eq("user_id", callerUser.id)
+        .eq("role", "ADMIN")
+        .eq("status", "ACTIVE")
+        .single();
+
+      if (adminMembership) {
+        isAuthorized = true;
+      }
+    }
+
+    if (!isAuthorized) {
       return new Response(
         JSON.stringify({ error: { code: "FORBIDDEN", message: "Caller is not an active Admin of this station" } }),
         { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -75,7 +91,7 @@ serve(async (req) => {
       action: "SESSIONS_REVOKED",
       target_type: "user",
       target_id: user_id,
-      metadata: { initiated_by: "STATION_ADMIN" },
+      metadata: { initiated_by: actorScope },
     });
 
     return new Response(

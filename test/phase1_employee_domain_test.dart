@@ -79,8 +79,9 @@ class MockEmployeeRepository implements EmployeeRepository {
   Future<String> resetEmployeePassword({
     required String stationId,
     required String userId,
+    String? newPassword,
   }) async {
-    return 'Ys#ResetPass456';
+    return newPassword ?? 'Ys#ResetPass456';
   }
 
   @override
@@ -181,6 +182,31 @@ void main() {
       expect(result.isNewUser, isTrue);
       expect(result.temporaryPassword, 'Ys#Pass123456');
       expect(result.status, 'NEW_USER_CREATED');
+    });
+  });
+
+  group('Employee Password Reset', () {
+    test('Reset password with custom password returns custom password',
+        () async {
+      final repo = MockEmployeeRepository();
+      final result = await repo.resetEmployeePassword(
+        stationId: 'sta-1',
+        userId: 'user-1',
+        newPassword: 'MyCustomSecurePassword123!',
+      );
+
+      expect(result, 'MyCustomSecurePassword123!');
+    });
+
+    test('Reset password without custom password returns generated password',
+        () async {
+      final repo = MockEmployeeRepository();
+      final result = await repo.resetEmployeePassword(
+        stationId: 'sta-1',
+        userId: 'user-1',
+      );
+
+      expect(result, 'Ys#ResetPass456');
     });
   });
 }

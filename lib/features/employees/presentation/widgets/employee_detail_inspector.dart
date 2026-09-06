@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import '../../../../core/design_system/tokens/app_colors.dart';
@@ -8,7 +7,6 @@ import '../../../../core/design_system/tokens/app_spacing.dart';
 import '../../../../core/design_system/tokens/app_typography.dart';
 import '../../../../core/design_system/components/app_avatar.dart';
 import '../../../../core/design_system/components/app_button.dart';
-import '../../../../core/design_system/components/app_dialog.dart';
 import '../../../../core/design_system/components/app_feedback.dart';
 import '../../../../core/design_system/components/app_status_badge.dart';
 import '../../../../core/errors/error_localizer.dart';
@@ -18,6 +16,7 @@ import '../../../stations/domain/station_membership.dart';
 import '../../domain/employee_details.dart';
 import '../employee_directory_provider.dart';
 import 'edit_employee_dialog.dart';
+import 'reset_password_dialog.dart';
 
 class EmployeeDetailInspector extends ConsumerStatefulWidget {
   final EmployeeDetails employee;
@@ -89,101 +88,7 @@ class _EmployeeDetailInspectorState
   }
 
   Future<void> _handleResetPassword() async {
-    final l10n = AppLocalizations.of(context)!;
-    const typography = AppTypography();
-
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (ctx) => AppDialog(
-        title: l10n.employeeResetPasswordTitle,
-        subtitle: l10n.employeeResetPasswordConfirm(widget.employee.fullName),
-        actions: [
-          AppButton(
-            label: l10n.dialogCancel,
-            variant: AppButtonVariant.outline,
-            onPressed: () => Navigator.of(ctx).pop(false),
-          ),
-          const SizedBox(width: AppSpacing.space8),
-          AppButton(
-            label: l10n.employeeResetPasswordGenerate,
-            variant: AppButtonVariant.destructive,
-            onPressed: () => Navigator.of(ctx).pop(true),
-          ),
-        ],
-      ),
-    );
-
-    if (confirmed != true || !mounted) return;
-
-    setState(() => _isLoadingAction = true);
-    try {
-      final tempPassword = await ref
-          .read(employeeDirectoryProvider.notifier)
-          .resetPassword(widget.employee.userId);
-
-      if (mounted) {
-        await showDialog<void>(
-          context: context,
-          builder: (ctx) => AppDialog(
-            title: l10n.employeeResetPasswordSuccessTitle,
-            subtitle:
-                l10n.employeeResetPasswordSuccessDesc(widget.employee.fullName),
-            content: Container(
-              padding: AppSpacing.insetAll16,
-              decoration: BoxDecoration(
-                color: AppColors.colorSurfaceBase,
-                borderRadius: AppRadius.borderMd,
-                border: Border.all(color: AppColors.colorBorderSubtle),
-              ),
-              child: Column(
-                children: [
-                  SelectableText(
-                    tempPassword,
-                    style: typography.headlineSmall.copyWith(
-                      letterSpacing: 1.5,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.colorTextBrand,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.space8),
-                  Text(
-                    l10n.employeeResetPasswordNotice,
-                    style: typography.caption
-                        .copyWith(color: AppColors.colorTextSecondary),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              AppButton(
-                label: l10n.copyPassword,
-                icon: LucideIcons.copy,
-                variant: AppButtonVariant.outline,
-                onPressed: () {
-                  Clipboard.setData(ClipboardData(text: tempPassword));
-                  AppFeedback.show(context, message: l10n.passwordCopied);
-                  Navigator.of(ctx).pop();
-                },
-              ),
-              const SizedBox(width: AppSpacing.space8),
-              AppButton(
-                label: l10n.closeButton,
-                onPressed: () => Navigator.of(ctx).pop(),
-              ),
-            ],
-          ),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        final localizedError = ErrorLocalizer.localize(e, l10n);
-        AppFeedback.show(context,
-            message: localizedError, type: AppFeedbackType.error);
-      }
-    } finally {
-      if (mounted) setState(() => _isLoadingAction = false);
-    }
+    await ResetEmployeePasswordDialog.show(context, employee: widget.employee);
   }
 
   Future<void> _handleRevokeSessions() async {

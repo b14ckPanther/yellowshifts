@@ -257,8 +257,9 @@ class _MockTestEmployeeRepository implements EmployeeRepository {
   Future<String> resetEmployeePassword({
     required String stationId,
     required String userId,
+    String? newPassword,
   }) async =>
-      'Ys#Temp123';
+      newPassword ?? 'Ys#Temp123';
 
   @override
   Future<void> revokeEmployeeSessions({

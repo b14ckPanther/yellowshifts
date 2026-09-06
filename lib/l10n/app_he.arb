@@ -405,7 +405,15 @@
   "employeeEditSaveButton": "שמירת שינויים",
   "employeeEditSuccessToast": "פרטי העובד עודכנו בהצלחה",
   "employeeEditAction": "עריכת פרופיל",
-  "employeeResetPasswordTitle": "איפוס סיסמת עובד",
+  "employeeResetPasswordTitle": "איפוס / שינוי סיסמת עובד",
+  "employeeResetPasswordSubtitle": "הגדרת סיסמה חדשה או יצירת סיסמה אקראית ומאובטחת עבור {name}.",
+  "@employeeResetPasswordSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "employeeResetPasswordConfirm": "פעולה זו תיצור סיסמה זמנית חדשה עבור {name} ותנתק את כל החיבורים הפעילים.",
   "@employeeResetPasswordConfirm": {
     "placeholders": {
@@ -414,9 +422,14 @@
       }
     }
   },
+  "employeeResetPasswordCustomLabel": "סיסמה חדשה",
+  "employeeResetPasswordCustomHint": "הזן סיסמה חדשה (מינימום 6 תווים)...",
+  "employeeResetPasswordGenerateAction": "צור סיסמה אקראית",
+  "employeeResetPasswordSetAction": "הגדר סיסמה",
+  "employeeResetPasswordMinLengthError": "הסיסמה חייבת להכיל לפחות 6 תווים",
   "employeeResetPasswordGenerate": "יצירת סיסמה חדשה",
-  "employeeResetPasswordSuccessTitle": "סיסמה זמנית חדשה",
-  "employeeResetPasswordSuccessDesc": "הונפקה סיסמה זמנית חדשה עבור {name}:",
+  "employeeResetPasswordSuccessTitle": "הסיסמה הוגדרה בהצלחה",
+  "employeeResetPasswordSuccessDesc": "הסיסמה החדשה עבור {name} היא:",
   "@employeeResetPasswordSuccessDesc": {
     "placeholders": {
       "name": {
@@ -424,7 +437,16 @@
       }
     }
   },
-  "employeeResetPasswordNotice": "מסור סיסמה זו לעובד. היא לא תוצג שוב במערכת.",
+  "employeeResetPasswordSuccessCustom": "הסיסמה עודכנה בהצלחה עבור {name}.",
+  "@employeeResetPasswordSuccessCustom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "employeeResetPasswordNotice": "מסור סיסמה זו לעובד. הוא יוכל להתחבר מיד ללא צורך בסיסמה הישנה.",
+  "employeeResetPasswordNoticeCustom": "מסור סיסמה זו לעובד. הוא יוכל להתחבר מיד ללא צורך בסיסמה הישנה.",
   "employeeRevokeSessionsConfirm": "ניתוק חיבורים פעילים",
   "employeeRevokeSessionsSuccess": "כל החיבורים הפעילים נותקו בהצלחה",
   "errorLastAdminRequired": "לא ניתן להסיר או להשבית את מנהל התחנה הפעיל האחרון.",

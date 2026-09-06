@@ -309,18 +309,21 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
     const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
 
-    // 1. Caller client to authenticate and verify identity
-    const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
+    const jwt = authHeader.replace(/^Bearer\s+/i, "");
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { data: { user: callerUser }, error: callerError } = await callerClient.auth.getUser();
+    // 1. Verify caller session using JWT token
+    const { data: { user: callerUser }, error: callerError } = await adminClient.auth.getUser(jwt);
     if (callerError || !callerUser) {
       return new Response(
         JSON.stringify({ error: { code: "UNAUTHORIZED", message: "Invalid or expired session" } }),
         { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+    const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
 
     const body = await req.json().catch(() => ({}));
     const { export_id } = body;

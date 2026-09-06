@@ -406,6 +406,14 @@
   "employeeEditSuccessToast": "Employee details updated successfully",
   "employeeEditAction": "Edit Profile",
   "employeeResetPasswordTitle": "Reset Employee Password",
+  "employeeResetPasswordSubtitle": "Set a custom password or generate a random secure password for {name}.",
+  "@employeeResetPasswordSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "employeeResetPasswordConfirm": "This will generate a new temporary password for {name} and invalidate all active sessions.",
   "@employeeResetPasswordConfirm": {
     "placeholders": {
@@ -414,9 +422,14 @@
       }
     }
   },
+  "employeeResetPasswordCustomLabel": "New Password",
+  "employeeResetPasswordCustomHint": "Enter custom password (min 6 characters)...",
+  "employeeResetPasswordGenerateAction": "Generate Random",
+  "employeeResetPasswordSetAction": "Set Password",
+  "employeeResetPasswordMinLengthError": "Password must be at least 6 characters",
   "employeeResetPasswordGenerate": "Generate New Password",
-  "employeeResetPasswordSuccessTitle": "New Temporary Password",
-  "employeeResetPasswordSuccessDesc": "A new temporary password has been issued for {name}:",
+  "employeeResetPasswordSuccessTitle": "Password Set Successfully",
+  "employeeResetPasswordSuccessDesc": "The new password for {name} is:",
   "@employeeResetPasswordSuccessDesc": {
     "placeholders": {
       "name": {
@@ -424,7 +437,16 @@
       }
     }
   },
-  "employeeResetPasswordNotice": "Provide this password to the employee. It will not be shown again.",
+  "employeeResetPasswordSuccessCustom": "Password updated successfully for {name}.",
+  "@employeeResetPasswordSuccessCustom": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "employeeResetPasswordNotice": "Provide this password to the employee. They can log in immediately without their old password.",
+  "employeeResetPasswordNoticeCustom": "Share this password with the employee. They can log in immediately without their old password.",
   "employeeRevokeSessionsConfirm": "Revoke Active Sessions",
   "employeeRevokeSessionsSuccess": "Active sessions revoked successfully",
   "errorLastAdminRequired": "Cannot demote or deactivate the last active Administrator of this station.",

@@ -40,14 +40,17 @@ serve(async (req) => {
       return json(401, { error: { code: "UNAUTHORIZED", message: "Missing Authorization header" } });
     }
 
-    const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
-      global: { headers: { Authorization: authHeader } },
-    });
+    const jwt = authHeader.replace(/^Bearer\s+/i, "");
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
 
-    const { data: { user: callerUser }, error: callerError } = await callerClient.auth.getUser();
+    const { data: { user: callerUser }, error: callerError } = await adminClient.auth.getUser(jwt);
     if (callerError || !callerUser) {
       return json(401, { error: { code: "UNAUTHORIZED", message: "Invalid or expired session" } });
     }
+
+    const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
 
     const { data: isPlatformAdmin, error: adminCheckError } = await callerClient.rpc("is_platform_admin");
     if (adminCheckError || isPlatformAdmin !== true) {

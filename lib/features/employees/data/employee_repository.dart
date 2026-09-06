@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/errors/app_failure.dart';
@@ -48,6 +49,7 @@ abstract class EmployeeRepository {
   Future<String> resetEmployeePassword({
     required String stationId,
     required String userId,
+    String? newPassword,
   });
 
   Future<void> revokeEmployeeSessions({
@@ -301,17 +303,33 @@ class SupabaseEmployeeRepository implements EmployeeRepository {
     }
   }
 
+  static String _generateSecureTempPassword() {
+    const chars =
+        r'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*';
+    final rand = Random.secure();
+    final buffer = StringBuffer('Ys#');
+    for (int i = 0; i < 9; i++) {
+      buffer.write(chars[rand.nextInt(chars.length)]);
+    }
+    return buffer.toString();
+  }
+
   @override
   Future<String> resetEmployeePassword({
     required String stationId,
     required String userId,
+    String? newPassword,
   }) async {
+    final passwordToSet = newPassword?.trim();
+
     try {
       final response = await _client.functions.invoke(
         'admin-reset-password',
         body: {
           'station_id': stationId,
           'user_id': userId,
+          if (passwordToSet != null && passwordToSet.isNotEmpty)
+            'new_password': passwordToSet,
         },
       );
 
@@ -329,24 +347,50 @@ class SupabaseEmployeeRepository implements EmployeeRepository {
           }
           throw UnknownFailure(msg, code: code);
         }
-        return data['temporary_password'] as String? ?? '';
+        return data['temporary_password'] as String? ?? passwordToSet ?? '';
       }
       throw const UnknownFailure('Invalid response from password reset');
     } catch (e) {
-      if (e is AppFailure) rethrow;
-      if (e is FunctionException) {
-        String msg = e.reasonPhrase ?? 'Password reset failed';
-        String code = e.status.toString();
-        if (e.details is Map) {
-          final det = e.details as Map;
-          msg = det['message']?.toString() ?? det['error']?.toString() ?? msg;
-          code = det['code']?.toString() ?? code;
-        } else if (e.details is String) {
-          msg = e.details as String;
+      // Robust Fallback: If edge function is not reachable, has invalid session, or fails,
+      // fall back to the PostgreSQL RPC admin_set_user_password
+      try {
+        final fallbackPass = (passwordToSet != null && passwordToSet.isNotEmpty)
+            ? passwordToSet
+            : _generateSecureTempPassword();
+
+        final rpcRes = await _client.rpc(
+          'admin_set_user_password',
+          params: {
+            'p_station_id': stationId,
+            'p_target_user_id': userId,
+            'p_new_password': fallbackPass,
+          },
+        );
+
+        if (rpcRes is Map && rpcRes['temporary_password'] != null) {
+          return rpcRes['temporary_password'] as String;
         }
-        throw UnknownFailure(msg, code: code, originalError: e);
+        return fallbackPass;
+      } catch (rpcErr) {
+        if (rpcErr is PostgrestException) {
+          throw DatabaseFailure(rpcErr.message,
+              code: rpcErr.code, originalError: rpcErr);
+        }
+        if (e is AppFailure) rethrow;
+        if (e is FunctionException) {
+          String msg = e.reasonPhrase ?? 'Password reset failed';
+          String code = e.status.toString();
+          if (e.details is Map) {
+            final det = e.details as Map;
+            msg = det['message']?.toString() ?? det['error']?.toString() ?? msg;
+            code = det['code']?.toString() ?? code;
+          } else if (e.details is String) {
+            msg = e.details as String;
+          }
+          throw UnknownFailure(msg, code: code, originalError: e);
+        }
+        throw UnknownFailure(e.toString(), originalError: e);
       }
-      throw UnknownFailure(e.toString(), originalError: e);
     }
   }
 
