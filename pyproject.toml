@@ -1,0 +1,10 @@
+[tool.pyright]
+include = ["scripts", "test"]
+exclude = ["**/__pyrefly_virtual__/**", "**/.system_generated/**", "**/scratch/**", "**/brain/**"]
+typeCheckingMode = "off"
+reportMissingImports = "none"
+reportUndefinedVariable = "none"
+reportGeneralTypeIssues = "none"
+
+[tool.pyrefly]
+ignore = ["**/__pyrefly_virtual__/**", "**/.system_generated/**"]
