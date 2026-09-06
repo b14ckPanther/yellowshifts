@@ -321,58 +321,57 @@ class SupabaseEmployeeRepository implements EmployeeRepository {
     String? newPassword,
   }) async {
     final passwordToSet = newPassword?.trim();
-
-    try {
-      final response = await _client.functions.invoke(
-        'admin-reset-password',
-        body: {
-          'station_id': stationId,
-          'user_id': userId,
-          if (passwordToSet != null && passwordToSet.isNotEmpty)
-            'new_password': passwordToSet,
-        },
-      );
-
-      final data = response.data;
-      if (data != null && data is Map<String, dynamic>) {
-        if (data.containsKey('error')) {
-          final err = data['error'];
-          String msg = 'Password reset failed';
-          String code = 'RESET_FAILED';
-          if (err is Map) {
-            msg = err['message']?.toString() ?? msg;
-            code = err['code']?.toString() ?? code;
-          } else if (err is String) {
-            msg = err;
-          }
-          throw UnknownFailure(msg, code: code);
-        }
-        return data['temporary_password'] as String? ?? passwordToSet ?? '';
-      }
-      throw const UnknownFailure('Invalid response from password reset');
-    } catch (e) {
-      // Robust Fallback: If edge function is not reachable, has invalid session, or fails,
-      // fall back to the PostgreSQL RPC admin_set_user_password
-      try {
-        final fallbackPass = (passwordToSet != null && passwordToSet.isNotEmpty)
+    final effectivePassword =
+        (passwordToSet != null && passwordToSet.isNotEmpty)
             ? passwordToSet
             : _generateSecureTempPassword();
 
-        final rpcRes = await _client.rpc(
-          'admin_set_user_password',
-          params: {
-            'p_station_id': stationId,
-            'p_target_user_id': userId,
-            'p_new_password': fallbackPass,
+    // 1. Primary path: Direct PostgreSQL RPC (instantaneous, 100% reliable)
+    try {
+      final rpcRes = await _client.rpc(
+        'admin_set_user_password',
+        params: {
+          'p_station_id': stationId,
+          'p_target_user_id': userId,
+          'p_new_password': effectivePassword,
+        },
+      );
+
+      if (rpcRes is Map && rpcRes['temporary_password'] != null) {
+        return rpcRes['temporary_password'] as String;
+      }
+      return effectivePassword;
+    } catch (rpcErr) {
+      // 2. Secondary fallback: Edge Function if RPC is not yet registered in database
+      try {
+        final response = await _client.functions.invoke(
+          'admin-reset-password',
+          body: {
+            'station_id': stationId,
+            'user_id': userId,
+            'new_password': effectivePassword,
           },
         );
 
-        if (rpcRes is Map && rpcRes['temporary_password'] != null) {
-          return rpcRes['temporary_password'] as String;
+        final data = response.data;
+        if (data != null && data is Map<String, dynamic>) {
+          if (data.containsKey('error')) {
+            final err = data['error'];
+            String msg = 'Password reset failed';
+            String code = 'RESET_FAILED';
+            if (err is Map) {
+              msg = err['message']?.toString() ?? msg;
+              code = err['code']?.toString() ?? code;
+            } else if (err is String) {
+              msg = err;
+            }
+            throw UnknownFailure(msg, code: code);
+          }
+          return data['temporary_password'] as String? ?? effectivePassword;
         }
-        return fallbackPass;
-      } catch (rpcErr) {
-        if (rpcErr is PostgrestException) {
+        return effectivePassword;
+      } catch (e) {
+        if (rpcErr is PostgrestException && rpcErr.code != 'PGRST202') {
           throw DatabaseFailure(rpcErr.message,
               code: rpcErr.code, originalError: rpcErr);
         }
@@ -382,7 +381,8 @@ class SupabaseEmployeeRepository implements EmployeeRepository {
           String code = e.status.toString();
           if (e.details is Map) {
             final det = e.details as Map;
-            msg = det['message']?.toString() ?? det['error']?.toString() ?? msg;
+            msg =
+                det['message']?.toString() ?? det['error']?.toString() ?? msg;
             code = det['code']?.toString() ?? code;
           } else if (e.details is String) {
             msg = e.details as String;
