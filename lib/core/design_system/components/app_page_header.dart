@@ -108,11 +108,15 @@ class AppPageHeader extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (actions != null) ...[
-                  Wrap(
-                    spacing: AppSpacing.space8,
-                    runSpacing: AppSpacing.space8,
-                    children: actions!,
+                if (actions != null && actions!.isNotEmpty) ...[
+                  const SizedBox(width: AppSpacing.space12),
+                  Flexible(
+                    child: Wrap(
+                      alignment: WrapAlignment.end,
+                      spacing: AppSpacing.space8,
+                      runSpacing: AppSpacing.space8,
+                      children: actions!,
+                    ),
                   ),
                 ],
               ],

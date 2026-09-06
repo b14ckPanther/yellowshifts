@@ -987,6 +987,21 @@
   "platformReactivateManager": "Reactivate Station Manager",
   "platformStationManagers": "Station Managers",
   "platformStationManagersSubtitle": "Only Platform Admins can grant or revoke Station Manager access.",
+  "platformEditStation": "Edit Station",
+  "platformEditStationSubtitle": "Update station name, code, timezone and configuration.",
+  "platformEditManager": "Edit Manager",
+  "platformEditManagerSubtitle": "Update name, email, phone number, and employee code for {name}.",
+  "@platformEditManagerSubtitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "platformStationUpdatedToast": "Station updated successfully.",
+  "platformManagerUpdatedToast": "Manager profile updated successfully.",
+  "platformResetManagerPassword": "Set Password",
+  "platformActionsColumn": "Actions",
   "platformDeactivateStation": "Deactivate Station",
   "platformReactivateStation": "Reactivate Station",
   "platformOpenStation": "Open Station",

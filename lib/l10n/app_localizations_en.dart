@@ -2088,6 +2088,34 @@ class AppLocalizationsEn extends AppLocalizations {
       'Only Platform Admins can grant or revoke Station Manager access.';
 
   @override
+  String get platformEditStation => 'Edit Station';
+
+  @override
+  String get platformEditStationSubtitle =>
+      'Update station name, code, timezone and configuration.';
+
+  @override
+  String get platformEditManager => 'Edit Manager';
+
+  @override
+  String platformEditManagerSubtitle(String name) {
+    return 'Update name, email, phone number, and employee code for $name.';
+  }
+
+  @override
+  String get platformStationUpdatedToast => 'Station updated successfully.';
+
+  @override
+  String get platformManagerUpdatedToast =>
+      'Manager profile updated successfully.';
+
+  @override
+  String get platformResetManagerPassword => 'Set Password';
+
+  @override
+  String get platformActionsColumn => 'Actions';
+
+  @override
   String get platformDeactivateStation => 'Deactivate Station';
 
   @override

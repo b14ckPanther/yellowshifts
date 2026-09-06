@@ -209,6 +209,25 @@ class FakePlatformAdminRepository implements PlatformAdminRepository {
   }) async {}
 
   @override
+  Future<void> updateStationManager({
+    required String stationId,
+    required String userId,
+    required String firstName,
+    required String lastName,
+    String? email,
+    String? phone,
+    String? employeeCode,
+  }) async {}
+
+  @override
+  Future<String> resetManagerPassword({
+    required String stationId,
+    required String userId,
+    String? newPassword,
+  }) async =>
+      newPassword ?? 'Ys#MockPass123';
+
+  @override
   Future<PlatformAuditPage> queryAuditLogs({
     String? stationId,
     String? action,
@@ -829,6 +848,23 @@ void main() {
       // Verify signOut was called
       expect(fakeAuth.signedOut, isTrue);
       expect(tester.takeException(), isNull);
+    });
+
+    testWidgets(
+        'Platform Station Managers screen renders edit and reset password actions',
+        (tester) async {
+      await tester.pumpWidget(
+        _platformRouter(
+          location: '/platform/stations/sta-kurdani/managers',
+          repo: FakePlatformAdminRepository(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Kurdani'), findsOneWidget);
+      expect(find.text('Edit Manager'), findsOneWidget);
+      expect(find.text('Set Password'), findsOneWidget);
+      expect(find.text('Dana Levi'), findsOneWidget);
     });
   });
 }

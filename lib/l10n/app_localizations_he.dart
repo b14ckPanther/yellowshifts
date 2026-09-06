@@ -2062,6 +2062,33 @@ class AppLocalizationsHe extends AppLocalizations {
       'רק מנהל פלטפורמה יכול להעניק או לבטל הרשאות מנהל תחנה.';
 
   @override
+  String get platformEditStation => 'עריכת תחנה';
+
+  @override
+  String get platformEditStationSubtitle =>
+      'עדכון שם תחנה, קוד, אזור זמן והגדרות תצורה.';
+
+  @override
+  String get platformEditManager => 'עריכת מנהל';
+
+  @override
+  String platformEditManagerSubtitle(String name) {
+    return 'עדכון שם, אימייל, טלפון ומספר עובד עבור $name.';
+  }
+
+  @override
+  String get platformStationUpdatedToast => 'פרטי התחנה עודכנו בהצלחה.';
+
+  @override
+  String get platformManagerUpdatedToast => 'פרטי המנהל עודכנו בהצלחה.';
+
+  @override
+  String get platformResetManagerPassword => 'הגדרת סיסמה';
+
+  @override
+  String get platformActionsColumn => 'פעולות';
+
+  @override
   String get platformDeactivateStation => 'השבתת תחנה';
 
   @override

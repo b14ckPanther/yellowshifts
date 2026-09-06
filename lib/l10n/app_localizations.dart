@@ -3824,6 +3824,54 @@ abstract class AppLocalizations {
   /// **'Only Platform Admins can grant or revoke Station Manager access.'**
   String get platformStationManagersSubtitle;
 
+  /// No description provided for @platformEditStation.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Station'**
+  String get platformEditStation;
+
+  /// No description provided for @platformEditStationSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update station name, code, timezone and configuration.'**
+  String get platformEditStationSubtitle;
+
+  /// No description provided for @platformEditManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Manager'**
+  String get platformEditManager;
+
+  /// No description provided for @platformEditManagerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update name, email, phone number, and employee code for {name}.'**
+  String platformEditManagerSubtitle(String name);
+
+  /// No description provided for @platformStationUpdatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Station updated successfully.'**
+  String get platformStationUpdatedToast;
+
+  /// No description provided for @platformManagerUpdatedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager profile updated successfully.'**
+  String get platformManagerUpdatedToast;
+
+  /// No description provided for @platformResetManagerPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Password'**
+  String get platformResetManagerPassword;
+
+  /// No description provided for @platformActionsColumn.
+  ///
+  /// In en, this message translates to:
+  /// **'Actions'**
+  String get platformActionsColumn;
+
   /// No description provided for @platformDeactivateStation.
   ///
   /// In en, this message translates to:

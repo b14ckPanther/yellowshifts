@@ -16,6 +16,7 @@ import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/app_empty_state.dart';
 import '../../domain/platform_station_summary.dart';
 import '../platform_admin_providers.dart';
+import '../widgets/edit_station_dialog.dart';
 
 class PlatformStationsScreen extends ConsumerWidget {
   const PlatformStationsScreen({super.key});
@@ -81,12 +82,18 @@ class PlatformStationsScreen extends ConsumerWidget {
                             DataColumn(
                                 label: Text(l10n.platformColShiftManagers)),
                             DataColumn(label: Text(l10n.platformColNfcTags)),
-                            const DataColumn(label: Text('')),
+                            DataColumn(label: Text(l10n.platformActionsColumn)),
                           ],
                           rows: [
                             for (final station in stations)
                               DataRow(cells: [
-                                DataCell(Text(station.name)),
+                                DataCell(
+                                  Text(
+                                    station.name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
                                 DataCell(Text(station.code)),
                                 DataCell(_statusBadge(station, l10n)),
                                 DataCell(Text('${station.activeMembers}')),
@@ -167,16 +174,29 @@ class _StationCard extends ConsumerWidget {
               runSpacing: 8,
               children: [
                 AppButton(
-                  label: l10n.platformOpenStation,
+                  label: l10n.platformEditStation,
+                  icon: LucideIcons.pencil,
                   size: AppButtonSize.small,
-                  onPressed: () => _openStation(context, ref, station),
+                  variant: AppButtonVariant.outline,
+                  onPressed: () => EditStationDialog.show(
+                    context,
+                    station: station,
+                  ),
                 ),
                 AppButton(
                   label: l10n.platformStationManagers,
+                  icon: LucideIcons.users,
                   size: AppButtonSize.small,
                   variant: AppButtonVariant.outline,
                   onPressed: () =>
                       context.go('/platform/stations/${station.id}/managers'),
+                ),
+                AppButton(
+                  label: l10n.platformOpenStation,
+                  icon: LucideIcons.externalLink,
+                  size: AppButtonSize.small,
+                  variant: AppButtonVariant.primary,
+                  onPressed: () => _openStation(context, ref, station),
                 ),
               ],
             ),
@@ -194,15 +214,34 @@ Widget _rowActions(
   AppLocalizations l10n,
 ) {
   return Row(
+    mainAxisSize: MainAxisSize.min,
     children: [
-      TextButton(
-        onPressed: () => _openStation(context, ref, station),
-        child: Text(l10n.platformOpenStation),
+      AppButton(
+        label: l10n.platformEditStation,
+        icon: LucideIcons.pencil,
+        size: AppButtonSize.small,
+        variant: AppButtonVariant.outline,
+        onPressed: () => EditStationDialog.show(
+          context,
+          station: station,
+        ),
       ),
-      TextButton(
+      const SizedBox(width: AppSpacing.space8),
+      AppButton(
+        label: l10n.platformStationManagers,
+        icon: LucideIcons.users,
+        size: AppButtonSize.small,
+        variant: AppButtonVariant.outline,
         onPressed: () =>
             context.go('/platform/stations/${station.id}/managers'),
-        child: Text(l10n.platformStationManagers),
+      ),
+      const SizedBox(width: AppSpacing.space8),
+      AppButton(
+        label: l10n.platformOpenStation,
+        icon: LucideIcons.externalLink,
+        size: AppButtonSize.small,
+        variant: AppButtonVariant.primary,
+        onPressed: () => _openStation(context, ref, station),
       ),
     ],
   );

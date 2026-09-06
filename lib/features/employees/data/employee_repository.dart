@@ -381,8 +381,7 @@ class SupabaseEmployeeRepository implements EmployeeRepository {
           String code = e.status.toString();
           if (e.details is Map) {
             final det = e.details as Map;
-            msg =
-                det['message']?.toString() ?? det['error']?.toString() ?? msg;
+            msg = det['message']?.toString() ?? det['error']?.toString() ?? msg;
             code = det['code']?.toString() ?? code;
           } else if (e.details is String) {
             msg = e.details as String;

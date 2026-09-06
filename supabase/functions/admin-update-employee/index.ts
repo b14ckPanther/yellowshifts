@@ -57,8 +57,12 @@ serve(async (req) => {
       );
     }
 
-    // 2. Privileged admin client for admin verification & mutations
-    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+    // 2. Check platform admin status
+    const callerClient = createClient(supabaseUrl, supabaseAnonKey, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: platformAdminFlag } = await callerClient.rpc("is_platform_admin");
+    const isPlatformAdmin = platformAdminFlag === true;
 
     // Verify caller is active ADMIN for station_id, or a Platform Admin.
     const { data: adminMembership, error: adminCheckError } = await adminClient
@@ -69,9 +73,6 @@ serve(async (req) => {
       .eq("role", "ADMIN")
       .eq("status", "ACTIVE")
       .single();
-
-    const { data: platformAdminFlag } = await callerClient.rpc("is_platform_admin");
-    const isPlatformAdmin = platformAdminFlag === true;
 
     if ((adminCheckError || !adminMembership) && !isPlatformAdmin) {
       return new Response(

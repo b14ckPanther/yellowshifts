@@ -57,6 +57,20 @@ abstract class PlatformAdminRepository {
     String demoteTo,
     bool deactivate,
   });
+  Future<void> updateStationManager({
+    required String stationId,
+    required String userId,
+    required String firstName,
+    required String lastName,
+    String? email,
+    String? phone,
+    String? employeeCode,
+  });
+  Future<String> resetManagerPassword({
+    required String stationId,
+    required String userId,
+    String? newPassword,
+  });
   Future<PlatformAuditPage> queryAuditLogs({
     String? stationId,
     String? action,
@@ -325,6 +339,106 @@ class SupabasePlatformAdminRepository implements PlatformAdminRepository {
       }
     } catch (e) {
       _throwMapped(e);
+    }
+  }
+
+  @override
+  Future<void> updateStationManager({
+    required String stationId,
+    required String userId,
+    required String firstName,
+    required String lastName,
+    String? email,
+    String? phone,
+    String? employeeCode,
+  }) async {
+    // 1. Attempt direct platform_update_station_manager RPC
+    try {
+      await _client.rpc('platform_update_station_manager', params: {
+        'p_station_id': stationId,
+        'p_target_user_id': userId,
+        'p_first_name': firstName.trim(),
+        'p_last_name': lastName.trim(),
+        'p_email': email?.trim(),
+        'p_phone':
+            phone != null && phone.trim().isNotEmpty ? phone.trim() : null,
+        'p_employee_code':
+            employeeCode != null && employeeCode.trim().isNotEmpty
+                ? employeeCode.trim()
+                : null,
+      });
+      return;
+    } catch (rpcErr) {
+      // 2. Fallback to admin-update-employee edge function if RPC not deployed yet
+      try {
+        final response = await _client.functions.invoke(
+          'admin-update-employee',
+          body: {
+            'station_id': stationId,
+            'user_id': userId,
+            'first_name': firstName.trim(),
+            'last_name': lastName.trim(),
+            'email': email?.trim(),
+            'phone': phone?.trim(),
+            'employee_code': employeeCode?.trim(),
+          },
+        );
+        final data = response.data;
+        if (data is Map && data['error'] != null) {
+          final err = data['error'];
+          final codeStr = err is Map ? err['code']?.toString() : null;
+          final msg = err is Map ? err['message']?.toString() : data.toString();
+          _throwMapped(PostgrestException(message: msg ?? '', code: codeStr));
+        }
+      } catch (e) {
+        _throwMapped(e);
+      }
+    }
+  }
+
+  @override
+  Future<String> resetManagerPassword({
+    required String stationId,
+    required String userId,
+    String? newPassword,
+  }) async {
+    final passwordToSet = newPassword?.trim();
+    final effectivePassword = (passwordToSet != null &&
+            passwordToSet.isNotEmpty)
+        ? passwordToSet
+        : 'Ys#${DateTime.now().millisecondsSinceEpoch.toRadixString(36)}!A1';
+
+    try {
+      final rpcRes = await _client.rpc(
+        'admin_set_user_password',
+        params: {
+          'p_station_id': stationId,
+          'p_target_user_id': userId,
+          'p_new_password': effectivePassword,
+        },
+      );
+      if (rpcRes is Map && rpcRes['temporary_password'] != null) {
+        return rpcRes['temporary_password'] as String;
+      }
+      return effectivePassword;
+    } catch (rpcErr) {
+      try {
+        final response = await _client.functions.invoke(
+          'admin-reset-password',
+          body: {
+            'station_id': stationId,
+            'user_id': userId,
+            'new_password': effectivePassword,
+          },
+        );
+        final data = response.data;
+        if (data is Map && data['temporary_password'] != null) {
+          return data['temporary_password'] as String;
+        }
+        return effectivePassword;
+      } catch (e) {
+        _throwMapped(e);
+      }
     }
   }
 

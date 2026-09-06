@@ -14,9 +14,14 @@ import '../../../../core/design_system/tokens/app_spacing.dart';
 import '../../../../core/design_system/tokens/app_typography.dart';
 import '../../../../core/errors/error_localizer.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../shared/widgets/app_empty_state.dart';
 import '../../data/platform_admin_repository.dart';
+import '../../domain/platform_station_manager.dart';
 import '../../domain/platform_station_summary.dart';
 import '../platform_admin_providers.dart';
+import '../widgets/edit_platform_manager_dialog.dart';
+import '../widgets/edit_station_dialog.dart';
+import '../widgets/reset_manager_password_dialog.dart';
 
 class PlatformStationManagersScreen extends ConsumerStatefulWidget {
   final String stationId;
@@ -114,19 +119,48 @@ class _PlatformStationManagersScreenState
     final email = TextEditingController();
     final first = TextEditingController();
     final last = TextEditingController();
+    final phone = TextEditingController();
     final ok = await showDialog<bool>(
       context: context,
       builder: (ctx) => AppDialog(
         title: l10n.platformAddManager,
+        subtitle: l10n.platformStationManagersSubtitle,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AppTextField(label: l10n.platformManagerEmail, controller: email),
-            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: AppTextField(
+                    label: l10n.platformManagerFirstName,
+                    controller: first,
+                    prefixIcon: LucideIcons.user,
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.space12),
+                Expanded(
+                  child: AppTextField(
+                    label: l10n.platformManagerLastName,
+                    controller: last,
+                    prefixIcon: LucideIcons.user,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.space12),
             AppTextField(
-                label: l10n.platformManagerFirstName, controller: first),
-            const SizedBox(height: 12),
-            AppTextField(label: l10n.platformManagerLastName, controller: last),
+              label: l10n.platformManagerEmail,
+              controller: email,
+              prefixIcon: LucideIcons.mail,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            const SizedBox(height: AppSpacing.space12),
+            AppTextField(
+              label: l10n.platformManagerPhone,
+              controller: phone,
+              prefixIcon: LucideIcons.phone,
+              keyboardType: TextInputType.phone,
+            ),
           ],
         ),
         actions: [
@@ -137,7 +171,13 @@ class _PlatformStationManagersScreenState
           ),
           AppButton(
             label: l10n.platformAssignManager,
-            onPressed: () => Navigator.pop(ctx, true),
+            variant: AppButtonVariant.primary,
+            onPressed: () {
+              if (first.text.trim().isEmpty || last.text.trim().isEmpty) {
+                return;
+              }
+              Navigator.pop(ctx, true);
+            },
           ),
         ],
       ),
@@ -146,22 +186,27 @@ class _PlatformStationManagersScreenState
     try {
       await ref.read(platformAdminRepositoryProvider).assignStationAdmin(
             stationId: widget.stationId,
-            email: email.text.trim(),
+            email: email.text.trim().isNotEmpty ? email.text.trim() : null,
             firstName: first.text.trim(),
             lastName: last.text.trim(),
+            phone: phone.text.trim().isNotEmpty ? phone.text.trim() : null,
           );
       ref.invalidate(platformStationManagersProvider(widget.stationId));
       ref.invalidate(platformStationsProvider);
       if (mounted) {
-        AppFeedback.show(context,
-            message: l10n.platformManagerAssignedToast,
-            type: AppFeedbackType.success);
+        AppFeedback.show(
+          context,
+          message: l10n.platformManagerAssignedToast,
+          type: AppFeedbackType.success,
+        );
       }
     } catch (e) {
       if (mounted) {
-        AppFeedback.show(context,
-            message: ErrorLocalizer.localize(e, l10n),
-            type: AppFeedbackType.error);
+        AppFeedback.show(
+          context,
+          message: ErrorLocalizer.localize(e, l10n),
+          type: AppFeedbackType.error,
+        );
       }
     }
   }
@@ -200,15 +245,19 @@ class _PlatformStationManagersScreenState
       ref.invalidate(platformStationManagersProvider(widget.stationId));
       ref.invalidate(platformStationsProvider);
       if (mounted) {
-        AppFeedback.show(context,
-            message: l10n.platformManagerRemovedToast,
-            type: AppFeedbackType.success);
+        AppFeedback.show(
+          context,
+          message: l10n.platformManagerRemovedToast,
+          type: AppFeedbackType.success,
+        );
       }
     } catch (e) {
       if (mounted) {
-        AppFeedback.show(context,
-            message: ErrorLocalizer.localize(e, l10n),
-            type: AppFeedbackType.error);
+        AppFeedback.show(
+          context,
+          message: ErrorLocalizer.localize(e, l10n),
+          type: AppFeedbackType.error,
+        );
       }
     }
   }
@@ -216,7 +265,6 @@ class _PlatformStationManagersScreenState
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    const typography = AppTypography();
     final stations = ref.watch(platformStationsProvider).value ?? const [];
     PlatformStationSummary? station;
     for (final s in stations) {
@@ -233,10 +281,20 @@ class _PlatformStationManagersScreenState
           children: [
             AppPageHeader(
               title: station?.name ?? l10n.platformStationManagers,
-              subtitle: l10n.platformStationManagersSubtitle,
+              subtitle: station != null
+                  ? '${station.code} · ${l10n.platformStationManagersSubtitle}'
+                  : l10n.platformStationManagersSubtitle,
               onBack: () => context.go('/platform/stations'),
               actions: [
-                if (currentStation != null)
+                if (currentStation != null) ...[
+                  AppButton(
+                    label: l10n.platformEditStation,
+                    icon: LucideIcons.pencil,
+                    variant: AppButtonVariant.outline,
+                    size: AppButtonSize.small,
+                    onPressed: () => EditStationDialog.show(context,
+                        station: currentStation),
+                  ),
                   AppButton(
                     label: currentStation.isActive
                         ? l10n.platformDeactivateStation
@@ -248,10 +306,12 @@ class _PlatformStationManagersScreenState
                     onPressed: () => _confirmDeactivate(
                         currentStation, !currentStation.isActive),
                   ),
+                ],
                 AppButton(
                   label: l10n.platformAddManager,
                   icon: LucideIcons.userPlus,
                   size: AppButtonSize.small,
+                  variant: AppButtonVariant.primary,
                   onPressed: _addManager,
                 ),
               ],
@@ -262,6 +322,15 @@ class _PlatformStationManagersScreenState
                 error: (e, _) =>
                     Center(child: Text(ErrorLocalizer.localize(e, l10n))),
                 data: (managers) {
+                  if (managers.isEmpty) {
+                    return AppEmptyState(
+                      title: l10n.platformStationManagers,
+                      description: l10n.platformStationManagersSubtitle,
+                      icon: LucideIcons.users,
+                      actionLabel: l10n.platformAddManager,
+                      onAction: _addManager,
+                    );
+                  }
                   return ListView.separated(
                     padding: AppSpacing.insetHorizontal16,
                     itemCount: managers.length,
@@ -269,37 +338,20 @@ class _PlatformStationManagersScreenState
                         const SizedBox(height: AppSpacing.space12),
                     itemBuilder: (context, i) {
                       final m = managers[i];
-                      return AppSurface(
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(m.fullName,
-                                      style: typography.bodyStrong),
-                                  Text(m.email ?? m.phone ?? m.userId,
-                                      style: typography.caption),
-                                ],
-                              ),
-                            ),
-                            AppStatusBadge(
-                              label: m.isActive
-                                  ? l10n.statusActive
-                                  : l10n.statusInactive,
-                              variant: m.isActive
-                                  ? AppBadgeVariant.success
-                                  : AppBadgeVariant.neutral,
-                            ),
-                            const SizedBox(width: 8),
-                            AppButton(
-                              label: l10n.platformRemoveManager,
-                              size: AppButtonSize.small,
-                              variant: AppButtonVariant.outline,
-                              onPressed: () => _removeManager(m.userId),
-                            ),
-                          ],
+                      return _ManagerCard(
+                        stationId: widget.stationId,
+                        manager: m,
+                        onEdit: () => EditPlatformManagerDialog.show(
+                          context,
+                          stationId: widget.stationId,
+                          manager: m,
                         ),
+                        onResetPassword: () => ResetManagerPasswordDialog.show(
+                          context,
+                          stationId: widget.stationId,
+                          manager: m,
+                        ),
+                        onRemove: () => _removeManager(m.userId),
                       );
                     },
                   );
@@ -309,6 +361,165 @@ class _PlatformStationManagersScreenState
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ManagerCard extends StatelessWidget {
+  final String stationId;
+  final PlatformStationManager manager;
+  final VoidCallback onEdit;
+  final VoidCallback onResetPassword;
+  final VoidCallback onRemove;
+
+  const _ManagerCard({
+    required this.stationId,
+    required this.manager,
+    required this.onEdit,
+    required this.onResetPassword,
+    required this.onRemove,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    const typography = AppTypography();
+
+    final initials =
+        (manager.firstName.isNotEmpty ? manager.firstName[0] : '') +
+            (manager.lastName.isNotEmpty ? manager.lastName[0] : '');
+
+    return AppSurface(
+      child: Padding(
+        padding: AppSpacing.insetAll16,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 22,
+                  backgroundColor: AppColors.colorSurfaceBrandSubtle,
+                  child: Text(
+                    initials.toUpperCase(),
+                    style: typography.bodyStrong.copyWith(
+                      color: AppColors.colorTextBrand,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.space12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              manager.fullName,
+                              style: typography.bodyStrong.copyWith(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: AppSpacing.space8),
+                          AppStatusBadge(
+                            label: manager.role == 'ADMIN'
+                                ? l10n.platformColManagers
+                                : manager.role,
+                            variant: AppBadgeVariant.info,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Wrap(
+                        spacing: 12,
+                        runSpacing: 4,
+                        children: [
+                          if (manager.email != null &&
+                              manager.email!.isNotEmpty)
+                            _infoChip(
+                                LucideIcons.mail, manager.email!, typography),
+                          if (manager.phone != null &&
+                              manager.phone!.isNotEmpty)
+                            _infoChip(
+                                LucideIcons.phone, manager.phone!, typography),
+                          if (manager.employeeCode != null &&
+                              manager.employeeCode!.isNotEmpty)
+                            _infoChip(LucideIcons.badgeCheck,
+                                manager.employeeCode!, typography),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.space12),
+                AppStatusBadge(
+                  label: manager.isActive
+                      ? l10n.statusActive
+                      : l10n.statusInactive,
+                  variant: manager.isActive
+                      ? AppBadgeVariant.success
+                      : AppBadgeVariant.neutral,
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.space16),
+            const Divider(height: 1, color: AppColors.colorBorderSubtle),
+            const SizedBox(height: AppSpacing.space12),
+            Wrap(
+              spacing: AppSpacing.space8,
+              runSpacing: AppSpacing.space8,
+              alignment: WrapAlignment.end,
+              children: [
+                AppButton(
+                  label: l10n.platformEditManager,
+                  icon: LucideIcons.pencil,
+                  size: AppButtonSize.small,
+                  variant: AppButtonVariant.outline,
+                  onPressed: onEdit,
+                ),
+                AppButton(
+                  label: l10n.platformResetManagerPassword,
+                  icon: LucideIcons.keyRound,
+                  size: AppButtonSize.small,
+                  variant: AppButtonVariant.outline,
+                  onPressed: onResetPassword,
+                ),
+                AppButton(
+                  label: l10n.platformRemoveManager,
+                  icon: LucideIcons.userMinus,
+                  size: AppButtonSize.small,
+                  variant: AppButtonVariant.ghost,
+                  onPressed: onRemove,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _infoChip(IconData icon, String text, AppTypography typography) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 14, color: AppColors.colorTextMuted),
+        const SizedBox(width: 4),
+        Flexible(
+          child: Text(
+            text,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: typography.caption
+                .copyWith(color: AppColors.colorTextSecondary),
+          ),
+        ),
+      ],
     );
   }
 }
